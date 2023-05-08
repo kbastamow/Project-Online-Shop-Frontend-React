@@ -8,9 +8,6 @@ const Productpage = () => {
       <ProductProvider>
         <Products></Products>
       </ProductProvider>
-
-
-
     </div>
   )
 }

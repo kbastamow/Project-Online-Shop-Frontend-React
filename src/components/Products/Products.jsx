@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { ProductContext } from '../../context/UserContext/ProductContext/ProductState'
+import Card from '../Card/Card'
 
 const Products = () => {
 
@@ -10,11 +11,16 @@ const Products = () => {
   }, [])
 
   const product = products.map((product) => {
-    return <div key={product.id}>{product.name}</div>
+    return <>
+    <Card product={product}/>
+    {/* return <div key={product.id}>{product.name}</div> */}
+
+    </>
   })
   
   return (
-    <div>{product}</div>
+    <div className="row bg bg-black"
+    >{product}</div>
   )
 }
 
