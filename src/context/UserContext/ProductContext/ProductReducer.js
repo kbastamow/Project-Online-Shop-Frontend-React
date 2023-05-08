@@ -7,11 +7,15 @@ const products = (state, action) => {
           ...state,  
           products: action.payload,  
        };
+       case "GET_BY_CATEGORY":
+         return {
+          ...state,
+          products:action.payload,
+         }
       default:
         return state;
     }
-
-    
+  
   };
 
   export default products;

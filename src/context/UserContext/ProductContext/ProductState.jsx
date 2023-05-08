@@ -28,12 +28,24 @@ export const ProductProvider = ({children}) => {
         }
       };
 
+    const getByCategory = async(cat) => {
+      try {
+        const res = await axios.get(API_URL + "categories/getAllJoinProducts");
+        console.log(res.data);
+          dispatch({
+            type: "GET_BY_CATEGORY",
+            payload: res.data
+          })
 
-
-      
-
+      } catch(error) {
+        console.error(error)
+        
+      }
+    
+      }
+    
       return (
-        <ProductContext.Provider value={{products: state.products, getProducts}}>
+        <ProductContext.Provider value={{products: state.products, getProducts, getByCategory}}>
           {children}
         </ProductContext.Provider>
       );

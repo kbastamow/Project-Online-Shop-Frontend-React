@@ -13,8 +13,6 @@ const Products = () => {
   const product = products.map((product) => {
     return <>
     <Card product={product}/>
-    {/* return <div key={product.id}>{product.name}</div> */}
-
     </>
   })
   
