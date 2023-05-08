@@ -4,7 +4,7 @@ import Products from '../../Products/Products'
 
 const Productpage = () => {
   return (
-    <div>Products
+    <div>
       <ProductProvider>
         <Products></Products>
       </ProductProvider>

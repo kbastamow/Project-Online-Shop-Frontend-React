@@ -7,7 +7,6 @@ import StarCalculator from '../StarCalculator/StarCalculator'
 
 const Card = (props) => {
   const imagePath = "http://localhost:3000/uploaded_imgs/"
-  console.log(props.product.id)
   return (
     <>
         <div key={props.product.id} className="card card bg-dark border-3 border-white mx-auto mx-md-3 my-3 col-9 col-md-2 text-center rounded-0">

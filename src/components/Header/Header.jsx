@@ -24,7 +24,7 @@ const Header = () => {
         <li className="nav-item">
           <a className="nav-link disabled">Disabled</a>
         </li>
-        <li className="nav-item dropdown">
+        {/* <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Search by category
           </a>
@@ -33,14 +33,21 @@ const Header = () => {
             <li><a className="dropdown-item" href="#">Another action</a></li>
             <li><a className="dropdown-item" href="#">Something else here</a></li>
           </ul>
-        </li>
+        </li> */}
 
       </ul>
-      <form className="d-flex" role="search">
+     
+      {/* <form className="d-flex" role="search">
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
         <button className="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      </form> */}
     </div>
+<div className="">
+    <ul className="d-flex flex-nowrap me-4 mb-2 mb-lg-0">
+      <li className="nav-item me-2 px-4 d-block">Login</li>
+      <li className="nav-item me-2 px-4 d-block">Register</li>
+      </ul>
+      </div>
   </div>
 </nav>
         

@@ -25,7 +25,6 @@ const StarCalculator = (props) => {
             for (let i = 0; i < emptyStars; i++) {
                 icons.push(<FaRegStar />)
             }
-            console.log(icons)
             return icons
         }
 
