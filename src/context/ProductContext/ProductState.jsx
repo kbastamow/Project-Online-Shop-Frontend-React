@@ -30,22 +30,35 @@ export const ProductProvider = ({children}) => {
     const getByCategory = async(categoryId) => {
       try {
         const res = await axios.get(API_URL + "categories/findById/" + categoryId);
-        console.log("Did we get to res-data?", res.data.Products);
           dispatch({
             type: "GET_BY_CATEGORY",
             payload: res.data.Products
-          })
+          });
         } catch(error) {
-            console.error(error)
-            
+            console.error(error)    
         }
       }
-    
+
+      const searchByName = async(input) => {
+        try {
+          console.log(input)
+          const res = await axios.get(API_URL + "products/findByName/" + input)
+          console.log(res.data, "We searched axios")
+          dispatch({
+            type:"SEARCH_BY_NAME",
+            payload: res.data
+          });
+        } catch (error) {  
+          console.error(error)
+        }    
+    }
+      
       return (
         <ProductContext.Provider value={{
         products: state.products, 
         getProducts, 
-        getByCategory}}>
+        getByCategory,
+        searchByName}}>
           {children}
         </ProductContext.Provider>
       );

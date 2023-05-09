@@ -12,7 +12,6 @@ const Products = () => {
   }, [])
 
   const product = products.map((product) => {
-    console.log(product.name)
     return <>
     <Card product={product}/>
     </>

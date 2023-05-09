@@ -13,6 +13,11 @@ const products = (state, action) => {
           products: action.payload
           // products: state.products.filter(product=> product.Categories.map(cat=> cat.name).includes(action.payload))  
          };
+      case "SEARCH_BY_NAME":
+          return {
+           ...state,
+           products: action.payload
+          };
       default:
         return state;
     }
