@@ -3,8 +3,6 @@ import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
 import Homepage from './components/Pages/Homepage/Homepage'
 import Productpage from './components/Pages/Productpage/Productpage'
-import Products from './components/Products/Products'
-import { ProductProvider } from './context/UserContext/ProductContext/ProductState'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 function App() {

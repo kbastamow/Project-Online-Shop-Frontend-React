@@ -11,7 +11,6 @@ const initialState = {
   
 export const ProductContext = createContext(initialState);
 
-
 export const ProductProvider = ({children}) => {
     const [state, dispatch] = useReducer(ProductReducer, initialState); //Two parameters
 
@@ -28,24 +27,25 @@ export const ProductProvider = ({children}) => {
         }
       };
 
-    const getByCategory = async(cat) => {
+    const getByCategory = async(categoryId) => {
       try {
-        const res = await axios.get(API_URL + "categories/getAllJoinProducts");
-        console.log(res.data);
+        const res = await axios.get(API_URL + "categories/findById/" + categoryId);
+        console.log("Did we get to res-data?", res.data.Products);
           dispatch({
             type: "GET_BY_CATEGORY",
-            payload: res.data
+            payload: res.data.Products
           })
-
-      } catch(error) {
-        console.error(error)
-        
-      }
-    
+        } catch(error) {
+            console.error(error)
+            
+        }
       }
     
       return (
-        <ProductContext.Provider value={{products: state.products, getProducts, getByCategory}}>
+        <ProductContext.Provider value={{
+        products: state.products, 
+        getProducts, 
+        getByCategory}}>
           {children}
         </ProductContext.Provider>
       );

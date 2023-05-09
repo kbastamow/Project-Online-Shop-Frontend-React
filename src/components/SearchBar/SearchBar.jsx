@@ -1,7 +1,22 @@
-import React from 'react'
-
+import React, { useState, useContext, useEffect } from 'react'
+import { CategoryContext } from '../../context/CategoryContext/CategoryState'
+import { ProductContext } from '../../context/ProductContext/ProductState'
+ 
 const SearchBar = () => {
 
+  const {categories, getCategories} = useContext(CategoryContext)
+  const {products, getByCategory, getAll} = useContext(ProductContext)
+
+  useEffect(()=> {  //when component appears, do this once
+    getCategories()
+  }, [])
+
+  const buttonList = categories.map(category => {
+    return <>
+    <li key={category.id}><button className="dropdown-item" onClick={() => getByCategory(category.id)}>{category.name}</button></li>
+    </>
+  })
+ 
   return (
     <nav className="navbar">
     <div className="container-fluid">
@@ -11,9 +26,9 @@ const SearchBar = () => {
               Search by category
             </a>
             <ul className="dropdown-menu">
-              <li><a className="dropdown-item" href="#">Action</a></li>
-              <li><a className="dropdown-item" href="#">Another action</a></li>
-              <li><a className="dropdown-item" href="#">Something else here</a></li>
+              {buttonList}
+
+              <li key="allProd"><button className="dropdown-item text-danger" onClick={() => getAll()}>All products</button></li>
             </ul>
           </li>
     

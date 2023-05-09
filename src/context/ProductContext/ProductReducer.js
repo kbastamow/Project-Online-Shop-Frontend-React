@@ -10,8 +10,9 @@ const products = (state, action) => {
        case "GET_BY_CATEGORY":
          return {
           ...state,
-          products:action.payload,
-         }
+          products: action.payload
+          // products: state.products.filter(product=> product.Categories.map(cat=> cat.name).includes(action.payload))  
+         };
       default:
         return state;
     }
