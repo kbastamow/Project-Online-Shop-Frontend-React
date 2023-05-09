@@ -4,6 +4,8 @@ import { ProductContext } from '../../context/ProductContext/ProductState'
  
 const SearchBar = () => {
   const [search, setSearch] = useState("");
+  const [resultMsg, setResultMsg] = useState("")
+
   const {categories, getCategories} = useContext(CategoryContext)
   const {products, getByCategory, getProducts, searchByName} = useContext(ProductContext)
 
@@ -13,7 +15,7 @@ const SearchBar = () => {
 
   const buttonList = categories.map(category => {
     return <>
-    <li key={category.id}><button className="dropdown-item" onClick={() => getByCategory(category.id)}>{category.name}</button></li>
+    <li key={category.id}><button className="dropdown-item" onClick={() => {return getByCategory(category.id), setResultMsg(`Showing results for ${category.name}`)}}>{category.name}</button></li>
     </>
   })
 
@@ -21,9 +23,12 @@ const SearchBar = () => {
     event.preventDefault();
     console.log(search)
     searchByName(search)
+    setResultMsg(`Showing results for "${search}"`)
+    setSearch("")
   }
  
   return (
+    <>
     <nav className="navbar">
     <div className="container-fluid">
       <div className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -34,17 +39,20 @@ const SearchBar = () => {
             <ul className="dropdown-menu">
               {buttonList}
 
-              <li key="allProd"><button className="dropdown-item text-danger" onClick={() => getProducts()}>All products</button></li>
+              <li key="allProd"><button className="dropdown-item text-danger" onClick={() => {return getProducts(), setResultMsg("")}}>All products</button></li>
             </ul>
           </li>
     
       </div>
         <form className="d-flex" role="search" onSubmit={handleSearch}>
-        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" onChange={(e) => setSearch(e.target.value)}/>
+        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" value={search} onChange={(e) => setSearch(e.target.value)}/>
         <button className="btn btn-outline-success" type="submit">Search</button>
       </form>
         </div>
   </nav>
+  <div>{resultMsg}</div>
+
+  </>
   )
 }
 
