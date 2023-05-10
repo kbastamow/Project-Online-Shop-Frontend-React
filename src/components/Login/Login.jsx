@@ -11,24 +11,18 @@ const Login = () => {
   const [loginPassword, setLoginPassword] = useState("");
   const [alert, setAlert] = useState(null)
   const [loginSubmitDisabled, setLoginBtnDisabled] = useState("true")
-  const {token} = useContext(UserContext)
+  const {token, login, register, registrationMsg} = useContext(UserContext)
 
-  const {login} = useContext(UserContext)
+  // const {login, } = useContext(UserContext)
   
   const navigate = useNavigate()
-
-
-
-
-
-
-
 
   //REGISTER
 const [nameDisabled, setNameDisabled] = useState(true)
 const [surnameDisabled, setSurnameDisabled] = useState(true)
 const [passwordDisabled, setPasswordDisabled] = useState(true)
 const [regSubmitDisabled, setRegSubmitDisabled] = useState(true);
+const [conditionsCheck, setConditionsCheck] = useState(false)
 
 // const [registerEmail, setRegisterEmail] = useState("")
 // const [registerName, setRegisterName] = useState("")
@@ -105,39 +99,64 @@ const closeModal = () => {
     };
   }, []);
 
-
-  const handleRegister = (event) =>{
+  const handleRegister = (event) => {
     event.preventDefault();
     console.log("registerfunction to be written")
-    if(data.password !== data.passwordRepeat) {
-      console.log("passwords not same")
-} else {
-  console.log("Registering")
-}
+    if (data.password !== data.passwordRepeat) {
+      setAlert(<div className="alert alert-danger">Passwords don't match</div>)
+      setTimeout(() => {
+        setAlert(null)
+      }, 3000);
+
+    } else {
+      console.log("Registering")
+
+      //DELETE Whitespaces
+      let email = data.email.trim()
+      let password = data.password.trim()
+
+      //Delete whitespaces and TURN name and surname to first letter uppercase
+      let name = data.name.trim().toLowerCase();
+      if (name.includes(' ')) {
+        const nameParts = name.split(' ');
+        // Capitalize each part separately and join them back into a single string
+        name = nameParts.map(part =>
+          part.charAt(0).toUpperCase() + part.slice(1)
+        ).join(' ');
+      } else {
+        // Capitalize only the first letter of the name
+        name = name.charAt(0).toUpperCase() + name.slice(1);
+      }
+
+      let surname = data.surname.trim().toLowerCase();
+      if (surname.includes(' ')) {
+        const nameParts = surname.split(' ');
+        surname = nameParts.map(part =>
+          part.charAt(0).toUpperCase() + part.slice(1)
+        ).join(' ');
+      } else {
+        surname = surname.charAt(0).toUpperCase() + surname.slice(1);
+      }
+
+      let registerData = { email, name, surname, password }
+      console.log(registerData)
+      register(registerData)
+      event.target.reset()
+      
+    }
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  useEffect(() => {
+    console.log(registrationMsg)
+    if (registrationMsg){
+      console.log(registrationMsg)
+      setAlert(<div className="alert alert-success">{registrationMsg}<br/><div className="spinner-border spinner-border-sm" role="status"/></div>)
+      setTimeout(() => {
+        closeModal()
+        navigate("/products")
+        setAlert(null)
+      }, 5000);
+  }}, [registrationMsg])
 
 
 const handleLogin = (event) =>{
@@ -186,7 +205,7 @@ const handleLogin = (event) =>{
             </div>
 
             <div className="modal-body">
-              {alert}
+            {alert}
 
 {/* LOGIN MODAL */}
 
@@ -327,8 +346,8 @@ const handleLogin = (event) =>{
                 
                 
                 <div className="remember">
-                  <input type="checkbox" />
-                  Remember Me
+                  <input type="checkbox" checked={conditionsCheck} name="conditionsCheck" onClick={()=> setConditionsCheck(!conditionsCheck)}/>
+                  I agree to the terms and conditions
                 </div>
                 <div className="form-group">
                   <button type="submit" value="Login" className="btn" disabled={regSubmitDisabled}>
