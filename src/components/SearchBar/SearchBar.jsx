@@ -15,7 +15,7 @@ const SearchBar = () => {
 
   const buttonList = categories.map(category => {
     return <>
-    <li key={category.id}><button className="dropdown-item" onClick={() => {return getByCategory(category.id), setResultMsg(`Showing results for ${category.name}`)}}>{category.name}</button></li>
+    <li key={category.name}><button className="dropdown-item" onClick={() => {return getByCategory(category.id), setResultMsg(`Showing results for ${category.name}`)}}>{category.name}</button></li>
     </>
   })
 
