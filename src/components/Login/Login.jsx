@@ -24,28 +24,7 @@ const [passwordDisabled, setPasswordDisabled] = useState(true)
 const [regSubmitDisabled, setRegSubmitDisabled] = useState(true);
 const [conditionsCheck, setConditionsCheck] = useState(false)
 
-// const [registerEmail, setRegisterEmail] = useState("")
-// const [registerName, setRegisterName] = useState("")
-// const [registerSurname, setRegisterSurname] = useState("")
-// const [registerPassword, setRegisterPassword] = useState("")
 
-
-
-// const handleEmailChange = (e) => {
-//   setRegisterEmail(e.target.value);
-//   console.log(registerEmail);
-// }
-
-
-// useEffect((event) => {
-//   setRegisterEmail(event.target.value)
-//   console.log(registerEmail)
-//   // setData(prevState => ({
-//   //   ...prevState,
-//   //   email: registerEmail
-// }, [registerEmail]);
-
- 
 const [data, setData] = useState({
   email: "",
   name: "",
@@ -206,9 +185,7 @@ const handleLogin = (event) =>{
 
             <div className="modal-body">
             {alert}
-
 {/* LOGIN MODAL */}
-
               <form onSubmit={handleLogin}>
                 <div className="input-group form-group">
                   <div className="input-group-prepend">
