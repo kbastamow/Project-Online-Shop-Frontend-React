@@ -1,12 +1,13 @@
 import './App.css'
 import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
-import Login from './components/Login/Login'
+
 import Homepage from './components/Pages/Homepage/Homepage'
 import Productpage from './components/Pages/Productpage/Productpage'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { UserProvider } from './context/UserContext/UserState'
 import "bootstrap/dist/css/bootstrap.min.css";
+import FormModal from './components/FormModal/FormModal'
 
 function App() {
 
@@ -15,7 +16,7 @@ function App() {
     <>
     <BrowserRouter>
     <UserProvider>
-    <Login></Login>
+    <FormModal></FormModal>
     <Header></Header>
     <Routes>
       <Route path="/" element={<Homepage/>}/>

@@ -43,8 +43,7 @@ const Header = () => {
           </div>
           <div className="">
             <ul className="d-flex flex-nowrap me-4 mb-2 mb-lg-0">
-              <button className="nav-item me-2 px-4 d-block" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-              <li className="nav-item me-2 px-4 d-block">Register</li>
+              <button className="nav-item me-2 px-4 d-block" data-bs-toggle="modal" data-bs-target="#loginModal">Login/register</button>
             </ul>
           </div>
         </div>
