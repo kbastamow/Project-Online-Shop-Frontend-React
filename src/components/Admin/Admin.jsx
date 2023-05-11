@@ -6,55 +6,70 @@ import Card from '../Card/Card'
 const Admin = () => {
   const {categories, getCategories} = useContext(CategoryContext)
   const {product, createProduct} = useContext(ProductContext)
-  const [preview, setPreview] = useState("")
-
-
-  console.log("Admin ", categories)
-
   const [checked, setChecked] = useState([]);
-
- useEffect(() => {
-    if (categories.length == 0) getCategories() 
-    console.log(categories, "inside") 
- }, [])
+  const [preview, setPreview] = useState(<h5>Complete all fields</h5>)
+  const [submitDisabled, setSubmitDisabled] = useState(true)
+  const [showNew, setShowNew] = useState("")
  
+  let formData; //couldn't be put in a state
 
-const create = (event) =>{
+  useEffect(() => {
+    setSubmitDisabled(false)
+   }, [preview])
+
+console.log("Admin ", categories)
+
+
+
+
+const handleSubmit = (event) =>{
   event.preventDefault();
-  console.log("hello")
-  console.log(productname.value)
-  console.log(description.value)  
-  console.log(price.value)  
-  console.log(image.files[0])
- 
-  const formData = new FormData();
+
+  formData = new FormData();
   formData.append('name', productname.value);
   formData.append('description', description.value)
   formData.append('price', price.value);
   formData.append('image', image.files[0])
   checked.forEach(category => formData.append('CategoryId[]', category))
-  
-  console.log(formData)
-  createProduct(formData)
-}
+
+  setPreview(<>
+  <p><b>Product name:</b> {productname.name}</p>
+  <p><b>Description:</b> {description.value}</p>
+  <p><b>Price:</b> {price.value}</p>
+  <p><b>Categories</b>: {checked.join(", ")}</p>
+  <div><b>Image preview:</b></div>
+  <img src={URL.createObjectURL(image.files[0])} alt="" />
+  </>
+  )}
+
+
+
+  const create = () => {
+    console.log("creating new product")
+    createProduct(formData)
+    setPreview(<h5>Complete all fields</h5>)
+    formData = ""
+  }
 
 useEffect(() => {
   console.log("Inside useEFFECT", product)
   if(product) {
-  setPreview(<Card product={product}/>)
+  setShowNew(<Card product={product}/>)
 } else {
-  setPreview(null)
+  setShowNew(null)
 }}, [product])
 
-const handleCheckbox = (event) => {
-  const value = event.target.value;
-  const isChecked = event.target.checked;
-  if (isChecked) {
-    setChecked([...checked, value]); // add the checked value to the state array
-  } else {
-    setChecked(checked.filter(v => v !== value)); // remove an unchecked value from the array
-  }
-  console.log(checked);
+
+
+  const handleCheckbox = (event) => {
+    const value = event.target.value;
+    const isChecked = event.target.checked;
+    if (isChecked) {
+      setChecked([...checked, value]); // add the checked value to the state array
+    } else {
+      setChecked(checked.filter(v => v !== value)); // remove an unchecked value from the array
+    }
+    console.log(checked);
   }
   
 
@@ -70,9 +85,6 @@ const categoryMap = categories.map(category => {
   })
 
 
-
-
-
   return (
     <>
       <div>Admin</div>
@@ -80,7 +92,7 @@ const categoryMap = categories.map(category => {
       <div><button type="button" className="btn btn-outline-danger">Create new product</button></div>
       <div className="d-flex col-12 col-md-8 justify-content-center mx-auto">
 
-        <form id="post-form" encType="multipart/form-data" method="post" className="" onSubmit={create}>
+        <form id="post-form" encType="multipart/form-data" method="post" className="" onSubmit={handleSubmit}>
 
           <div className="form-outline mb-4">
             <label className="form-label" htmlFor="productname">Name</label>
@@ -103,31 +115,33 @@ const categoryMap = categories.map(category => {
           </fieldset>
           <div className="form-outline mb-4">
             <label className="form-label" htmlFor="image">Upload an image</label>
-            <input type="file" id="image" name="image" accept="image/jpeg, image/png, image/jpg, image/gif" />
+            <input type="file" id="image" name="image" accept="image/jpeg, image/png, image/jpg, image/gif" required/>
           </div>
-          <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#previewModal">Preview product</button>
-          
-          
-          <div className="modal fade" id="previewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        <button type="submit" className="btn btn-primary btn-block col-12 mx-auto" data-bs-toggle="modal" data-bs-target="#previewModal" onClick={handleSubmit} disable>Preview product</button>
+{/* 
+        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#previewModal">Extra button</button> */}
+                 
+          <div className="modal fade" id="previewModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div className="modal-dialog">
     <div className="modal-content">
       <div className="modal-header">
-        <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 className="modal-title" id="exampleModalLabel">Review the product:</h5>
         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div className="modal-body">
-        ...
+
+        {preview}
+
       </div>
       <div className="modal-footer">
-        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" className="btn btn-primary">Save changes</button>
+        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Go back</button>
+        <button type="button" className="btn btn-primary" onClick={create} disabled={submitDisabled}>Confirm</button>
       </div>
     </div>
   </div>
 </div>
 
-
-          <button type="submit" className="btn btn-primary btn-block col-12 mx-auto" required >Post</button>
 
 
 
@@ -137,7 +151,7 @@ const categoryMap = categories.map(category => {
         </form>
       </div>
       <div>
-        {preview}
+        {showNew}
       </div>
     </>
 
