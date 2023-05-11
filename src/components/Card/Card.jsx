@@ -1,13 +1,18 @@
 
-import React from 'react'
+import React, { useContext } from 'react'
 // import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import guitarPic from "../../assets/guitarproduct.jpg"
 import StarCalculator from '../StarCalculator/StarCalculator'
+import { ProductContext } from '../../context/ProductContext/ProductState'
 
 
 const Card = (props) => {
+  const{extractOne} = useContext(ProductContext)
+  
   const imagePath = "http://localhost:3000/uploaded_imgs/"
-
+  const enlarge =() =>{
+    console.log("hello from card")
+  }
 
   return (
     <>
@@ -22,8 +27,8 @@ const Card = (props) => {
 
                     <p id="show-details" className="mt-2" data-bs-toggle="collapse" data-bs-target={`#${props.product.id}`}>Show Details</p>
                     <p id={props.product.id} className="collapse">{props.product.description}</p>
-                   
-                    <button id="buy-btn" className="btn btn-outline-light">Add to cart</button>
+                    <button id="buy-btn" className="btn btn-outline-dark" onClick={() => extractOne(props.product)}>Details</button>
+                    <button id="buy-btn" className="btn btn-outline-success">Add to cart</button>
                  
                     <p className="mb-0">Rating:</p>
                     {/* CreateProduct doesn't return reviews, so set a default value */}

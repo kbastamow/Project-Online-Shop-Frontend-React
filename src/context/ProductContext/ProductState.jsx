@@ -70,6 +70,14 @@ export const ProductProvider = ({children}) => {
         console.error(error)
       }
     }
+
+    const extractOne = (data) => {
+      console.log(data);
+      dispatch({
+        type: "EXTRACT_ONE",
+        payload: data
+      })
+    }
       
       return (
         <ProductContext.Provider value={{
@@ -78,7 +86,8 @@ export const ProductProvider = ({children}) => {
         getProducts, 
         getByCategory,
         searchByName,
-        createProduct
+        createProduct,
+        extractOne
         }}>
           {children}
         </ProductContext.Provider>

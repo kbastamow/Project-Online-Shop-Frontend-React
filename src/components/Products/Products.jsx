@@ -5,22 +5,25 @@ import SearchBar from '../SearchBar/SearchBar'
 
 const Products = () => {
 
-  const {products, getProducts} = useContext(ProductContext)  //basically initialstate and function to change
+  const {product, products, getProducts} = useContext(ProductContext)  //basically initialstate and function to change
 
   useEffect(()=> {  //when component appears, do this once
     getProducts()
   }, [])
 
-  const product = products.map((product) => {
+  const productList= products.map((item) => {
     return <>
-    <Card product={product}/>
+    <Card product={item}/>
     </>
   })
+
+  const productFocus = product ? <Card product={product}/> : <p>Hello</p> //null is falsy value
   
   return (
     <>
     <SearchBar/>
-    <div className="row bg bg-black">{product}</div>
+    <div className="bg-bg-5">{productFocus}</div>
+    <div className="row bg bg-black">{productList}</div>
     </>
     )
 }

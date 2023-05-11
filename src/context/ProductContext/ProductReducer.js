@@ -22,7 +22,12 @@ const products = (state, action) => {
         return {
           ...state,
           product: action.payload,
-        }   
+        };
+        case "EXTRACT_ONE":
+          return {
+            ...state,
+            product:action.payload,
+          }   
       default:
         return state;
     }
