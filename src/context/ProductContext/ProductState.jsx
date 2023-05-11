@@ -6,7 +6,8 @@ import axios from "axios";
 
 
 const initialState = {
-    products: []
+    products: [],
+    product: null,
   }
   
 export const ProductContext = createContext(initialState);
@@ -43,7 +44,6 @@ export const ProductProvider = ({children}) => {
         try {
           console.log(input)
           const res = await axios.get(API_URL + "products/findByName/" + input)
-          console.log(res.data, "We searched axios")
           dispatch({
             type:"SEARCH_BY_NAME",
             payload: res.data
@@ -52,13 +52,35 @@ export const ProductProvider = ({children}) => {
           console.error(error)
         }    
     }
+
+    const createProduct = async(formdata) => {
+      let token = JSON.parse(localStorage.getItem("shoptoken"))
+      try {
+        const res = await axios.post(API_URL + "products/createProduct", formdata, {
+          headers: {
+            'Authorization': token,
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        console.log(res.data)
+        dispatch({
+          type: "CREATE_PRODUCT",
+          payload: res.data
+        })
+      }catch(error) {
+        console.error(error)
+      }
+    }
       
       return (
         <ProductContext.Provider value={{
         products: state.products, 
+        product: state.product,
         getProducts, 
         getByCategory,
-        searchByName}}>
+        searchByName,
+        createProduct
+        }}>
           {children}
         </ProductContext.Provider>
       );

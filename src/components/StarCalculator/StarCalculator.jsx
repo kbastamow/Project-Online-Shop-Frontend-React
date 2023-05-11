@@ -44,9 +44,11 @@ const StarCalculator = (props) => {
         const ratingDisplay = calculateAverage(props.reviews);  //Average
         const reviewMap = props.reviews.map(review => {  //Each review
             return <>
+                <div key={review.id}>
                 {calculateEach(review)}
                 <p className="small px-2"><em>{review.details}</em></p>
                 <hr />
+                </div>
             </>
         })
 

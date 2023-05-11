@@ -17,7 +17,8 @@ export const CategoryProvider = ({children}) => {
     const getCategories = async () => {
         try {
             const res = await axios.get(API_URL + "categories/getAll");
-              dispatch({
+              console.log(res.data)
+            dispatch({
                 type: "GET_CATEGORIES",
                 payload: res.data
               })
@@ -30,9 +31,9 @@ export const CategoryProvider = ({children}) => {
     return (<CategoryContext.Provider value={{
         categories: state.categories,
         getCategories
-}}>
-    {children}
-</CategoryContext.Provider>
+    }}>
+        {children}
+    </CategoryContext.Provider>
 
     )
 

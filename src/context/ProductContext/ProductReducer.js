@@ -18,6 +18,11 @@ const products = (state, action) => {
            ...state,
            products: action.payload
           };
+       case "CREATE_PRODUCT":
+        return {
+          ...state,
+          product: action.payload
+        }   
       default:
         return state;
     }

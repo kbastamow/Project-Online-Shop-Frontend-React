@@ -13,9 +13,11 @@ const SearchBar = () => {
     getCategories()
   }, [])
 
-  const buttonList = categories.map(category => {
+  const buttonList = categories.map((category, i) => {
     return <>
-    <li key={category.name}><button className="dropdown-item" onClick={() => {return getByCategory(category.id), setResultMsg(`Showing results for ${category.name}`)}}>{category.name}</button></li>
+    <div key={i}>
+    <li><button className="dropdown-item" onClick={() => {return getByCategory(category.id), setResultMsg(`Showing results for ${category.name}`)}}>{category.name}</button></li>
+    </div>
     </>
   })
 
