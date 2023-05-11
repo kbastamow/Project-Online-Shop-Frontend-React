@@ -9,8 +9,7 @@ const users = (state, action) => {
         case "REGISTER":
             return {
                ...state,
-               registrationMsg: action.payload
-                 //I NEED SOMETHING HERE TO GET A MESSGAGE THAT THE POST WAS SUCCESSFUL
+               registrationMsg: action.payload,
             }
         default:
             return state;

@@ -11,33 +11,9 @@ const FormModal = () => {
 
 const [formOnDisplay, setFormOnDisplay] = useState(null)
 const [toggleForms, setToggleForms] = useState(null)
-  
+ 
 
-useEffect(() => {
-  seeLogin()
-}, []);
-
-
-const seeRegistration = () => {
-  setFormOnDisplay(<FormRegister/>)
-  setToggleForms(<>Already registered? <span onClick={()=>seeLogin()}>Login here</span></>)
-  
-}
-
-const seeLogin = () => {
-  setFormOnDisplay(<FormLogin/>)
-  setToggleForms(<>New user? <span onClick={()=>seeRegistration()}>Register here</span></>)
-}
-
-
-
-
-
-
-
-
-
-  //CLOSES AND SHOWS MODAL ON BUTTON CLICK
+  //CLOSES AND SHOWS MODAL 
   const modalRef = useRef(null);
   const [modal, setModal] = useState("")
   const showModal = () => {
@@ -60,6 +36,21 @@ const seeLogin = () => {
     };
   }, []);
 
+
+useEffect(() => {
+  seeLogin()
+}, []);
+
+const seeRegistration = () => {
+  setFormOnDisplay(<FormRegister/>)
+  setToggleForms(<>Already registered? <span onClick={()=>seeLogin()}>Login here</span></>)
+  
+}
+
+const seeLogin = () => {
+  setFormOnDisplay(<FormLogin/>)
+  setToggleForms(<>New user? <span onClick={()=>seeRegistration()}>Register here</span></>)
+}
 
 
 

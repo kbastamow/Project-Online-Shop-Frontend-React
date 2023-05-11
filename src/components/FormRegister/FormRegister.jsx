@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import { FaUser, FaKey } from "react-icons/fa";
 import { UserContext } from "../../context/UserContext/UserState";
 import { useNavigate } from "react-router-dom";
-
+import { Modal } from "bootstrap";
 
 
 const FormRegister = () => {
@@ -86,15 +86,22 @@ const FormRegister = () => {
       }
     
       useEffect(() => {
-        if (registrationMsg){
-          console.log(registrationMsg)
+        if (registrationMsg === "Please check your email to confirm registration!"){
           setAlert(<div className="alert alert-success">{registrationMsg}<br/><div className="spinner-border spinner-border-sm" role="status"/></div>)
           setTimeout(() => {
-            closeModal()
+            {props.closeModal()}
             navigate("/products")
             setAlert(null)
-          }, 5000);
-      }}, [registrationMsg])
+          }, 4000);
+      } else if (registrationMsg === "email must be unique"){
+        console.log(registrationMsg)
+        setAlert(<div className="alert alert-danger">This email is already registered</div>)
+        setTimeout(() => {
+          setAlert(null)
+        }, 4000);
+      }
+      return
+    }, [registrationMsg])
     
     
     

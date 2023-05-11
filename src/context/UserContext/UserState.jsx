@@ -10,7 +10,7 @@ const token = JSON.parse(localStorage.getItem("shoptoken"))
 const initialState = {
     user: null,
     token: token ? token : null,
-    registrationMsg: null  //THIS SHOULDN'T REALLY BE HERE??
+    registrationMsg: null
 }
 
 export const UserContext = createContext(initialState);
@@ -38,13 +38,16 @@ const register = async(registerData) => {
     try {
         const res = await axios.post(API_URL + "users/createUser", registerData)
         console.log("user who registered: " + res.data.msg)
-
         dispatch({
             type: "REGISTER",
             payload:res.data.msg
         })
     } catch (error) {
-        console.error(error)
+        console.error(error.response.data.messages[0])
+        dispatch({
+            type: "REGISTER",
+            payload:error.response.data.messages[0]
+        })
     }
 }
 
