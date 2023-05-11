@@ -18,7 +18,6 @@ export const ProductProvider = ({children}) => {
     const getProducts = async () => {
         try {
             const res = await axios.get(API_URL + "products/getAllWithAssociations");
-            console.log(res.data)
             dispatch({
               type: "GET_PRODUCTS",
               payload: res.data,
@@ -62,10 +61,10 @@ export const ProductProvider = ({children}) => {
             'Content-Type': 'multipart/form-data'
           }
         })
-        console.log(res.data)
+        console.log(res.data.product)
         dispatch({
           type: "CREATE_PRODUCT",
-          payload: res.data
+          payload: res.data.product,
         })
       }catch(error) {
         console.error(error)
@@ -74,8 +73,8 @@ export const ProductProvider = ({children}) => {
       
       return (
         <ProductContext.Provider value={{
-        products: state.products, 
-        product: state.product,
+        products:state.products,
+        product:state.product,
         getProducts, 
         getByCategory,
         searchByName,

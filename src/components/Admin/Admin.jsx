@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { CategoryContext } from '../../context/CategoryContext/CategoryState'
 import { ProductContext } from '../../context/ProductContext/ProductState'
+import Card from '../Card/Card'
 
 const Admin = () => {
   const {categories, getCategories} = useContext(CategoryContext)
   const {product, createProduct} = useContext(ProductContext)
+  const [preview, setPreview] = useState("")
 
 
   console.log("Admin ", categories)
@@ -34,8 +36,18 @@ const create = (event) =>{
   
   console.log(formData)
   createProduct(formData)
-
 }
+
+useEffect(() => {
+  console.log("Inside useEFFECT", product)
+  if(product) {
+  setPreview(<Card product={product}/>)
+} else {
+  setPreview(null)
+}}, [product])
+
+
+
 
 const handleCheckbox = (event) => {
   const value = event.target.value;
@@ -111,7 +123,10 @@ const categoryMap = categories.map(category => {
               <button type="submit" className="btn btn-primary btn-block col-12 mx-auto" required >Post</button>
             </form>
         </div>
-
+<div>
+  Hello
+  {preview}
+</div>
 
 
     </>

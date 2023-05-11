@@ -16,12 +16,12 @@ const products = (state, action) => {
       case "SEARCH_BY_NAME":
           return {
            ...state,
-           products: action.payload
+           products: action.payload,
           };
        case "CREATE_PRODUCT":
         return {
           ...state,
-          product: action.payload
+          product: action.payload,
         }   
       default:
         return state;
