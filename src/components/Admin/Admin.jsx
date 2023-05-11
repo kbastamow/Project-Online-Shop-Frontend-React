@@ -19,6 +19,10 @@ const Admin = () => {
 
 console.log("Admin ", categories)
 
+useEffect(() => {
+  if (categories.length == 0) getCategories() 
+  console.log(categories, "inside") 
+}, [])
 
 
 
@@ -118,15 +122,15 @@ const categoryMap = categories.map(category => {
             <input type="file" id="image" name="image" accept="image/jpeg, image/png, image/jpg, image/gif" required/>
           </div>
 
-        <button type="submit" className="btn btn-primary btn-block col-12 mx-auto" data-bs-toggle="modal" data-bs-target="#previewModal" onClick={handleSubmit} disable>Preview product</button>
+        <button type="submit" className="btn btn-primary btn-block col-12 mx-auto" data-bs-toggle="modal" data-bs-target="#previewModal" onClick={handleSubmit}>Preview product</button>
 {/* 
         <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#previewModal">Extra button</button> */}
                  
-          <div className="modal fade" id="previewModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div className="modal fade" id="previewModal" tabIndex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
   <div className="modal-dialog">
     <div className="modal-content">
       <div className="modal-header">
-        <h5 className="modal-title" id="exampleModalLabel">Review the product:</h5>
+        <h5 className="modal-title">Review the product:</h5>
         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div className="modal-body">
@@ -141,13 +145,6 @@ const categoryMap = categories.map(category => {
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
         </form>
       </div>
       <div>
