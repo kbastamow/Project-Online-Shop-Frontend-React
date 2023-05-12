@@ -42,6 +42,12 @@ const Admin = () => {
 
 
   }
+
+
+  if (target.type === "file") {
+    setFormInput({...formInput, image: target.files[0]})
+    console.log(formInput.image)
+  }
   console.log(formInput)
 }
 
@@ -173,8 +179,8 @@ const Admin = () => {
           </fieldset>
           <div className="form-outline mb-4">
             <label className="form-label" htmlFor="image">Upload an image</label>
-            <input type="file" id="image" name="image" accept="image/jpeg, image/png, image/jpg, image/gif" required />
-          </div>
+            <input type="file" id="image" name="image" accept="image/jpeg, image/png, image/jpg, image/gif" required onChange={handleInput}  />
+            </div>
 
           <button type="submit" className="btn btn-primary btn-block col-12 mx-auto" data-bs-toggle="modal" data-bs-target="#previewModal" onClick={handleSubmit}>Preview product</button>
           {/* 
