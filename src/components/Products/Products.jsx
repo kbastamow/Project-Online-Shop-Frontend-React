@@ -2,14 +2,16 @@ import React, { useContext, useEffect } from 'react'
 import { ProductContext } from '../../context/ProductContext/ProductState'
 import Card from '../Card/Card'
 import SearchBar from '../SearchBar/SearchBar'
+import CardOne from '../CardOne/CardOne'
 
 const Products = () => {
 
   const {product, products, getProducts} = useContext(ProductContext)  //basically initialstate and function to change
-
+  
   useEffect(()=> {  //when component appears, do this once
     getProducts()
   }, [])
+
 
   const productList= products.map((item) => {
     return <>
@@ -22,7 +24,8 @@ const Products = () => {
   return (
     <>
     <SearchBar/>
-    <div className="bg-bg-5">{productFocus}</div>
+    <>{(product) ? <CardOne/> : null}</>
+    {/* <div className="bg-bg-5">{productFocus}</div> */}
     <div className="row bg bg-black">{productList}</div>
     </>
     )

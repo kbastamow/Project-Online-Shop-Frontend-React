@@ -1,6 +1,6 @@
 import React from 'react'
 import { FaStarHalfAlt, FaStar, FaRegStar } from "react-icons/fa";
-
+import "./StarCalculator.scss"
 
 const StarCalculator = (props) => {
     if (props.reviews.length === 0) {
@@ -25,7 +25,7 @@ const StarCalculator = (props) => {
             for (let i = 0; i < emptyStars; i++) {
                 icons.push(<FaRegStar />)
             }
-            return icons
+            return <i>{icons}</i>
         }
 
         const calculateEach = (review) => {
@@ -46,18 +46,22 @@ const StarCalculator = (props) => {
             return <>
                 <div key={review.id}>
                 {calculateEach(review)}
-                <p className="small px-2"><em>{review.details}</em></p>
+                <p className="px-2"><em>{review.details}</em></p>
                 <hr />
                 </div>
             </>
         })
 
         return (
-            <>
+            <>  
+            <div className="starCalculator-div">
+            <div className="mt-2">
                 {ratingDisplay}
-                <p className="read-more mt-2" data-bs-toggle="collapse" data-bs-target={`#${props.productId}-review`}>Read more</p>
-                <div id={`${props.productId}-review`} className="collapse text-center text-bg-dark mt-2 pt-1">
+                <span className="read-more ms-1" data-bs-toggle="collapse" data-bs-target={`#${props.productId}-review`}>Read more</span>
+                </div>
+                <div id={`${props.productId}-review`} className="collapse text-center mt-2 pt-1">
                 {reviewMap}
+                </div>
                 </div>
             </>
         )
