@@ -8,4 +8,11 @@
     i {
         color: rgb(241, 169, 0);
     }
+
+    span:hover {
+        cursor: pointer;
+        color: #9C052A;
+        font-weight: bolder;
+        text-shadow: 1px 1px 4px grey;
+    }
 }

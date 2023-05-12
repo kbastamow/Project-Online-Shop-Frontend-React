@@ -18,7 +18,6 @@ return (<>
   <div className="topContainer">
 {/* <div className="container-fluid"> */}
   {/* <div className="row"> */}
-    <div>CardOne</div>
   
 <div className="card flex-row oneCard ">
 
@@ -34,7 +33,7 @@ return (<>
           <button type="button" className="filled">Add to cart</button>
           <button type="button" className="outline ms-3">Add to favorites</button><br/>
           </div>
-          <div className="my-auto"> {<StarCalculator reviews={product.Reviews || []} productId={product.id}/>}</div>
+          <div className="my-2"> {<StarCalculator reviews={product.Reviews || []} productId={product.id}/>}</div>
   </div>
 </div>
 
