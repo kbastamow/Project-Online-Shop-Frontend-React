@@ -12,6 +12,7 @@ import Admin from './components/Admin/Admin'
 import { CategoryProvider } from './context/CategoryContext/CategoryState'
 import { ProductProvider } from './context/ProductContext/ProductState'
 import Products from './components/Products/Products'
+import CartModal from './components/CartModal/CartModal'
 
 function App() {
 
@@ -23,7 +24,9 @@ function App() {
           <ProductProvider>
             <CategoryProvider>
               <FormModal></FormModal>
+              <CartModal></CartModal>
               <Header></Header>
+            
               <Routes>
                 <Route path="/" element={<Homepage />} />
                 <Route path="/admin" element={<Admin />} />

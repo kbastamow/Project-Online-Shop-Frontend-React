@@ -1,10 +1,26 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import logosm from "../../assets/logosmall2.png"
+import "./Header.scss"
+import { FaUser } from "react-icons/fa";
+import { UserContext } from '../../context/UserContext/UserState';
+
 
 const Header = () => {
+
+  const {token, user} =useContext(UserContext)
+ 
+  let logger;
+  
+  (!user) ? logger="tester" : logger= user.name
+
+  let navbarLeft = (token) ? (
+    <div className="welcome-div ">Welcome<button className="ms-3 padding-2" data-bs-toggle="modal" data-bs-target="#cartModal"><FaUser></FaUser></button></div>
+    )  :  (<div className="login-div me-2 px-4 py2" data-bs-toggle="modal" data-bs-target="#loginModal">Login/register</div>)
+
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg bg-light">
+    <div className="main-navbar">
+      <nav className="main-navbar navbar navbar-expand-lg bg-light p-0">
         <div className="container-fluid">
           <button
             className="navbar-toggler"
@@ -19,7 +35,7 @@ const Header = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
             <a className="navbar-brand" href="#">
-              Hidden brand
+              <img src={logosm} alt="logo" />
             </a>
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
@@ -44,9 +60,13 @@ const Header = () => {
             </ul>
           </div>
           <div className="">
-            <ul className="d-flex flex-nowrap me-4 mb-2 mb-lg-0">
-              <button className="nav-item me-2 px-4 d-block" data-bs-toggle="modal" data-bs-target="#loginModal">Login/register</button>
-            </ul>
+            <div className="d-flex flex-wrap me-4 mb-2 mb-lg-0">
+
+              {navbarLeft}
+
+              {/* <div className="login-div nav-item me-2 px-4 py2" data-bs-toggle="modal" data-bs-target="#loginModal"><i className="me-1"><FaUser></FaUser></i>Login/register</div> */}
+            
+            </div>
           </div>
         </div>
       </nav>

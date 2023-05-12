@@ -1,0 +1,27 @@
+@import "../../colors_styles.scss";
+
+
+.main-navbar {
+    border:none;
+    border-bottom: 1px solid $carmine;
+  
+    .login-div {
+        font-size:large
+    }
+    .login-div:hover {
+        color: $carmine;
+        cursor: pointer;
+    }
+
+    .welcome-div button{
+        padding: 10%;
+        border-radius:50%;
+    }
+
+    }
+    
+
+
+
+
+   

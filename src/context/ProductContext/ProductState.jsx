@@ -4,10 +4,12 @@ import ProductReducer from "./ProductReducer"
 import React, { createContext, useReducer } from 'react';
 import axios from "axios";
 
+let cart = JSON.parse(localStorage.getItem("shopcart")) || []
 
 const initialState = {
     products: [],
     product: null,
+    cart: cart
   }
   
 export const ProductContext = createContext(initialState);
@@ -78,16 +80,29 @@ export const ProductProvider = ({children}) => {
         payload: data
       })
     }
+
+    const addToCart = (product) => {
+      let trimmed =  {id:product.id, name: product.name, price: product.price, image: product.image}
+      console.log(product)
+      dispatch ({
+        type: "ADD_TO_CART",
+        payload: trimmed
+      })
+
+    }
+
       
       return (
         <ProductContext.Provider value={{
         products:state.products,
         product:state.product,
+        cart: state.cart,
         getProducts, 
         getByCategory,
         searchByName,
         createProduct,
-        extractOne
+        extractOne,
+        addToCart
         }}>
           {children}
         </ProductContext.Provider>
