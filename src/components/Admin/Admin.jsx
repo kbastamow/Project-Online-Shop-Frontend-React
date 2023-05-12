@@ -11,6 +11,55 @@ const Admin = () => {
   const [submitDisabled, setSubmitDisabled] = useState(true)
   const [showNew, setShowNew] = useState("")
 
+  const [formInput, setFormInput] = useState({
+    name: "",
+    description: "",
+    price: "",
+    image: {},
+    category: []
+  })
+
+   
+  const handleInput = (event) => {
+    let target = event.target;
+
+    if (target.type === "checkbox") {
+      if (target.value && (!formInput.category.includes(target.name))) {
+      console.log("true")
+      setFormInput({...formInput, category: [...formInput.category, target.name]}) 
+
+    } else { //If checkbox is false
+      console.log("false")
+      console.log(target.name)
+      let falseRemoved = formInput.category.filter(item =>  item !== target.name)
+      setFormInput({...formInput, category: falseRemoved}); // remove an unchecked value from the array
+      // let unique = formInput.category.filter((value, index, array) => array.indexOf(value) === index);
+      // console.log(unique)
+
+}
+
+   
+
+
+  }
+  console.log(formInput)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   let formData; //couldn't be put in a state
 
   useEffect(() => {
@@ -67,23 +116,23 @@ const Admin = () => {
 
 
 
-  const handleCheckbox = (event) => {
-    const value = event.target.value;
-    const isChecked = event.target.checked;
-    if (isChecked) {
-      setChecked([...checked, value]); // add the checked value to the state array
-    } else {
-      setChecked(checked.filter(v => v !== value)); // remove an unchecked value from the array
-    }
-    console.log(checked);
-  }
+  // const handleCheckbox = (event) => {
+  //   const value = event.target.value;
+  //   const isChecked = event.target.checked;
+  //   if (isChecked) {
+  //     setChecked([...checked, value]); // add the checked value to the state array
+  //   } else {
+  //     setChecked(checked.filter(v => v !== value)); // remove an unchecked value from the array
+  //   }
+  //   console.log(checked);
+  // }
 
 
   const categoryMap = categories.map(category => {
     return (
       <>
         <div key={category.id}>
-          <input type="checkbox" id={category.name} name="category" value={category.id} onChange={handleCheckbox} />
+          <input type="checkbox" id={category.name} name={category.id} onChange={handleInput} />
           <label htmlFor={category.name}> {category.name} </label><br></br>
         </div>
       </>
