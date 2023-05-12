@@ -6,12 +6,9 @@ import Card from '../Card/Card'
 const Admin = () => {
   const { categories, getCategories } = useContext(CategoryContext)
   const { product, createProduct } = useContext(ProductContext)
-  // const [checked, setChecked] = useState([]);
   const [preview, setPreview] = useState(<h5>Complete all fields</h5>)
   const [btnDisabled, setBtnDisabled] = useState(true)
-  // const [submitBtnDisabled, setSubmitBtnDisabled] = useState(true)
   const [showNew, setShowNew] = useState("")
-  // const [localUrl, setLocalUrl] = useState("")
 
   const [formInput, setFormInput] = useState({
     name: "",
@@ -21,58 +18,29 @@ const Admin = () => {
     category: []
   })
 
-   
   const handleInput = (event) => {
     let target = event.target;
     if (target.type === "checkbox") {
       if (target.value && (!formInput.category.includes(target.name))) {  //Add trues if they don't exist yet
-      console.log("true")
-      setFormInput({...formInput, category: [...formInput.category, target.name]}) 
+        console.log("true")
+        setFormInput({ ...formInput, category: [...formInput.category, target.name] })
 
-    } else { //If checkbox is false, remove from array if it was added earlier
-      console.log("false")
-      console.log(target.name)
-      let falseRemoved = formInput.category.filter(item =>  item !== target.name)
-      setFormInput({...formInput, category: falseRemoved}); // remove an unchecked value from the array
-      // let unique = formInput.category.filter((value, index, array) => array.indexOf(value) === index);
-      // console.log(unique)
-}
-  
+      } else { //If checkbox is false, remove from array if it was added earlier
+        console.log("false")
+        console.log(target.name)
+        let falseRemoved = formInput.category.filter(item => item !== target.name)
+        setFormInput({ ...formInput, category: falseRemoved }); // remove an unchecked value from the array
+      }
+
+    }
+    if (target.type === "file") {
+      setFormInput({ ...formInput, image: target.files[0] })
+      console.log(formInput.image)
+    }
+    if (target.type === "text" || target.type === "number" || target.type === "textarea") {
+      setFormInput({ ...formInput, [target.name]: target.value })
+    }
   }
-  if (target.type === "file") {
-
-    setFormInput({...formInput, image: target.files[0]})
-    console.log(formInput.image)
-  }
-
-  if (target.type === "text"  || target.type === "number" || target.type === "textarea") {
-    setFormInput({...formInput, [target.name]: target.value})
-  }
-  console.log(formInput)
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  let formData; //couldn't be put in a state
-
-  // useEffect(() => {
-  //   setBtnDisabled(false)
-  // }, [preview])
-
-  console.log("Admin ", categories)
 
   useEffect(() => {
     if (categories.length == 0) getCategories()
@@ -80,33 +48,29 @@ const Admin = () => {
   }, [])
 
 
-
   const previewProduct = () => {
-
     // Check for empty values
     let hasEmptyValues = false;
 
-    for (const key in formInput) {  
+    for (const key in formInput) {
       if (!formInput[key] && formInput[key] !== 0) {
         console.log(formInput[key])
         hasEmptyValues = true;
         setPreview(<h5>Complete all fields</h5>)
         setBtnDisabled(true)
         return;
-      }  
+      }
     }
-
     //Get the categories names from CategoryContext
-      let categoryNames = formInput.category.map(id => {
-        const extractedName = categories.find(cat => cat.id == id);
-        return extractedName ? extractedName.name : null;
-      });
+    let categoryNames = formInput.category.map(id => {
+      const extractedName = categories.find(cat => cat.id == id);
+      return extractedName ? extractedName.name : null;
+    });
 
-      if (categoryNames.length === 0) return
+    if (categoryNames.length === 0) return
 
-
-      setBtnDisabled(false)
-      setPreview(<>
+    setBtnDisabled(false)
+    setPreview(<>
       <p><b>Product name:</b> {formInput.name}</p>
       <p><b>Description:</b> {formInput.description}</p>
       <p><b>Price: </b> {formInput.price} €</p>
@@ -115,38 +79,31 @@ const Admin = () => {
       <img src={URL.createObjectURL(formInput.image)} alt="" />
     </>
     )
-}
-    
-   
+  }
 
-const handleSubmit = (event) => {
-  event.preventDefault();
-  
-  let formData = new FormData();
-  formData.append('name', formInput.name)
-  formData.append('description', formInput.description)
-  formData.append('price', formInput.price);
-  formData.append('image', formInput.image)
-  formInput.category.forEach(id => formData.append('CategoryId[]', id))
-  
-  console.log(formData)
-  createProduct(formData)
-  setFormInput({
-    name: "",
-    description: "",
-    price: "",
-    image: {},
-    category: []
-  })
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    let formData = new FormData();
+    formData.append('name', formInput.name)
+    formData.append('description', formInput.description)
+    formData.append('price', formInput.price);
+    formData.append('image', formInput.image)
+    formInput.category.forEach(id => formData.append('CategoryId[]', id))
 
-}
+    console.log(formData)
+    console.log("WHAT THE F..")
+    console.log("this is event-target ", event.target)
+    createProduct(formData)
+    event.target.reset()
 
-// const create = () => {
-//     console.log("creating new product")
-//     createProduct(formData)
-//     setPreview(<h5>Complete all fields</h5>)
-//     formData = ""
-//   }
+    setFormInput({
+      name: "",
+      description: "",
+      price: "",
+      image: {},
+      category: []
+    })
+  }
 
   useEffect(() => {
     console.log("Inside useEFFECT", product)
@@ -156,20 +113,6 @@ const handleSubmit = (event) => {
       setShowNew(null)
     }
   }, [product])
-
-
-
-  // const handleCheckbox = (event) => {
-  //   const value = event.target.value;
-  //   const isChecked = event.target.checked;
-  //   if (isChecked) {
-  //     setChecked([...checked, value]); // add the checked value to the state array
-  //   } else {
-  //     setChecked(checked.filter(v => v !== value)); // remove an unchecked value from the array
-  //   }
-  //   console.log(checked);
-  // }
-
 
   const categoryMap = categories.map(category => {
     return (
@@ -182,11 +125,9 @@ const handleSubmit = (event) => {
     )
   })
 
-
   return (
     <>
       <div>Admin</div>
-
       <div>
         <button type="button" className="btn btn-outline-danger">Create new product</button>
         <button type="button" className="btn btn-outline-danger">Update or delete</button>
@@ -197,7 +138,7 @@ const handleSubmit = (event) => {
 
           <div className="form-outline mb-4">
             <label className="form-label" htmlFor="productname">Name</label>
-            <input type="text" className="form-control" name="name" id="productname" required onChange={handleInput}/>
+            <input type="text" className="form-control" name="name" id="productname" required onChange={handleInput} />
           </div>
           <div className="form-outline mb-4">
             <label className="form-label" htmlFor="description">Description</label>
@@ -216,21 +157,16 @@ const handleSubmit = (event) => {
           </fieldset>
           <div className="form-outline mb-4">
             <label className="form-label" htmlFor="image">Upload an image</label>
-            <input type="file" id="image" name="image" accept="image/jpeg, image/png, image/jpg, image/gif" required onChange={handleInput}  />
-            </div>
-
-            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#previewModal" onClick={previewProduct}>Preview</button>
-
-          {/* <button type="submit" className="btn btn-primary btn-block col-12 mx-auto"  onClick={handleSubmit} disabled={btnDisabled}>Submit</button> */}
-          
-       
+            <input type="file" id="image" name="image" accept="image/jpeg, image/png, image/jpg, image/gif" required onChange={handleInput} />
+          </div>
+{/* FORM FINISH, MODAL BUTTON AND MODAL */}
+          <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#previewModal" onClick={previewProduct}>Preview</button>
 
           <div className="modal fade" id="previewModal" tabIndex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
             <div className="modal-dialog">
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title text-center">Review the product:</h5>
-                  {/* <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
                 </div>
                 <div className="modal-body">
 
@@ -238,12 +174,9 @@ const handleSubmit = (event) => {
 
                 </div>
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={()=> setPreview(<h5>Complete all fields</h5>)}>Go back</button>
+                  <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => setPreview(<h5>Complete all fields</h5>)}>Go back</button>
 
-                  {/* <button type="submit" className="btn btn-primary btn-block col-12 mx-auto"  onClick={create} disabled={btnDisabled}>Submit</button> */}
-
-
-                  <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={handleSubmit} disabled={btnDisabled}>Confirm</button>
+                  <button type="submit" className="btn btn-primary" data-bs-dismiss="modal" disabled={btnDisabled}>Confirm</button>
                 </div>
               </div>
             </div>
