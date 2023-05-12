@@ -1,0 +1,31 @@
+@import "../../colors_styles.scss";
+
+.card-list {
+
+    h4 {
+        font-family: $brand;
+        font-size:medium;
+    }
+
+}
+
+.image-zoom {
+    overflow: hidden;
+  }
+  
+  .image-zoom img {
+    transition: transform .5s ease;
+    max-width: 100;
+  }
+  
+  .image-zoom:hover img {
+    transform: scale(1.5);
+  }
+
+  .show-details:hover {
+    cursor: pointer;
+    color: #9C052A;
+    font-weight: bolder;
+    letter-spacing: 0.3rem;
+
+  }

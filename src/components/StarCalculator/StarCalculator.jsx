@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FaStarHalfAlt, FaStar, FaRegStar } from "react-icons/fa";
 import "./StarCalculator.scss"
+import { ProductProvider } from '../../context/ProductContext/ProductState';
 
 const StarCalculator = (props) => {
+    const {products} = useContext(ProductProvider) 
+
+
     if (props.reviews.length === 0) {
         return <><p>No reviews yet</p></>
     } else {

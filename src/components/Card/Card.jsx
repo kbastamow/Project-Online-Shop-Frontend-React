@@ -1,10 +1,11 @@
 
 import React, { useContext } from 'react'
-// import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
+import { FaCartArrowDown } from "react-icons/fa";
+import {BsArrowUpRightSquareFill} from "react-icons/bs"
 import guitarPic from "../../assets/guitarproduct.jpg"
 import StarCalculator from '../StarCalculator/StarCalculator'
 import { ProductContext } from '../../context/ProductContext/ProductState'
-
+import "./Card.scss"
 
 const Card = (props) => {
   const{extractOne} = useContext(ProductContext)
@@ -15,20 +16,20 @@ const Card = (props) => {
   }
 
   return (
-    <>
-        <div key={props.product.id} className="card card bg-dark border-3 border-white mx-auto mx-md-3 my-3 col-9 col-md-2 text-center rounded-0">
-                <h4 className="card-title w-100  bg-black text-bg-dark p-2 mb-0">{props.product.name}</h4>
-                <div className="image-zoom w-100 bg-white">
+    <>  
+        <div key={props.product.id} className="card card-list col-5 col-md-2 mx-md-3 my-3">
+        {/* card border-3 border-black mx-auto   col-9 col-md-2 text-center rounded-0 */}
+                 
+                 <div className="image-zoom w-75 bg-white mx-auto">
                   <img src={imagePath + props.product.image}
-                  className="img-fluid"/>
+                  className="img-fluid mt-2"/>
                 </div>
+                <h4 className="card-title w-100  bg-black text-bg-dark p-2 mb-0">{props.product.name}</h4>
                 <div className="card-body bg-white text-bg-light">
-                  <h5 className="mb-3">{props.product.price}</h5>
+                  <h5 className="mb-3">{props.product.price}€</h5>
 
-                    <p id="show-details" className="mt-2" data-bs-toggle="collapse" data-bs-target={`#${props.product.id}`}>Show Details</p>
-                    <p id={props.product.id} className="collapse">{props.product.description}</p>
-                    <button id="buy-btn" className="btn btn-outline-dark" onClick={() => extractOne(props.product)}>Details</button>
-                    <button id="buy-btn" className="btn btn-outline-success">Add to cart</button>
+                    <p className="mt-2 show-details"  onClick={() => extractOne(props.product)}>Details<span className="ms-2"><BsArrowUpRightSquareFill/></span></p>
+                    <button id="buy-btn" className="btn btn-outline-success"><i><FaCartArrowDown/></i></button>
                  
                     <p className="mb-0">Rating:</p>
                     {/* CreateProduct doesn't return reviews, so set a default value */}
@@ -36,6 +37,7 @@ const Card = (props) => {
                    
                 </div>
               </div>
+       
     </>
   )
 }
