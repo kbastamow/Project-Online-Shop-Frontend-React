@@ -6,10 +6,12 @@ import Card from '../Card/Card'
 const Admin = () => {
   const { categories, getCategories } = useContext(CategoryContext)
   const { product, createProduct } = useContext(ProductContext)
-  const [checked, setChecked] = useState([]);
+  // const [checked, setChecked] = useState([]);
   const [preview, setPreview] = useState(<h5>Complete all fields</h5>)
-  const [submitDisabled, setSubmitDisabled] = useState(true)
+  const [btnDisabled, setBtnDisabled] = useState(true)
+  // const [submitBtnDisabled, setSubmitBtnDisabled] = useState(true)
   const [showNew, setShowNew] = useState("")
+  // const [localUrl, setLocalUrl] = useState("")
 
   const [formInput, setFormInput] = useState({
     name: "",
@@ -43,7 +45,7 @@ const Admin = () => {
     console.log(formInput.image)
   }
 
-  if (target.type === "text"  || target.type === "number"){
+  if (target.type === "text"  || target.type === "number" || target.type === "textarea") {
     setFormInput({...formInput, [target.name]: target.value})
   }
   console.log(formInput)
@@ -66,9 +68,9 @@ const Admin = () => {
 
   let formData; //couldn't be put in a state
 
-  useEffect(() => {
-    setSubmitDisabled(false)
-  }, [preview])
+  // useEffect(() => {
+  //   setBtnDisabled(false)
+  // }, [preview])
 
   console.log("Admin ", categories)
 
@@ -79,35 +81,72 @@ const Admin = () => {
 
 
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const previewProduct = () => {
 
-    formData = new FormData();
-    formData.append('name', productname.value);
-    formData.append('description', description.value)
-    formData.append('price', price.value);
-    formData.append('image', image.files[0])
-    checked.forEach(category => formData.append('CategoryId[]', category))
+    // Check for empty values
+    let hasEmptyValues = false;
 
-    setPreview(<>
-      <p><b>Product name:</b> {productname.name}</p>
-      <p><b>Description:</b> {description.value}</p>
-      <p><b>Price:</b> {price.value}</p>
-      <p><b>Categories</b>: {checked.join(", ")}</p>
+    for (const key in formInput) {  
+      if (!formInput[key] && formInput[key] !== 0) {
+        console.log(formInput[key])
+        hasEmptyValues = true;
+        setPreview(<h5>Complete all fields</h5>)
+        setBtnDisabled(true)
+        return;
+      }  
+    }
+
+    //Get the categories names from CategoryContext
+      let categoryNames = formInput.category.map(id => {
+        const extractedName = categories.find(cat => cat.id == id);
+        return extractedName ? extractedName.name : null;
+      });
+
+      if (categoryNames.length === 0) return
+
+
+      setBtnDisabled(false)
+      setPreview(<>
+      <p><b>Product name:</b> {formInput.name}</p>
+      <p><b>Description:</b> {formInput.description}</p>
+      <p><b>Price: </b> {formInput.price} €</p>
+      <p><b>Categories</b>: {categoryNames.join(", ")}</p>
       <div><b>Image preview:</b></div>
-      <img src={URL.createObjectURL(image.files[0])} alt="" />
+      <img src={URL.createObjectURL(formInput.image)} alt="" />
     </>
     )
-  }
+}
+    
+   
 
+const handleSubmit = (event) => {
+  event.preventDefault();
+  
+  let formData = new FormData();
+  formData.append('name', formInput.name)
+  formData.append('description', formInput.description)
+  formData.append('price', formInput.price);
+  formData.append('image', formInput.image)
+  formInput.category.forEach(id => formData.append('CategoryId[]', id))
+  
+  console.log(formData)
+  createProduct(formData)
+  setFormInput({
+    name: "",
+    description: "",
+    price: "",
+    image: {},
+    category: []
+  })
 
+}
 
-  const create = () => {
-    console.log("creating new product")
-    createProduct(formData)
-    setPreview(<h5>Complete all fields</h5>)
-    formData = ""
-  }
+// const create = () => {
+//     console.log("creating new product")
+//     createProduct(formData)
+//     setPreview(<h5>Complete all fields</h5>)
+//     formData = ""
+//   }
 
   useEffect(() => {
     console.log("Inside useEFFECT", product)
@@ -180,16 +219,18 @@ const Admin = () => {
             <input type="file" id="image" name="image" accept="image/jpeg, image/png, image/jpg, image/gif" required onChange={handleInput}  />
             </div>
 
-          <button type="submit" className="btn btn-primary btn-block col-12 mx-auto" data-bs-toggle="modal" data-bs-target="#previewModal" onClick={handleSubmit}>Preview product</button>
-          {/* 
-        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#previewModal">Extra button</button> */}
+            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#previewModal" onClick={previewProduct}>Preview</button>
+
+          {/* <button type="submit" className="btn btn-primary btn-block col-12 mx-auto"  onClick={handleSubmit} disabled={btnDisabled}>Submit</button> */}
+          
+       
 
           <div className="modal fade" id="previewModal" tabIndex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
             <div className="modal-dialog">
               <div className="modal-content">
                 <div className="modal-header">
-                  <h5 className="modal-title">Review the product:</h5>
-                  <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <h5 className="modal-title text-center">Review the product:</h5>
+                  {/* <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
                 </div>
                 <div className="modal-body">
 
@@ -197,8 +238,12 @@ const Admin = () => {
 
                 </div>
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Go back</button>
-                  <button type="button" className="btn btn-primary" onClick={create} disabled={submitDisabled}>Confirm</button>
+                  <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={()=> setPreview(<h5>Complete all fields</h5>)}>Go back</button>
+
+                  {/* <button type="submit" className="btn btn-primary btn-block col-12 mx-auto"  onClick={create} disabled={btnDisabled}>Submit</button> */}
+
+
+                  <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={handleSubmit} disabled={btnDisabled}>Confirm</button>
                 </div>
               </div>
             </div>
