@@ -8,6 +8,8 @@ import { ProductContext } from '../../context/ProductContext/ProductState'
 import "./Card.scss"
 
 const Card = (props) => {
+  let scale = "limited" //invented variable to limit what starcalculator returns
+
   const{extractOne} = useContext(ProductContext)
   
   const imagePath = "http://localhost:3000/uploaded_imgs/"
@@ -31,9 +33,9 @@ const Card = (props) => {
                     <p className="mt-2 show-details"  onClick={() => extractOne(props.product)}>Details<span className="ms-2"><BsArrowUpRightSquareFill/></span></p>
                     <button id="buy-btn" className="btn btn-outline-success"><i><FaCartArrowDown/></i></button>
                  
-                    <p className="mb-0">Rating:</p>
+                    {/* <p className="mb-0">Rating:</p> */}
                     {/* CreateProduct doesn't return reviews, so set a default value */}
-                    {<StarCalculator reviews={props.product.Reviews || []} productId={props.product.id}/>}
+                    {<StarCalculator reviews={props.product.Reviews || []} productId={props.product.id} scale={scale}/>}
                    
                 </div>
               </div>

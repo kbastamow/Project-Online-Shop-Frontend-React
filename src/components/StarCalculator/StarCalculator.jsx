@@ -1,12 +1,9 @@
 import React, { useContext } from 'react'
 import { FaStarHalfAlt, FaStar, FaRegStar } from "react-icons/fa";
 import "./StarCalculator.scss"
-import { ProductProvider } from '../../context/ProductContext/ProductState';
 
 const StarCalculator = (props) => {
-    const {products} = useContext(ProductProvider) 
-
-
+    
     if (props.reviews.length === 0) {
         return <><p>No reviews yet</p></>
     } else {
@@ -56,9 +53,15 @@ const StarCalculator = (props) => {
             </>
         })
 
+//Return only average stars if we call for call map; render all reviews if calling for one card focus
+
         return (
-            <>  
+            <>
+            {props.scale === "limited" ? (   
             <div className="starCalculator-div">
+ {ratingDisplay}
+ </div>
+ ) : (<div className="starCalculator-div">
             <div className="mt-2">
                 {ratingDisplay}
                 <span className="read-more ms-1" data-bs-toggle="collapse" data-bs-target={`#${props.productId}-review`}>Read more</span>
@@ -66,10 +69,12 @@ const StarCalculator = (props) => {
                 <div id={`${props.productId}-review`} className="collapse text-center mt-2 pt-1">
                 {reviewMap}
                 </div>
-                </div>
+                </div>  
+            )}
             </>
-        )
-    }
+        
+    )
+}
 }
 
 export default StarCalculator

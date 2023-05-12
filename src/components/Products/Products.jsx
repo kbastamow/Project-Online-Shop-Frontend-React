@@ -26,7 +26,7 @@ const Products = () => {
     <SearchBar/>
     <>{(product) ? <CardOne/> : null}</>
     {/* <div className="bg-bg-5">{productFocus}</div> */}
-    <div className="row">{productList}</div>
+    <div className="row h-25">{productList}</div>
     </>
     )
 }
