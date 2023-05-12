@@ -22,31 +22,29 @@ const Admin = () => {
    
   const handleInput = (event) => {
     let target = event.target;
-
     if (target.type === "checkbox") {
-      if (target.value && (!formInput.category.includes(target.name))) {
+      if (target.value && (!formInput.category.includes(target.name))) {  //Add trues if they don't exist yet
       console.log("true")
       setFormInput({...formInput, category: [...formInput.category, target.name]}) 
 
-    } else { //If checkbox is false
+    } else { //If checkbox is false, remove from array if it was added earlier
       console.log("false")
       console.log(target.name)
       let falseRemoved = formInput.category.filter(item =>  item !== target.name)
       setFormInput({...formInput, category: falseRemoved}); // remove an unchecked value from the array
       // let unique = formInput.category.filter((value, index, array) => array.indexOf(value) === index);
       // console.log(unique)
-
 }
-
-   
-
-
+  
   }
-
-
   if (target.type === "file") {
+
     setFormInput({...formInput, image: target.files[0]})
     console.log(formInput.image)
+  }
+
+  if (target.type === "text"  || target.type === "number"){
+    setFormInput({...formInput, [target.name]: target.value})
   }
   console.log(formInput)
 }
@@ -160,15 +158,15 @@ const Admin = () => {
 
           <div className="form-outline mb-4">
             <label className="form-label" htmlFor="productname">Name</label>
-            <input type="text" className="form-control" name="name" id="productname" required />
+            <input type="text" className="form-control" name="name" id="productname" required onChange={handleInput}/>
           </div>
           <div className="form-outline mb-4">
             <label className="form-label" htmlFor="description">Description</label>
-            <textarea id="description" rows="4" className="form-control" name="description" required></textarea>
+            <textarea id="description" rows="4" className="form-control" name="description" required onChange={handleInput}></textarea>
           </div>
           <div className="form-outline mb-4">
             <label className="form-label" htmlFor="">Price</label>
-            <input type="number" className="form-control" name="price" required id="price" />
+            <input type="number" className="form-control" name="price" required id="price" onChange={handleInput} />
           </div>
 
           <fieldset className="text-start">
