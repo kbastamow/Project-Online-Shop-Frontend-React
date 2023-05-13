@@ -47,7 +47,7 @@
         border: 2px solid $element;
         background-color: $element;
         color: white;
-        padding: 1% 2%;
+        padding: 1% 4%;
     
     }
 
@@ -56,7 +56,7 @@
     border-radius: none;
     border: 2px solid $element;
     color: $element;
-    padding: 1% 2%;
+    padding: 1% 4%;
 
 }
 
@@ -64,8 +64,10 @@
 }
 
 .imgDiv {
-    max-height: 85%;
-    margin: 10px;
+    height: 85%;
+    margin: auto 10px;;
+    
+    
    
     
 }

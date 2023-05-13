@@ -6,11 +6,8 @@ import CardOne from '../CardOne/CardOne'
 
 const Products = () => {
 
-  const {product, products, getProducts, cart} = useContext(ProductContext)  //basically initialstate and function to change
+  const {product, products, getProducts, cart, favorites} = useContext(ProductContext)  //basically initialstate and function to change
   
-
-
-
   useEffect(()=> {  //when component appears, do this once
     getProducts()
   }, [])
@@ -18,6 +15,12 @@ const Products = () => {
   useEffect(() => {
     localStorage.setItem("shopcart", JSON.stringify(cart));
   }, [cart]);
+
+useEffect (() => {
+  localStorage.setItem("shopfavorites", JSON.stringify(favorites))
+  console.log(favorites, "my favourites are")
+}, [favorites])
+
 
   const productList= products.map((item) => {
     return <>

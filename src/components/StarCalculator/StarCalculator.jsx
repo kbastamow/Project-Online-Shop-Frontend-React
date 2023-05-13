@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { FaStarHalfAlt, FaStar, FaRegStar } from "react-icons/fa";
 import "./StarCalculator.scss"
+import DateFormatter from '../DateFormatter/DateFormatter';
 
 const StarCalculator = (props) => {
     
@@ -46,7 +47,9 @@ const StarCalculator = (props) => {
         const reviewMap = props.reviews.map(review => {  //Each review
             return <>
                 <div key={review.id}>
+                <div className="text-end"><DateFormatter dateString={review.createdAt}></DateFormatter></div>
                 {calculateEach(review)}
+             
                 <p className="px-2"><em>{review.details}</em></p>
                 <hr />
                 </div>
@@ -57,24 +60,26 @@ const StarCalculator = (props) => {
 
         return (
             <>
-            {props.scale === "limited" ? (   
-            <div className="starCalculator-div">
- {ratingDisplay}
- </div>
- ) : (<div className="starCalculator-div">
-            <div className="mt-2">
-                {ratingDisplay}
-                <span className="read-more ms-1" data-bs-toggle="collapse" data-bs-target={`#${props.productId}-review`}>Read more</span>
+                {props.scale === "limited" ? (
+                    <div className="starCalculator-div">
+                        {ratingDisplay}
+                    </div>
+                ) : (
+                <div className="starCalculator-div">
+                    <div className="mt-1">
+                        {ratingDisplay}<br />
+                        <span>({props.reviews.length} reviews)</span>
+                        <span className="read-more ms-1" data-bs-toggle="collapse" data-bs-target={`#${props.productId}-review`}>Read more</span>
+                    </div>
+                    <div id={`${props.productId}-review`} className="collapse text-center mt-2 pt-1">
+                        {reviewMap}
+                    </div>
                 </div>
-                <div id={`${props.productId}-review`} className="collapse text-center mt-2 pt-1">
-                {reviewMap}
-                </div>
-                </div>  
-            )}
+                )}
             </>
-        
-    )
-}
+
+        )
+    }
 }
 
 export default StarCalculator

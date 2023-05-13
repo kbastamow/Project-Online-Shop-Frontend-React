@@ -9,7 +9,8 @@ import axios from "axios";
 const initialState = {
     products: [],
     product: null,
-    cart: JSON.parse(localStorage.getItem("shopcart")) || []
+    cart: JSON.parse(localStorage.getItem("shopcart")) || [],
+    favorites: JSON.parse(localStorage.getItem("shopfavorites")) || []
   }
   
 export const ProductContext = createContext(initialState);
@@ -75,11 +76,20 @@ export const ProductProvider = ({children}) => {
 
     const extractOne = (data) => {
       console.log(data);
+      window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
       dispatch({
         type: "EXTRACT_ONE",
         payload: data
       })
     }
+
+  const addFavorite = (product) => {
+    console.log(product)
+    dispatch({
+      type: "ADD_FAVORITE",
+      payload: product,
+    });
+  }
 
   const addToCart = (product) => {
     const trimmed = { id: product.id, name: product.name, price: product.price, image: product.image, quantity: 1 }
@@ -108,7 +118,7 @@ export const ProductProvider = ({children}) => {
         cartItem.quantity++
       }
     })
-    console.log(newProduct, " and ", state.cart)
+
     dispatch({
       type: "CHANGE_QUANTITY",
       payload: newProduct
@@ -128,18 +138,18 @@ export const ProductProvider = ({children}) => {
       })
     }
 
-
-   
       return (
         <ProductContext.Provider value={{
         products:state.products,
         product:state.product,
         cart: state.cart,
+        favorites: state.favorites,
         getProducts, 
         getByCategory,
         searchByName,
         createProduct,
         extractOne,
+        addFavorite,
         addToCart,
         changeQuantity,
         removeFromCart,

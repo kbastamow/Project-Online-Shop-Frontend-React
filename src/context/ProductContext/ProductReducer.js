@@ -26,8 +26,14 @@ const products = (state, action) => {
         case "EXTRACT_ONE":
           return {
             ...state,
-            product:action.payload,
+            product: action.payload,
           };
+
+        case "ADD_FAVORITE":
+        return {
+          ...state,
+          favorites: [action.payload, ...state.favorites]
+        };  
           
         case "ADD_TO_CART": 
         return {

@@ -11,16 +11,11 @@ const Card = (props) => {
   let scale = "limited" //invented variable to limit what starcalculator returns
 
   const{extractOne, addToCart} = useContext(ProductContext)
-
   const imagePath = "http://localhost:3000/uploaded_imgs/"
-  // const enlarge =() =>{
-  //   console.log("hello from card")
-  // }
 
   return (
     <>
         <div key={props.product.id} className="card card-list col-5 col-md-2 mx-md-3 my-3">
-        {/* card border-3 border-black mx-auto   col-9 col-md-2 text-center rounded-0 */}
 
                  <div className="image-zoom w-75 bg-white mx-auto">
                   <img src={imagePath + props.product.image}
@@ -34,8 +29,6 @@ const Card = (props) => {
     
                     <button className="click-effect" onClick={()=>addToCart(props.product)}><i><FaCartArrowDown/></i></button>
                   
-                    {/* <p className="mb-0">Rating:</p> */}
-                    {/* CreateProduct doesn't return reviews, so set a default value */}
                     {<StarCalculator reviews={props.product.Reviews || []} productId={props.product.id} scale={scale}/>}
 
                 </div>
