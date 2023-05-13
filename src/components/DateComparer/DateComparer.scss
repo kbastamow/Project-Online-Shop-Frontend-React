@@ -1,0 +1,9 @@
+@import "../../colors_styles.scss";
+
+.new-badge {
+    background-color: $secondary;
+    padding: 5px;
+    position: absolute;
+    right: -5%;
+    top: -2%;
+}

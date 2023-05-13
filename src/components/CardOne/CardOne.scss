@@ -11,9 +11,7 @@
     border-radius:0%;
     border-left: none;
     border-top: none;
-    // border-right: 2px solid $carmine;
-    // border-bottom: 2px solid $carmine;
-    box-shadow: 2px 2px 5px $secondary
+    box-shadow: 2px 2px 5px $secondary;
 
 }
 
@@ -50,6 +48,11 @@
         padding: 1% 4%;
     
     }
+//OVERRIDE datecomparer's style to move the badge in. These go with position - absolute!
+    .badge {
+        right: 5%;
+        top: 10%;
+    }
 
     
 .outline {
@@ -66,11 +69,6 @@
 .imgDiv {
     height: 85%;
     margin: auto 10px;;
-    
-    
-   
-    
+       
 }
-
-
 
