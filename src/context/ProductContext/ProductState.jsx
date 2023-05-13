@@ -122,6 +122,12 @@ export const ProductProvider = ({children}) => {
       })
     }
 
+    const clearCart = () => {
+      dispatch ({
+        type: "CLEAR_CART"
+      })
+    }
+
 
    
       return (
@@ -136,7 +142,8 @@ export const ProductProvider = ({children}) => {
         extractOne,
         addToCart,
         changeQuantity,
-        removeFromCart
+        removeFromCart,
+        clearCart
         }}>
           {children}
         </ProductContext.Provider>

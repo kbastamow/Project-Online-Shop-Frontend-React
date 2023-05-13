@@ -48,6 +48,12 @@ const products = (state, action) => {
             (item) => item.id !== action.payload.id
           ),
         }
+
+        case "CLEAR_CART":
+          return {
+            ...state,
+            cart: []
+          }
       default:
         return state;
     }

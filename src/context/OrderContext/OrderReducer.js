@@ -3,7 +3,7 @@ const orders = (state, action) => {
       case "PLACE_ORDER":  
         return {
           ...state,  
-          order: action.payload,  
+          orderSuccess: action.payload,  
        };
        default: return state
     }

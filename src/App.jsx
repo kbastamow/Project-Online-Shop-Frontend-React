@@ -14,6 +14,7 @@ import { ProductProvider } from './context/ProductContext/ProductState'
 import Products from './components/Products/Products'
 import CartModal from './components/CartModal/CartModal'
 import {OrderProvider} from "./context/OrderContext/OrderState"
+import User from './components/User/User'
 
 function App() {
 
@@ -26,9 +27,8 @@ function App() {
             <CategoryProvider>
               <OrderProvider>
               <FormModal></FormModal>
-              <CartModal></CartModal>
+              <User></User>
               <Header></Header>
-            
               <Routes>
                 <Route path="/" element={<Homepage />} />
                 <Route path="/admin" element={<Admin />} />

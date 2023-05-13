@@ -5,7 +5,7 @@ import { OrderContext } from '../../context/OrderContext/OrderState'
 
 const CartModal = () => {
 
-const {cart, changeQuantity, removeFromCart} = useContext(ProductContext) 
+const {cart, changeQuantity, removeFromCart, clearCart} = useContext(ProductContext) 
 const {placeOrder} = useContext(OrderContext)
   return (
     <>
@@ -22,10 +22,10 @@ const {placeOrder} = useContext(OrderContext)
       <table className="table text-start">
   <thead>
     <tr>
-      <th class="col-3">Item</th>
-      <th class="col-1">Price</th>
-      <th class="col-3 text-center" >Quantity</th>
-      <th class="col-3">Subtotal</th>
+      <th className="col-3">Item</th>
+      <th className="col-1">Price</th>
+      <th className="col-3 text-center" >Quantity</th>
+      <th className="col-3">Subtotal</th>
     </tr>
   </thead>
   <tbody>
@@ -62,7 +62,7 @@ const {placeOrder} = useContext(OrderContext)
          </table>
           <h5>Total: {cart.reduce((acc, value) => (acc + value.price * value.quantity), 0)}€</h5>
           <button type="button" className="btn btn-primary" onClick={()=> placeOrder(cart)}>Place Order</button>
-          {/* <button type="button" className="btn btn-secondary" onClick={()=> clearCart()}>Clear cart</button> */}
+          <button type="button" className="btn btn-secondary" onClick={()=> clearCart()}>Clear cart</button>
       </div>
       <div className="modal-footer">
         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
