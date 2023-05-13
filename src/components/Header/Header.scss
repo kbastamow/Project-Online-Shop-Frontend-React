@@ -3,13 +3,13 @@
 
 .main-navbar {
     border:none;
-    border-bottom: 1px solid $carmine;
+    border-bottom: 1px solid $secondary;
   
     .login-div {
         font-size:large
     }
     .login-div:hover {
-        color: $carmine;
+        color: $primary;
         cursor: pointer;
     }
 

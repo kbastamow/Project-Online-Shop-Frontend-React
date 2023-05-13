@@ -33,7 +33,20 @@ const products = (state, action) => {
         return {
           ...state,
           cart: action.payload //replace cart each time - if quantity changes we just update existing
+        };
 
+        case "CHANGE_QUANTITY": 
+        return {
+          ...state,
+          cart: action.payload
+        };
+
+        case "REMOVE_FROM_CART":
+        return {
+          ...state,
+          cart: state.cart.filter(
+            (item) => item.id !== action.payload.id
+          ),
         }
       default:
         return state;

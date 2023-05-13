@@ -31,8 +31,9 @@ const Card = (props) => {
                   <h5 className="mb-3">{props.product.price}€</h5>
 
                     <p className="mt-2 show-details"  onClick={() => extractOne(props.product)}>Details<span className="ms-2"><BsArrowUpRightSquareFill/></span></p>
-                    <button id="buy-btn" className="btn btn-outline-success" onClick={()=>addToCart(props.product)}><i><FaCartArrowDown/></i></button>
-
+    
+                    <button className="click-effect" onClick={()=>addToCart(props.product)}><i><FaCartArrowDown/></i></button>
+                  
                     {/* <p className="mb-0">Rating:</p> */}
                     {/* CreateProduct doesn't return reviews, so set a default value */}
                     {<StarCalculator reviews={props.product.Reviews || []} productId={props.product.id} scale={scale}/>}

@@ -86,7 +86,6 @@ export const ProductProvider = ({children}) => {
     let newProduct = [...state.cart]  //Withoud spread, state.cart updates here too!!!!
     let found = false;
     newProduct.forEach(cartItem => {
-      console.log(cartItem.id, trimmed.id, "inside foreach")
       if (cartItem.id == trimmed.id) {
         console.log("found id")
         cartItem.quantity++
@@ -99,6 +98,31 @@ export const ProductProvider = ({children}) => {
       payload: newProduct,
     });
   };
+
+   const changeQuantity = (product, operator) => {
+    let newProduct = [...state.cart]
+    newProduct.forEach(cartItem => {
+      if (cartItem.id === product.id && operator === "minus" && cartItem.quantity > 1) {
+        cartItem.quantity--
+      } else if (cartItem.id === product.id && operator === "plus" && cartItem.quantity >= 1){
+        cartItem.quantity++
+      }
+    })
+    console.log(newProduct, " and ", state.cart)
+    dispatch({
+      type: "CHANGE_QUANTITY",
+      payload: newProduct
+    })
+  }
+
+    const removeFromCart = (product) => {
+      dispatch({
+        type: "REMOVE_FROM_CART",
+        payload: product
+      })
+    }
+
+
    
       return (
         <ProductContext.Provider value={{
@@ -110,7 +134,9 @@ export const ProductProvider = ({children}) => {
         searchByName,
         createProduct,
         extractOne,
-        addToCart
+        addToCart,
+        changeQuantity,
+        removeFromCart
         }}>
           {children}
         </ProductContext.Provider>

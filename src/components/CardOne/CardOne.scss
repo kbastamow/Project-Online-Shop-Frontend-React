@@ -7,13 +7,13 @@
     width: 75%;
     max-height: 88%;
     margin: auto;
-    background: linear-gradient(90deg, rgb(255, 255, 255) 15%, $lgray 40%);
+    background: linear-gradient(90deg, rgb(255, 255, 255) 15%, $light 40%);
     border-radius:0%;
     border-left: none;
     border-top: none;
     // border-right: 2px solid $carmine;
     // border-bottom: 2px solid $carmine;
-    box-shadow: 2px 2px 5px $carmine
+    box-shadow: 2px 2px 5px $secondary
 
 }
 
@@ -34,7 +34,7 @@
     }
 
     .price{
-        background-color: $carmine;
+        background-color: $secondary;
         padding: 1% 2%;
         color: white;
         font-family: $brand;
@@ -44,8 +44,8 @@
 
     .filled {
         border-radius: none;
-        border: 2px solid $carmine;
-        background-color: $carmine;
+        border: 2px solid $element;
+        background-color: $element;
         color: white;
         padding: 1% 2%;
     
@@ -54,8 +54,8 @@
     
 .outline {
     border-radius: none;
-    border: 2px solid $carmine;
-    color: $carmine;
+    border: 2px solid $element;
+    color: $element;
     padding: 1% 2%;
 
 }
