@@ -32,7 +32,7 @@ const products = (state, action) => {
         case "ADD_TO_CART": 
         return {
           ...state,
-          cart: [action.payload, ...state.cart ]
+          cart: action.payload //replace cart each time - if quantity changes we just update existing
 
         }
       default:

@@ -8,15 +8,16 @@ const Products = () => {
 
   const {product, products, getProducts, cart} = useContext(ProductContext)  //basically initialstate and function to change
   
-  useEffect(() => {
-    localStorage.setItem("shopcart", JSON.stringify(cart));
-  }, [cart]);
+
 
 
   useEffect(()=> {  //when component appears, do this once
     getProducts()
   }, [])
 
+  useEffect(() => {
+    localStorage.setItem("shopcart", JSON.stringify(cart));
+  }, [cart]);
 
   const productList= products.map((item) => {
     return <>

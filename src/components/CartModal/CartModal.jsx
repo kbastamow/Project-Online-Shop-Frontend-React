@@ -20,10 +20,11 @@ const {cart} = useContext(ProductContext)
       <div className="modal-body">
 
         {cart.map(product => {
-            return <div key={product.id}>
+            return <div key={product.id +"cartModal"}>
+              {console.log(product.id)}
                 <div>{product.name}</div>
                 <div>{product.price}€</div>
-                <div><button>-</button> quantity <button>+</button></div>
+                <div><button>-</button> {product.quantity} <button>+</button></div>
             </div>
         }  
             )}

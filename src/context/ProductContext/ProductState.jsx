@@ -4,12 +4,12 @@ import ProductReducer from "./ProductReducer"
 import React, { createContext, useReducer } from 'react';
 import axios from "axios";
 
-let cart = JSON.parse(localStorage.getItem("shopcart")) || []
+
 
 const initialState = {
     products: [],
     product: null,
-    cart: cart
+    cart: JSON.parse(localStorage.getItem("shopcart")) || []
   }
   
 export const ProductContext = createContext(initialState);
@@ -81,17 +81,25 @@ export const ProductProvider = ({children}) => {
       })
     }
 
-    const addToCart = (product) => {
-      let trimmed =  {id:product.id, name: product.name, price: product.price, image: product.image}
-      console.log(product)
-      dispatch ({
-        type: "ADD_TO_CART",
-        payload: trimmed
-      })
-
-    }
-
-      
+  const addToCart = (product) => {
+    const trimmed = { id: product.id, name: product.name, price: product.price, image: product.image, quantity: 1 }
+    let newProduct = [...state.cart]  //Withoud spread, state.cart updates here too!!!!
+    let found = false;
+    newProduct.forEach(cartItem => {
+      console.log(cartItem.id, trimmed.id, "inside foreach")
+      if (cartItem.id == trimmed.id) {
+        console.log("found id")
+        cartItem.quantity++
+        found = true;
+      }
+    })
+    if (!found) newProduct.push(trimmed)
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: newProduct,
+    });
+  };
+   
       return (
         <ProductContext.Provider value={{
         products:state.products,
