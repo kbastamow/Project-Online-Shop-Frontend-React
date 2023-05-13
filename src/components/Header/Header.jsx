@@ -18,7 +18,7 @@ const Header = () => {
   return (
     <div className="main-navbar">
       <nav className="main-navbar navbar navbar-expand-lg bg-light p-0">
-        <div className="container-fluid">
+        <div className="container-fluid py-2 py-md-0">
           <button
             className="navbar-toggler"
             type="button"
