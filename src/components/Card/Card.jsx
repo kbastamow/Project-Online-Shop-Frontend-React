@@ -24,8 +24,8 @@ const Card = (props) => {
           <DateComparer dateString={props.product.createdAt} />
         
         </div>
-        <h4 className="card-title w-100  bg-black text-bg-dark p-2 mb-0">{props.product.name}</h4>
-        <div className="card-body bg-white text-bg-light">
+        <h4 className=" card-title w-100  bg-black text-bg-dark p-2 mb-0">{props.product.name}</h4>
+        <div className="test card-body">
           <h5 className="mb-3">{props.product.price}€</h5>
 
           <p className="mt-2 show-details" onClick={() => extractOne(props.product)}>Details<span className="ms-2"><BsArrowUpRightSquareFill /></span></p>

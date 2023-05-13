@@ -2,11 +2,18 @@ $primary :#1b2242ff;
 $secondary: #780038ff;
 $light: #f0e2e7ff;
 $element: #27AACB;
+$dark: rgb(37, 35, 35);
 
 
 
 $brand: 'Asap Condensed', sans-serif;
 $text: 'Saira Semi Condensed', sans-serif;
+
+//for box-shadow
+$layer1: 0px 1px 2px #27AACB; 
+$layer2: 0px 2px 4px #27AACB;
+$layer3: 0px 4px 8px #27AACB; 
+$layer4: 0px 8px 16px #27AACB;
 
 
 //.click-effect - shadowtransition
