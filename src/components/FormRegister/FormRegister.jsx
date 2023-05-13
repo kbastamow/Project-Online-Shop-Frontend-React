@@ -115,7 +115,7 @@ const FormRegister = () => {
     <form onSubmit={handleRegister}>
                     <div className="input-group form-group">
                       <div className="input-group-prepend">
-                        <span className="input-group-text">
+                        <span className="icon-span input-group-text">
                           <i>
                             <FaUser />
                           </i>
@@ -123,7 +123,7 @@ const FormRegister = () => {
                       </div>
                       <input
                         type="text"
-                        className="form-control"
+                        className="form-control my-input"
                         placeholder="email"
                         value={data.email}
                         name="email"
@@ -132,7 +132,7 @@ const FormRegister = () => {
                     </div>
                     <div className="input-group form-group">
                       <div className="input-group-prepend">
-                        <span className="input-group-text">
+                        <span className="icon-span input-group-text">
                           <i>
                             <FaUser />
                           </i>
@@ -140,7 +140,7 @@ const FormRegister = () => {
                       </div>
                       <input
                         type="text"
-                        className="form-control"
+                        className="form-control my-input"
                         placeholder="name"
                         value={data.name}
                         name="name"
@@ -151,7 +151,7 @@ const FormRegister = () => {
     
                     <div className="input-group form-group">
                       <div className="input-group-prepend">
-                        <span className="input-group-text">
+                        <span className="icon-span input-group-text">
                           <i>
                             <FaUser />
                           </i>
@@ -159,7 +159,7 @@ const FormRegister = () => {
                       </div>
                       <input
                         type="text"
-                        className="form-control"
+                        className="form-control my-input"
                         placeholder="surname"
                         name="surname"
                         disabled = {surnameDisabled}
@@ -169,7 +169,7 @@ const FormRegister = () => {
     
                     <div className="input-group form-group">
                       <div className="input-group-prepend">
-                        <span className="input-group-text">
+                        <span className="icon-span input-group-text">
                           <i>
                             <FaKey />
                           </i>
@@ -177,7 +177,7 @@ const FormRegister = () => {
                       </div>
                       <input
                         type="password"
-                        className="form-control"
+                        className="form-control my-input"
                         placeholder="password"
                         name="password"
                         disabled = {passwordDisabled}
@@ -187,7 +187,7 @@ const FormRegister = () => {
     
                     <div className="input-group form-group">
                       <div className="input-group-prepend">
-                        <span className="input-group-text">
+                        <span className=" icon-span input-group-text">
                           <i>
                             <FaKey />
                           </i>
@@ -195,7 +195,7 @@ const FormRegister = () => {
                       </div>
                       <input
                         type="password"
-                        className="form-control"
+                        className="form-control my-input"
                         placeholder="password"
                         name="passwordRepeat"
                         disabled = {passwordDisabled}

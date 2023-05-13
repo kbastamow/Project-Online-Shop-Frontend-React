@@ -5,7 +5,8 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import { Modal } from "bootstrap";
 import FormLogin from "../FormLogin/FormLogin";
 import FormRegister from "../FormRegister/FormRegister";
-
+import logosm from "../../assets/logosmall2.png"
+import "./FormModal.scss"
 
 const FormModal = () => {
 
@@ -43,26 +44,25 @@ useEffect(() => {
 
 const seeRegistration = () => {
   setFormOnDisplay(<FormRegister/>)
-  setToggleForms(<>Already registered? <span onClick={()=>seeLogin()}>Login here</span></>)
+  setToggleForms(<>Already registered? <span className ="secondary-emphasized form-link" onClick={()=>seeLogin()}>Login here</span></>)
   
 }
 
 const seeLogin = () => {
   setFormOnDisplay(<FormLogin/>)
-  setToggleForms(<>New user? <span onClick={()=>seeRegistration()}>Register here</span></>)
+  setToggleForms(<>New user? <span className ="secondary-emphasized form-link" onClick={()=>seeRegistration()}>Register here</span></>)
 }
 
 
 
   return (
     <>
-      <div ref={modalRef} className="modal fade" show="false" id="loginModal" tabIndex="-1" aria-labelledby="loginModalLabel"
+      <div ref={modalRef} className="form-div modal fade" show="false" id="loginModal" tabIndex="-1" aria-labelledby="loginModalLabel"
         aria-hidden="false">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
-              {/* <h1 className="modal-title fs-5">Login to your account</h1> */}
-
+              <img src={logosm} alt="logo" className="modal-title ms-auto" />
               <button
                 type="button"
                 className="btn-close"

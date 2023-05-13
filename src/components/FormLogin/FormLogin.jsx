@@ -44,7 +44,7 @@ const FormLogin= () => {
       <form onSubmit={handleLogin}>
         <div className="input-group form-group">
           <div className="input-group-prepend">
-            <span className="input-group-text">
+            <span className="icon-span input-group-text">
               <i>
                 <FaUser />
               </i>
@@ -52,14 +52,14 @@ const FormLogin= () => {
           </div>
           <input
             type="text"
-            className="form-control"
+            className="form-control my-input"
             placeholder="email"
             name="email"
           />
         </div>
         <div className="input-group form-group">
           <div className="input-group-prepend">
-            <span className="input-group-text">
+            <span className="icon-span input-group-text">
               <i>
                 <FaKey />
               </i>
@@ -67,7 +67,7 @@ const FormLogin= () => {
           </div>
           <input
             type="password"
-            className="form-control"
+            className="form-control my-input"
             placeholder="password"
             name="password"
           />
