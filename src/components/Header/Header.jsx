@@ -10,9 +10,6 @@ const Header = () => {
 
   const {token, user} =useContext(UserContext)
  
-  let logger;
-  
-  (!user) ? logger="tester" : logger= user.name
 
   let navbarLeft = (token) ? (
     <div className="welcome-div ">Welcome<button className="ms-3 padding-2" data-bs-toggle="modal" data-bs-target="#cartModal"><FaUser></FaUser></button></div>

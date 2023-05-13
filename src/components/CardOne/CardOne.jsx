@@ -10,14 +10,7 @@ const CardOne = () => {
 const {product, addToCart, addFavorite, favorites} = useContext(ProductContext)
 const imagePath = "http://localhost:3000/uploaded_imgs/"
 
-
-// //Date comparer
-// const dataBaseDate = new Date(product.createdAt);
-// const today = new Date();
-// //One day - 86400000 milliseconds
-// const differenceInDays = Math.abs(Math.round((today - dataBaseDate) / 86400000));
-
-  return (<>
+return (<>
     <div className="topContainer">
       <div className="card flex-row oneCard">
 

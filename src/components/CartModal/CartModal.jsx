@@ -3,13 +3,14 @@ import { ProductContext } from '../../context/ProductContext/ProductState'
 import {FaPlus, FaMinus, FaTimes} from "react-icons/fa"
 import { OrderContext } from '../../context/OrderContext/OrderState'
 import logosm from "../../assets/logosmall2.png"
+import { UserContext } from '../../context/UserContext/UserState'
 
 
 const CartModal = () => {
 
 const {cart, changeQuantity, removeFromCart, clearCart} = useContext(ProductContext)
 const {placeOrder} = useContext(OrderContext)
-
+const {logout} = useContext(UserContext);
 
   const cartContents = <>
     <table className="table text-start">
@@ -62,7 +63,8 @@ return (
   
 
       </div>
-      <div className="modal-footer">
+      <div className="modal-footer d-flex justify-content-between">
+        <button type="button" className="btn btn-secondary" onClick={() => logout()}>Logout</button>
         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
       </div>

@@ -51,13 +51,33 @@ const register = async(registerData) => {
     }
 }
 
+const logout = async() => {
+    try {
+        const token = JSON.parse(localStorage.getItem("shoptoken"))
+        //NECESSARY TO PUT empty object in the middle to represent req.body
+        const res = await axios.put(API_URL + "users/logout", {}, {
+            headers: {
+                "authorization": token
+            }
+        })
+        console.log(res)
+       dispatch({
+        type: "LOGOUT",
+        payload: res
+       }) 
+    } catch (error) {
+      console.log(error)
+    }
+}
+
   return (
     <UserContext.Provider value= {{
         token: state.token,
         user: state.user,
         registrationMsg: state.registrationMsg,
         login,
-        register
+        register,
+        logout
     }}>
         {children}
     </UserContext.Provider>
