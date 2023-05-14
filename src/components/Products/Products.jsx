@@ -3,6 +3,7 @@ import { ProductContext } from '../../context/ProductContext/ProductState'
 import Card from '../Card/Card'
 import SearchBar from '../SearchBar/SearchBar'
 import CardOne from '../CardOne/CardOne'
+import "./Product.scss"
 
 const Products = () => {
 
@@ -33,9 +34,11 @@ useEffect (() => {
   return (
     <>
     <SearchBar/>
+    <div className="product-div">
     <>{(product) ? <CardOne/> : null}</>
     {/* <div className="bg-bg-5">{productFocus}</div> */}
     <div className="row h-25">{productList}</div>
+    </div>
     </>
     )
 }

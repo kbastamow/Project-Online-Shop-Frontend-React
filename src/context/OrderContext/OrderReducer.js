@@ -5,6 +5,12 @@ const orders = (state, action) => {
           ...state,  
           orderSuccess: action.payload,  
        };
+       case "PAST_ORDERS": 
+       return {
+        ...state,
+        orders: action.payload
+       }
+
        default: return state
     }
 }

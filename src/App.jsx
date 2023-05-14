@@ -12,7 +12,6 @@ import Admin from './components/Admin/Admin'
 import { CategoryProvider } from './context/CategoryContext/CategoryState'
 import { ProductProvider } from './context/ProductContext/ProductState'
 import Products from './components/Products/Products'
-import CartModal from './components/CartModal/CartModal'
 import {OrderProvider} from "./context/OrderContext/OrderState"
 import User from './components/User/User'
 import { ModalProvider } from './context/ModalContext/ModalState'
@@ -44,10 +43,9 @@ function App() {
               </OrderProvider>
             </CategoryProvider>
           </ProductProvider>
-        
-        <Footer />
         </ModalProvider>
         </UserProvider>
+        <Footer />
       </BrowserRouter>
   
     

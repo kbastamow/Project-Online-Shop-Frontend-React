@@ -2,18 +2,30 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import logosm from "../../assets/logosmall2.png"
 import "./Header.scss"
-import { FaUser } from "react-icons/fa";
 import { UserContext } from '../../context/UserContext/UserState';
 import { ModalContext } from '../../context/ModalContext/ModalState';
 import { FaShoppingCart } from "react-icons/fa";
 
 const Header = () => {
 
-  const {token, user} =useContext(UserContext)
+  const {token} = useContext(UserContext)
   const {openForm} = useContext(ModalContext)
 
-  let navbarLeft = (token) ? (
-    <div className="welcome-div">Welcome<span className="cart-icon ms-3" data-bs-toggle="modal" data-bs-target="#cartModal">
+
+  let loggedInUser = JSON.parse(localStorage.getItem("shopuser")) 
+  let greetingUser;
+  console.log(loggedInUser,  "user who is logged in")
+  
+  // if (loggedInUser.length === 0 || !(loggedInUser)) {
+  //   greetingUser = ""
+  //  } else {
+  //   greetingUser = loggedInUser.name
+  //  }
+
+  let loggedInToken = JSON.parse(localStorage.getItem("shoptoken")) || ""
+ 
+  let navbarLeft = (loggedInToken) ? (
+    <div className="welcome-div">Welcome  <span className="cart-icon ms-3" data-bs-toggle="modal" data-bs-target="#cartModal">
       <FaShoppingCart></FaShoppingCart>
     </span></div>)  :  (<div className="login-div me-2 px-4 py2" onClick={openForm}>Login/register</div>)
 

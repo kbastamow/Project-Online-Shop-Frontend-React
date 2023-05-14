@@ -29,7 +29,7 @@ const {logout} = useContext(UserContext);
               <th scope="row">{product.name}</th>
               <td >{product.price}€</td>
               <td className="text-center"><span type="button" onClick={() => changeQuantity(product, "minus")}><FaMinus /></span><span className="p-3">{product.quantity}</span> <span type="button" onClick={() => changeQuantity(product, "plus")}><FaPlus /></span></td>
-              <td className="d-flex justify-content-between"> {product.quantity * product.price}€ <span type="button" onClick={() => (removeFromCart(product))}><FaTimes></FaTimes></span></td>
+              <td className="d-flex justify-content-between"> {(product.quantity * product.price).toFixed(2)}€ <span type="button" onClick={() => (removeFromCart(product))}><FaTimes></FaTimes></span></td>
             </tr>
           )
         }

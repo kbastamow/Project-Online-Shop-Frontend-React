@@ -5,7 +5,7 @@ const users = (state, action) => {
             return {
                 ...state,
                 token: action.payload.token,
-                user: {name: action.payload.user.name, id: action.payload.user.id, msg: action.payload.msg} 
+                user: {id: action.payload.user.id, name: action.payload.user.name, msg: action.payload.msg} 
             };
         case "REGISTER":
             return {
@@ -16,7 +16,14 @@ const users = (state, action) => {
         case  "LOGOUT":
             return {
                 ...state,
-                token: null
+                token: null,
+                user: null
+            };
+
+        case "FIND_USER":
+            return {
+                ...state,
+                user: action.payload
             }
         default:
             return state;

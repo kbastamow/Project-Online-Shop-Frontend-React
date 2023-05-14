@@ -8,7 +8,6 @@ const formattedDate = dateObj.toLocaleDateString("en-GB", {
     month: "2-digit",
     year: "numeric",
 });
-    console.log(formattedDate)
   return (
     <>{formattedDate}</>
   )

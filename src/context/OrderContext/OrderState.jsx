@@ -3,9 +3,9 @@ import { createContext, useReducer } from "react"
 const API_URL = "http://localhost:3000/"
 import axios from "axios"
 
-
 const initialState = {
-    orderSuccess: null
+    orderSuccess: null,
+    orders: null
 }
 
 export const OrderContext = createContext(initialState);
@@ -39,10 +39,36 @@ export const OrderProvider = ({ children }) => {
         }
     }
 
+
+const pastOrders = async() => {
+    
+    try {
+    console.log("retrieving orders")
+    let token = JSON.parse(localStorage.getItem("shoptoken"));
+    console.log(token)
+       const res = await axios.get(API_URL + "orders/getMyOrders", {
+        headers: {
+            "authorization": token
+        }
+    }) 
+    console.log(res.data, "success")
+    dispatch ({
+        type: "PAST_ORDERS",
+        payload: res.data
+    })
+
+    } catch (error) {
+        console.error(error)
+        
+    }
+}
+
   return (
     <OrderContext.Provider value= {{
         orderSuccess: state.orderSuccess,
-        placeOrder
+        orders: state.orders,
+        placeOrder,
+        pastOrders,
        
     }}>
         {children}

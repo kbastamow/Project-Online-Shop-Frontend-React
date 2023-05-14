@@ -1,1 +1,16 @@
 @import "../../colors_styles.scss";
+
+
+.profile-div {
+    background-image: url("../../assets/player2.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 90vh;
+
+    .card {
+        opacity: 0.7;
+        color: $secondary;
+        font-weight: bold;
+    }
+}

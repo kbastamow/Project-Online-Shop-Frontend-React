@@ -6,11 +6,12 @@ const API_URL = "http://localhost:3000/"
 
 
 const token = JSON.parse(localStorage.getItem("shoptoken"))
-
+const user = JSON.parse(localStorage.getItem("shopuser"))
+console.log("what is happening at userState")
 const initialState = {
-    user: null,
+    user: user ? user : null,
     token: token ? token : null,
-    registrationMsg: null
+    registrationMsg: ""
 }
 
 export const UserContext = createContext(initialState);
@@ -28,6 +29,8 @@ export const UserProvider = ({ children }) => {
                 payload: res.data
             });
             if (res.data) localStorage.setItem("shoptoken", JSON.stringify(res.data.token))
+            if (res.data) localStorage.setItem("shopuser", JSON.stringify({ id: res.data.user.id, name: res.data.user.name,}))
+            console.log(res.data.user)
 
         } catch (error) {
             console.error(error)
@@ -62,13 +65,37 @@ const logout = async() => {
             }
         })
         console.log(res)
-       dispatch({
+        
+        dispatch({
         type: "LOGOUT",
         payload: res
-       }) 
+       })
+       
+       if (res.data) {
+        localStorage.removeItem("shoptoken");
+        localStorage.removeItem("shopuser")
+      } 
     } catch (error) {
       console.log(error)
     }
+}
+
+
+const findUser = async() => {
+    try {
+    let userId = JSON.parse(localStorage.getItem("shopuser")).id
+    const res = await axios.get(API_URL + "users/userOrderProducts/" + userId)
+    console.log(res.data)
+    dispatch ({
+        type: "FIND_USER",
+        payload: res.data
+    })
+    } catch (error) {
+        console.log(error)
+        
+    }
+    
+
 }
 
   return (
@@ -78,7 +105,8 @@ const logout = async() => {
         registrationMsg: state.registrationMsg,
         login,
         register,
-        logout
+        logout,
+        findUser
     }}>
         {children}
     </UserContext.Provider>
