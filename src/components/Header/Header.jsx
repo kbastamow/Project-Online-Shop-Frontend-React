@@ -5,7 +5,7 @@ import "./Header.scss"
 import { FaUser } from "react-icons/fa";
 import { UserContext } from '../../context/UserContext/UserState';
 import { ModalContext } from '../../context/ModalContext/ModalState';
-
+import { FaShoppingCart } from "react-icons/fa";
 
 const Header = () => {
 
@@ -13,7 +13,9 @@ const Header = () => {
   const {openForm} = useContext(ModalContext)
 
   let navbarLeft = (token) ? (
-    <div className="welcome-div ">Welcome<button className="ms-3 padding-2" data-bs-toggle="modal" data-bs-target="#cartModal"><FaUser></FaUser></button></div>)  :  (<div className="login-div me-2 px-4 py2" data-bs-toggle="modal" data-bs-target="#loginModal">Login/register</div>)
+    <div className="welcome-div">Welcome<span className="cart-icon ms-3" data-bs-toggle="modal" data-bs-target="#cartModal">
+      <FaShoppingCart></FaShoppingCart>
+    </span></div>)  :  (<div className="login-div me-2 px-4 py2" onClick={openForm}>Login/register</div>)
 
 
   return (
@@ -31,7 +33,7 @@ const Header = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
+          <div className="collapse navbar-collapse col-8" id="navbarTogglerDemo01">
             <a className="navbar-brand" href="#">
               <img src={logosm} alt="logo" />
             </a>
@@ -50,6 +52,13 @@ const Header = () => {
                   </span>
                 </Link>
               </li>
+              {token ?  <li className="nav-item">
+                <Link to="/profile">
+                <span className="nav-link">Profile</span>
+                </Link>
+              </li> : <></>}
+
+
               <li className="nav-item">
                 <Link to="/admin">
                 <span className="nav-link">Admin</span>
@@ -57,15 +66,11 @@ const Header = () => {
               </li>
             </ul>
           </div>
-          <div className="">
-            <div className="d-flex flex-wrap me-4 mb-2 mb-lg-0">
-            <div className="login-div me-2 px-4 py2" onClick={openForm}>Login/register</div>
+                <div className="col-4">
+            {/* d-flex flex-wrap me-4 mb-2 mb-lg-0 */}
               {navbarLeft}
-
-              {/* <div className="login-div nav-item me-2 px-4 py2" data-bs-toggle="modal" data-bs-target="#loginModal"><i className="me-1"><FaUser></FaUser></i>Login/register</div> */}
-            
             </div>
-          </div>
+        
         </div>
       </nav>
     </div>

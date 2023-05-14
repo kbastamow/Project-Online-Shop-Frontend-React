@@ -30,7 +30,7 @@ const Card = (props) => {
 
           <p className="mt-2 show-details" onClick={() => extractOne(props.product)}>Details<span className="ms-2"><BsArrowUpRightSquareFill /></span></p>
 
-          <button className="click-effect" onClick={() => addToCart(props.product)}><i><FaCartArrowDown /></i></button>
+          <span className="click-effect cart-icon" onClick={() => addToCart(props.product)}><i><FaCartArrowDown /></i></span>
 
           {<StarCalculator reviews={props.product.Reviews || []} productId={props.product.id} scale={scale} />}
 

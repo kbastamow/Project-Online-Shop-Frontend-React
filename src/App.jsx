@@ -16,6 +16,7 @@ import CartModal from './components/CartModal/CartModal'
 import {OrderProvider} from "./context/OrderContext/OrderState"
 import User from './components/User/User'
 import { ModalProvider } from './context/ModalContext/ModalState'
+import Profile from './components/Profile/Profile'
 
 
 
@@ -36,6 +37,7 @@ function App() {
               <FormModal></FormModal>
               <Routes>
                 <Route path="/" element={<Homepage />} />
+                <Route path="/profile" element={<Profile />} />
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/products" element={<Products />} />
               </Routes>
