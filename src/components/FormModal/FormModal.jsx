@@ -2,40 +2,26 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 // import { FaUser, FaKey } from "react-icons/fa";
 // import { UserContext } from "../../context/UserContext/UserState";
 // import { useNavigate } from "react-router-dom";
-import { Modal } from "bootstrap";
+// import { Modal } from "bootstrap";
 import FormLogin from "../FormLogin/FormLogin";
 import FormRegister from "../FormRegister/FormRegister";
 import logosm from "../../assets/logosmall2.png"
 import "./FormModal.scss"
+import Modal from "react-bootstrap/Modal"
+import {ModalContext} from "../../context/ModalContext/ModalState";
+
 
 const FormModal = () => {
 
 const [formOnDisplay, setFormOnDisplay] = useState(null)
 const [toggleForms, setToggleForms] = useState(null)
- 
+const {formModal, closeForm, openForm} = useContext(ModalContext)
 
-  //CLOSES AND SHOWS MODAL 
-  const modalRef = useRef(null);
-  const [modal, setModal] = useState("")
-  const showModal = () => {
-    modal.show();
-  }
-  const closeModal = () => {
-    modal.hide();
-    console.log("hidden")
-  }
-  useEffect(() => {
-    if (modalRef.current) {
-      setModal(new Modal(modalRef.current));
-      // If you want to do something else when the modal show is added, add this line
-      // modalRef.current.addEventListener('show.bs.modal', myFunction) first, the default, and second, your function (e.g. a message)
-    }
-    return () => {
-      // if (modalRef.current) {
-      //   modalRef.current.removeEventListener();
-      // }
-    };
-  }, []);
+
+useEffect(()=>{
+  console.log("changing state", formModal)
+}, [formModal])
+
 
 
 useEffect(() => {
@@ -57,8 +43,15 @@ const seeLogin = () => {
 
   return (
     <>
-      <div ref={modalRef} className="form-div modal fade" show="false" id="loginModal" tabIndex="-1" aria-labelledby="loginModalLabel"
-        aria-hidden="false">
+    <Modal 
+        show={formModal}
+        backdrop="true"
+        keyboard={false}
+        // onHide={closeForm}
+        dialogClassName
+        >
+      {/* <div ref={modalRef} className="form-div modal fade" show="false" id="loginModal" tabIndex="-1" aria-labelledby="loginModalLabel"
+        aria-hidden="false"> */}
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
@@ -67,7 +60,7 @@ const seeLogin = () => {
                 type="button"
                 className="btn-close"
                 // data-bs-dismiss="modal"
-                onClick={() => modal.hide()}
+                onClick={() => closeForm()}
                 aria-label="Close"
               ></button>
             </div>
@@ -86,9 +79,35 @@ const seeLogin = () => {
       </div> */}
           </div>
         </div>
-      </div>
+      {/* </div> */}
+      </Modal>
     </>
   );
 };
 
 export default FormModal
+
+
+
+  // //CLOSES AND SHOWS MODAL 
+  // const modalRef = useRef(null);
+  // const [modal, setModal] = useState("")
+  // const showModal = () => {
+  //   modal.show();
+  // }
+  // const closeModal = () => {
+  //   modal.hide();
+  //   console.log("hidden")
+  // }
+  // useEffect(() => {
+  //   if (modalRef.current) {
+  //     setModal(new Modal(modalRef.current));
+  //     // If you want to do something else when the modal show is added, add this line
+  //     // modalRef.current.addEventListener('show.bs.modal', myFunction) first, the default, and second, your function (e.g. a message)
+  //   }
+  //   return () => {
+  //     // if (modalRef.current) {
+  //     //   modalRef.current.removeEventListener();
+  //     // }
+  //   };
+  // }, []);

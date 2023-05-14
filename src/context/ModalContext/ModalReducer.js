@@ -3,12 +3,12 @@ const modalcontrol = (state, action) => {
       case "OPEN_FORM":  
         return {
           ...state,  
-          form: action.payload,  
+          formModal: action.payload,  
        };
        case "CLOSE_FORM":  
         return {
           ...state,  
-          form: action.payload,  
+          formModal: action.payload,  
        };
    
       default:

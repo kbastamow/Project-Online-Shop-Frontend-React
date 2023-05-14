@@ -3,11 +3,13 @@ import { FaUser, FaKey } from "react-icons/fa";
 import { UserContext } from "../../context/UserContext/UserState";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "bootstrap";
+import { ModalContext } from "../../context/ModalContext/ModalState";
 
 const FormLogin= () => {
 
   const [alert, setAlert] = useState(null)
   const {token, login} = useContext(UserContext)
+  const {closeForm} = useContext(ModalContext)
   
   const navigate = useNavigate()
 
@@ -29,7 +31,7 @@ const FormLogin= () => {
   
     }  else {
     setTimeout(() => {
-      closeModal()
+      closeForm()
       navigate("/products")
     }, 2000);
     event.target.reset()

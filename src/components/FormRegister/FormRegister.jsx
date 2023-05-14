@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import { FaUser, FaKey } from "react-icons/fa";
 import { UserContext } from "../../context/UserContext/UserState";
 import { useNavigate } from "react-router-dom";
-import { Modal } from "bootstrap";
+import { ModalContext } from "../../context/ModalContext/ModalState";
 
 
 const FormRegister = () => {
@@ -15,7 +15,7 @@ const FormRegister = () => {
   const [passwordDisabled, setPasswordDisabled] = useState(true)
   const [regSubmitDisabled, setRegSubmitDisabled] = useState(true);
   const [conditionsCheck, setConditionsCheck] = useState(false)
-  
+  const {closeForm} = useContext(ModalContext)
   
   const [data, setData] = useState({
     email: "",
@@ -40,22 +40,21 @@ const FormRegister = () => {
   
     const handleRegister = (event) => {
         event.preventDefault();
-        console.log("registerfunction to be written")
         if (data.password !== data.passwordRepeat) {
           setAlert(<div className="alert alert-danger">Passwords don't match</div>)
           setTimeout(() => {
             setAlert(null)
           }, 3000);
-    
+          // return
         } else {
           console.log("Registering")
     
           //DELETE Whitespaces
           let email = data.email.trim()
           let password = data.password.trim()
-    
-          //Delete whitespaces and TURN name and surname to first letter uppercase
+         //Delete whitespaces and TURN name and surname to first letter uppercase
           let name = data.name.trim().toLowerCase();
+          
           if (name.includes(' ')) {
             const nameParts = name.split(' ');
             // Capitalize each part separately and join them back into a single string
@@ -76,6 +75,7 @@ const FormRegister = () => {
           } else {
             surname = surname.charAt(0).toUpperCase() + surname.slice(1);
           }
+          
     
           let registerData = { email, name, surname, password }
           console.log(registerData)
@@ -85,13 +85,15 @@ const FormRegister = () => {
         }
       }
     
+
+
       useEffect(() => {
         if (registrationMsg === "Please check your email to confirm registration!"){
           setAlert(<div className="alert alert-success">{registrationMsg}<br/><div className="spinner-border spinner-border-sm" role="status"/></div>)
           setTimeout(() => {
-            {props.closeModal()}
-            navigate("/products")
             setAlert(null)
+            closeForm()
+            navigate("/products")
           }, 4000);
       } else if (registrationMsg === "email must be unique"){
         console.log(registrationMsg)

@@ -13,14 +13,16 @@ const initialState = {
 export const ModalContext = createContext(initialState);
 
 export const ModalProvider = ({children}) => {
-    [state, dispatch] = useReducer(ModalReducer, initialState)
+   const [state, dispatch] = useReducer(ModalReducer, initialState)
 
 
     const openForm = () => {
+        console.log("opening")
         dispatch({
             type: "OPEN_FORM",
             payload: true
         })
+    
     }
 
     const closeForm = () => {
@@ -39,11 +41,6 @@ export const ModalProvider = ({children}) => {
         }}>
             {children}
         </ModalContext.Provider>
-    );
-
-
-
-
-
+    )
 
 }
