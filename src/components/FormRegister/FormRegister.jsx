@@ -15,8 +15,8 @@ const FormRegister = () => {
   const [passwordDisabled, setPasswordDisabled] = useState(true)
   const [regSubmitDisabled, setRegSubmitDisabled] = useState(true);
   const [conditionsCheck, setConditionsCheck] = useState(false)
-  const {closeForm} = useContext(ModalContext)
-  
+  const {closeForm, formModal} = useContext(ModalContext)
+
   const [data, setData] = useState({
     email: "",
     name: "",
@@ -24,37 +24,44 @@ const FormRegister = () => {
     password: "",
     passwordRepeat: "",
   });
-  
+
+  useEffect(() => {
+    if(formModal == false || formModal === true)  setAlert(null)
+    console.log("formModal changing", alert)
+  }, [formModal]);
+
   const handleInputChange = (event) => {
       setData({ ...data, [event.target.name]: event.target.value  });
       console.log(data)
-  
-      if(/(\w+?@\w+?\x2E.+)/.test(data.email)) setNameDisabled(false)  
-  
+
+      if(/(\w+?@\w+?\x2E.+)/.test(data.email)) setNameDisabled(false)
+
       if (data.name.length + 1 > 2) setSurnameDisabled(false)
-  
+
       if (data.surname.length + 1 > 2) setPasswordDisabled(false)
-  
+
       if (data.password && data.passwordRepeat) setRegSubmitDisabled(false)
     }
-  
+
     const handleRegister = (event) => {
+        console.log("handling register")
         event.preventDefault();
         if (data.password !== data.passwordRepeat) {
-          setAlert(<div className="alert alert-danger">Passwords don't match</div>)
+          setAlert(<div className="secondary-emphasized" >Passwords don't match</div>)
           setTimeout(() => {
             setAlert(null)
           }, 3000);
-          // return
+
         } else {
           console.log("Registering")
-    
+
           //DELETE Whitespaces
           let email = data.email.trim()
           let password = data.password.trim()
-         //Delete whitespaces and TURN name and surname to first letter uppercase
+
+          //Delete whitespaces and TURN name and surname to first letter uppercase
           let name = data.name.trim().toLowerCase();
-          
+
           if (name.includes(' ')) {
             const nameParts = name.split(' ');
             // Capitalize each part separately and join them back into a single string
@@ -65,55 +72,55 @@ const FormRegister = () => {
             // Capitalize only the first letter of the name
             name = name.charAt(0).toUpperCase() + name.slice(1);
           }
-    
+
           let surname = data.surname.trim().toLowerCase();
           if (surname.includes(' ')) {
             const nameParts = surname.split(' ');
             surname = nameParts.map(part =>
               part.charAt(0).toUpperCase() + part.slice(1)
             ).join(' ');
+            console.log(surname)
           } else {
             surname = surname.charAt(0).toUpperCase() + surname.slice(1);
           }
-          
-    
+
           let registerData = { email, name, surname, password }
-          console.log(registerData)
+          console.log( "data before register ", registerData)
           register(registerData)
+          setAlert(<><div className="secondary-emphasized">Please wait...</div><div className="spinner-border spinner-border-sm" role="status"/></>)
           event.target.reset()
-          
         }
       }
-    
 
-
-      useEffect(() => {
-        if (registrationMsg === "Please check your email to confirm registration!"){
-          setAlert(<div className="alert alert-success">{registrationMsg}<br/><div className="spinner-border spinner-border-sm" role="status"/></div>)
-          setTimeout(() => {
-            setAlert(null)
-            closeForm()
-            navigate("/products")
-          }, 4000);
-      } else if (registrationMsg === "email must be unique"){
+///THIS DOESN'T WORK
+useEffect(() => {
+    console.log("change reg msg")
+    console.log(registrationMsg)
+    if (registrationMsg == "Please check your email to confirm registration!"){
+        setAlert(<div className="secondary-emphasized">NEW USER REGISTERED!<br/> Check your email to confirm registration!</div>)
+        setRegSubmitDisabled(true)
+        setTimeout(() => {
+          setAlert(null)
+        }, 5000);
+      } else if (registrationMsg == "email must be unique"){
         console.log(registrationMsg)
-        setAlert(<div className="alert alert-danger">This email is already registered</div>)
+        setAlert(<div className="secondary-emphasized mb-4">This email is already registered</div>)
         setTimeout(() => {
           setAlert(null)
         }, 4000);
       }
-      return
     }, [registrationMsg])
-    
-    
-    
-
 
 
   return (
     <div>{/* REGISTER MODAL */}
-    <p>Create an account</p>
-                {alert}
+    <p className="text-center">Create an account</p>
+    <div className="mx-auto mb-3 text-center">
+      {alert}
+    {/* <div className="secondary-emphasized">Please wait...</div>
+    <div className="spinner-border spinner-border-sm" role="status"/>
+          */}
+          </div>
     <form onSubmit={handleRegister}>
                     <div className="input-group form-group">
                       <div className="input-group-prepend">
@@ -144,13 +151,12 @@ const FormRegister = () => {
                         type="text"
                         className="form-control my-input"
                         placeholder="name"
-                        value={data.name}
                         name="name"
                         onChange={handleInputChange}
                         disabled = {nameDisabled}
                       />
                     </div>
-    
+
                     <div className="input-group form-group">
                       <div className="input-group-prepend">
                         <span className="icon-span input-group-text">
@@ -168,7 +174,7 @@ const FormRegister = () => {
                         onChange={handleInputChange}
                       />
                     </div>
-    
+
                     <div className="input-group form-group">
                       <div className="input-group-prepend">
                         <span className="icon-span input-group-text">
@@ -186,7 +192,7 @@ const FormRegister = () => {
                         onChange={handleInputChange}
                       />
                     </div>
-    
+
                     <div className="input-group form-group">
                       <div className="input-group-prepend">
                         <span className=" icon-span input-group-text">
@@ -204,8 +210,8 @@ const FormRegister = () => {
                         onChange={handleInputChange}
                       />
                     </div>
-                    
-                    
+
+
                     <div className="remember">
                       <input type="checkbox" checked={conditionsCheck} name="conditionsCheck" onClick={()=> setConditionsCheck(!conditionsCheck)}/>
                       I agree to the terms and conditions

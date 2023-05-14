@@ -24,15 +24,16 @@ function App() {
 
   return (
     <>
+     
       <BrowserRouter>
+      <UserProvider>
       <ModalProvider>
-        <UserProvider>
-          <ProductProvider>
+         <ProductProvider>
             <CategoryProvider>
               <OrderProvider>
-              <FormModal></FormModal>
               <User></User>
               <Header></Header>
+              <FormModal></FormModal>
               <Routes>
                 <Route path="/" element={<Homepage />} />
                 <Route path="/admin" element={<Admin />} />
@@ -41,10 +42,13 @@ function App() {
               </OrderProvider>
             </CategoryProvider>
           </ProductProvider>
-        </UserProvider>
-        </ModalProvider>
+        
         <Footer />
+        </ModalProvider>
+        </UserProvider>
       </BrowserRouter>
+  
+    
     </>
   )
 }

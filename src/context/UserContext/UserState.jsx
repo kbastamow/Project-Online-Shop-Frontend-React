@@ -35,6 +35,7 @@ export const UserProvider = ({ children }) => {
 }
 
 const register = async(registerData) => {
+    console.log("axios in progress!")
     try {
         const res = await axios.post(API_URL + "users/createUser", registerData)
         console.log("user who registered: " + res.data.msg)
