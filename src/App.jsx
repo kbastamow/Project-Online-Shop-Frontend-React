@@ -15,6 +15,8 @@ import Products from './components/Products/Products'
 import CartModal from './components/CartModal/CartModal'
 import {OrderProvider} from "./context/OrderContext/OrderState"
 import User from './components/User/User'
+import { ModalProvider } from './context/ModalContext/ModalState'
+
 
 function App() {
 
@@ -22,6 +24,8 @@ function App() {
   return (
     <>
       <BrowserRouter>
+      
+      <ModalProvider>
         <UserProvider>
           <ProductProvider>
             <CategoryProvider>
@@ -38,6 +42,7 @@ function App() {
             </CategoryProvider>
           </ProductProvider>
         </UserProvider>
+        </ModalProvider>
         <Footer />
       </BrowserRouter>
     </>
