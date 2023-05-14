@@ -216,8 +216,8 @@ useEffect(() => {
                       <input type="checkbox" checked={conditionsCheck} name="conditionsCheck" onClick={()=> setConditionsCheck(!conditionsCheck)}/>
                       I agree to the terms and conditions
                     </div>
-                    <div className="form-group">
-                      <button type="submit" value="Login" className="btn" disabled={regSubmitDisabled}>
+                    <div className="form-group d-flex justify-content-center">
+                      <button type="submit" value="Login" className="dark-button-blue px-4 my-2" disabled={regSubmitDisabled}>
                         Register
                       </button>
                     </div>

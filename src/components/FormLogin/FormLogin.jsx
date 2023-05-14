@@ -40,7 +40,7 @@ const FormLogin= () => {
   
   return (
     <>
-    <p>Login to your account</p>
+    <p className="text-center">Login to your account</p>
     {alert}
 {/* LOGIN MODAL */}
       <form onSubmit={handleLogin}>
@@ -74,12 +74,12 @@ const FormLogin= () => {
             name="password"
           />
         </div>
-        <div className="remember">
+        <div className="remember my-2 text-center">
           <input type="checkbox" />
           Remember Me
         </div>
-        <div className="form-group">
-          <button type="submit" value="Login" className="btn btn-primary" >
+        <div className="form-group d-flex justify-content-center">
+          <button type="submit" value="Login" className="dark-button-blue px-4 my-2" >
             Login
           </button>
         </div>

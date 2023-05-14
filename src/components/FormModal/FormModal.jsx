@@ -70,7 +70,11 @@ const seeLogin = () => {
 
               {formOnDisplay}
 
+              <div className="text-center">
+
               {toggleForms}
+
+              </div>
 
             </div>
             {/* <div className="modal-footer">

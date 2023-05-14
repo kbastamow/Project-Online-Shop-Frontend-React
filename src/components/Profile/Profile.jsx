@@ -3,9 +3,11 @@ import "./Profile.scss"
 import { UserContext } from '../../context/UserContext/UserState'
 import DateFormatter from '../DateFormatter/DateFormatter'
 import { OrderContext } from "../../context/OrderContext/OrderState"
+import { UserContext } from '../../context/UserContext/UserState'
 
 const Profile = () => {
 
+const {logout} = useContext(UserContext);
 const {user, findUser} = useContext(UserContext)
 const {orders, pastOrders} = useContext(OrderContext)
 const [userDetails, setUserDetails] = useState("")
@@ -99,9 +101,15 @@ return (
                         </div>
                         </div>
                         </div>
-                        <div className="col-11 col-md-3">
+                        <div className="col-11 col-md-3 mb-3">
                             <button className="w-100 p-0" type="button" data-bs-toggle="modal" data-bs-target="#cartModal">
                                 <div className="dark-header p-2 text-light">View current cart</div>
+                            </button>
+                            <button className="w-100 p-0" type="button">
+                                <div className="dark-header p-2 text-light">Browse favorites</div>
+                            </button>
+                            <button className="w-100 p-0" type="button">
+                                <div className="dark-header p-2 text-light" onClick={() => logout()}>Logout</div>
                             </button>
                             {/* <div className="collapse" id="user-cart">
                                 <div className="card card-body">

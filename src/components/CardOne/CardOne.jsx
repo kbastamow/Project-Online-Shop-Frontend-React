@@ -26,7 +26,7 @@ return (<>
           <p className="card-text">{product.description}</p>
           <p className="card-text"><span className="price">{product.price}€</span></p>
           <div className="">
-            <button type="button" className="filled click-effect my-1" onClick={() => addToCart(product)}>Add to cart</button>
+            <button type="button" className="click-effect dark-button-blue my-1 px-5 py-1" onClick={() => addToCart(product)}>Add to cart</button>
 
             {(favorites.includes(product)) ?
               <>

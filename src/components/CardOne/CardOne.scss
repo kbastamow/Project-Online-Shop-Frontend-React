@@ -40,14 +40,14 @@
 
     }
 
-    .filled {
-        border-radius: none;
-        border: 2px solid $element;
-        background-color: $element;
-        color: white;
-        padding: 1% 4%;
+    // .filled {
+    //     border-radius: none;
+    //     border: 2px solid $element;
+    //     background-color: $element;
+    //     color: white;
+    //     padding: 1% 4%;
     
-    }
+    // }
 //OVERRIDE datecomparer's style to move the badge in. These go with position - absolute!
     .badge {
         right: 5%;
@@ -55,13 +55,7 @@
     }
 
     
-.outline {
-    border-radius: none;
-    border: 2px solid $element;
-    color: $element;
-    padding: 1% 4%;
 
-}
 
    
 }
