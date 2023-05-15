@@ -4,13 +4,17 @@ import { ProductContext } from '../../context/ProductContext/ProductState'
 import Card from '../Card/Card'
 
 const Admin = () => {
-  const { categories, getCategories } = useContext(CategoryContext)
+  const { categories, getCategories, createCategory } = useContext(CategoryContext)
   const { product, createProduct } = useContext(ProductContext)
   const [preview, setPreview] = useState(<h5>Complete all fields</h5>)
   const [btnDisabled, setBtnDisabled] = useState(true)
   const [showNew, setShowNew] = useState("")
+  
 
-  const [formInput, setFormInput] = useState({
+  const [showCreate, setShowCreate] = useState(false)
+  const [showCreateCategory, setShowCreateCategory] = useState(false)
+
+   const [formInput, setFormInput] = useState({
     name: "",
     description: "",
     price: "",
@@ -18,11 +22,15 @@ const Admin = () => {
     category: []
   })
 
+  const [categoryForm, setCategoryForm] = useState ({
+    name: ""
+  })
+  const [categoryMsg, setCategoryMsg] = useState(null)
+
   const handleInput = (event) => {
     let target = event.target;
     if (target.type === "checkbox") {
       if (target.value && (!formInput.category.includes(target.name))) {  //Add trues if they don't exist yet
-        console.log("true")
         setFormInput({ ...formInput, category: [...formInput.category, target.name] })
 
       } else { //If checkbox is false, remove from array if it was added earlier
@@ -106,13 +114,37 @@ const Admin = () => {
   }
 
   useEffect(() => {
-    console.log("Inside useEFFECT", product)
     if (product) {
       setShowNew(<Card product={product} />)
     } else {
       setShowNew(null)
     }
   }, [product])
+
+
+const handleCategorySubmit = (event) => {
+  event.preventDefault();
+  let contains = categories.filter(category => category.name.toLowerCase() === (categoryForm.name.toLowerCase()))
+  if (contains.length > 0) {
+    setCategoryMsg(<div>This category exists</div>)
+  } else {
+    createCategory(categoryForm)
+    setCategoryMsg(<div>Please wait...</div>)
+  
+  }
+  setTimeout(() => {
+    event.target.reset()
+    setCategoryMsg(null)
+  }, 4000);
+      
+}
+
+
+
+
+
+
+
 
   const categoryMap = categories.map(category => {
     return (
@@ -125,126 +157,131 @@ const Admin = () => {
     )
   })
 
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <>
       <div  className="admin-div">Admin</div>
 
-
-
-
-
-
-<div classname="container-fluid">
-  
-  <div className="d-flex flex-wrap justify-content-around p-4">
-  
-                    <div className="">
-                        <button className="w-100 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#create-product" aria-expanded="false" aria-controls="collapseExample">
-                            <div className="dark-header p-2 text-light">Create new product</div>
-                        </button>
-                        <div className="collapse" id="create-product">
-                            <div className="card card-body text-start neon-glow">
-  
-                            <div className="d-flex col-12 col-md-8 justify-content-center mx-auto">
-
-<form id="post-form" encType="multipart/form-data" method="post" className="" onSubmit={handleSubmit}>
-
-  <div className="form-outline mb-4">
-    <label className="form-label" htmlFor="productname">Name</label>
-    <input type="text" className="form-control" name="name" id="productname" required onChange={handleInput} />
-  </div>
-  <div className="form-outline mb-4">
-    <label className="form-label" htmlFor="description">Description</label>
-    <textarea id="description" rows="4" className="form-control" name="description" required onChange={handleInput}></textarea>
-  </div>
-  <div className="form-outline mb-4">
-    <label className="form-label" htmlFor="">Price</label>
-    <input type="number" className="form-control" name="price" required id="price" onChange={handleInput} />
-  </div>
-
-  <fieldset className="text-start">
-    <div className="text-center">Category</div>
-
-    {categoryMap}
-
-  </fieldset>
-  <div className="form-outline mb-4">
-    <label className="form-label" htmlFor="image">Upload an image</label>
-    <input type="file" id="image" name="image" accept="image/jpeg, image/png, image/jpg, image/gif" required onChange={handleInput} />
-  </div>
-{/* FORM FINISH, MODAL BUTTON AND MODAL */}
-  <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#previewModal" onClick={previewProduct}>Preview</button>
-
-  <div className="modal fade" id="previewModal" tabIndex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
-    <div className="modal-dialog">
-      <div className="modal-content">
-        <div className="modal-header">
-          <h5 className="modal-title text-center">Review the product:</h5>
-        </div>
-        <div className="modal-body">
-
-          {preview}
-
-        </div>
-        <div className="modal-footer">
-          <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => setPreview(<h5>Complete all fields</h5>)}>Go back</button>
-
-          <button type="submit" className="btn btn-primary" data-bs-dismiss="modal" disabled={btnDisabled}>Confirm</button>
-        </div>
+      <div>Admin</div>
+      <div>
+        {/* Button toggles true and false */}
+        <button type="button" className="btn btn-outline-danger" onClick={() => setShowCreate(!showCreate)}>Create new product</button>
+        <button type="button" className="btn btn-outline-danger" >Update or delete</button>
+        <button type="button" className="btn btn-outline-danger"onClick={() => setShowCreateCategory(!showCreateCategory)}>Create new categories</button>
       </div>
+      <div className="d-flex col-12 col-md-8 justify-content-center mx-auto">
+
+{/* CREATE FORM SHOW OR NOT */}
+
+     { showCreate ? null :
+    <div>
+      <h4>New product</h4>
+      <form id="post-form" encType="multipart/form-data" method="post" className={""} onSubmit={handleSubmit}>
+            <div className="form-outline mb-4">
+              <label className="form-label" htmlFor="productname">Name</label>
+              <input type="text" className="form-control" name="name" id="productname" required onChange={handleInput} />
+            </div>
+            <div className="form-outline mb-4">
+              <label className="form-label" htmlFor="description">Description</label>
+              <textarea id="description" rows="4" className="form-control" name="description" required onChange={handleInput}></textarea>
+            </div>
+            <div className="form-outline mb-4">
+              <label className="form-label" htmlFor="">Price</label>
+              <input type="number" className="form-control" name="price" required id="price" onChange={handleInput} />
+            </div>
+            <fieldset className="text-start">
+              <div className="text-center">Category</div>
+              {categoryMap}
+            </fieldset>
+            <div className="form-outline mb-4">
+              <label className="form-label" htmlFor="image">Upload an image</label>
+              <input type="file" id="image" name="image" accept="image/jpeg, image/png, image/jpg, image/gif" required onChange={handleInput} />
+            </div>
+            {/* FORM FINISH, MODAL BUTTON AND MODAL */}
+            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#previewModal" onClick={previewProduct}>Preview</button>
+            <div className="modal fade" id="previewModal" tabIndex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title text-center">Review the product:</h5>
+                  </div>
+                  <div className="modal-body">
+                    {preview}
+                  </div>
+                  <div className="modal-footer">
+                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => setPreview(<h5>Complete all fields</h5>)}>Go back</button>
+                    <button type="submit" className="btn btn-primary" data-bs-dismiss="modal" disabled={btnDisabled}>Confirm</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
     </div>
-  </div>
-</form>
-</div>
+}
+
+{/* CREATE FORM SHOW OR NOT FINISHES */}
+
+{/* CREATE CATEGORY HERE */}
+
+{ showCreateCategory ? null :
+
 <div>
-{showNew}
-</div>
+  <h4>New category</h4>
+  <form onSubmit={handleCategorySubmit}>
+  <div className="form-outline mb-4">
+              <label className="form-label" htmlFor="categoryname">New Category:</label>
+              <input type="text" className="form-control" name="name" id="categoryname" required onChange={() => setCategoryForm({[event.target.name]:event.target.value})} />
+    </div>
+  <h5>Current categories</h5>
+  <ul className="text-start">
+  {categories.sort().map(category => {
+      return (
+        <>
+          <li key={category.id}>{category.name}</li>
+        </>
+      )
+    })}
+    </ul>
   
-                            </div>
-                        </div>
-                    </div>
   
-                    <div className="">
-                        <button className="w-100 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#create-category" aria-expanded="false" aria-controls="collapseExample">
-                            <div className="dark-header p-2 text-light">Create category </div>
-                        </button>
-                        <div className="collapse" id="create-category">
-                            <div className="card card-body text-start neon-glow">
   
-                                <p>Text</p>
   
-                            </div>
-                        </div>
-                    </div>
   
-                    <div className="">
-                        <button className="w-100 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#update-delete" aria-expanded="false" aria-controls="collapseExample">
-                            <div className="dark-header p-2 text-light">Your profile </div>
-                        </button>
-                        <div className="collapse" id="update-delete">
-                            <div className="card card-body text-start neon-glow">
+          <div className="form-group d-flex justify-content-center">
+            <button type="submit" className="dark-button-blue px-4 my-2" >
+              Create
+            </button>
+          </div>
   
-                                <p>Text</p>
+          {categoryMsg}
   
-                            </div>
-                        </div>
-                    </div>
-  
-  </div>
+        </form>
 </div>
 
-
-
-
-
-
-
-
-      {/* <div>
-        <button type="button" className="btn btn-outline-danger">Create new product</button>
-        <button type="button" className="btn btn-outline-danger">Update or delete</button>
-      </div> */}
       
+}
+      {/* CREATE CATEGORY FINISHES */}
+
+
+
+
+
+        
+      </div>
+      <div>
+        {showNew}
+      </div>
     </>
 
   )

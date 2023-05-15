@@ -28,9 +28,29 @@ export const CategoryProvider = ({children}) => {
               }
     }
 
+    const createCategory = async(data) => {
+        try {
+          const token = JSON.parse(localStorage.getItem("shoptoken"))
+          const res = await axios.post(API_URL + "categories/createCategory", data, {
+            headers: {
+                "Authorization": token
+            }
+          }) 
+          console.log(res.data) 
+          dispatch ({
+            type: "CREATE_CATEGORY",
+            payload: res.data
+          })
+        } catch (error) {
+            console.error(error)
+            
+        }
+    }
+
     return (<CategoryContext.Provider value={{
         categories: state.categories,
-        getCategories
+        getCategories,
+        createCategory
     }}>
         {children}
     </CategoryContext.Provider>
