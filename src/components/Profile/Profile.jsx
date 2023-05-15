@@ -90,10 +90,6 @@ useEffect(() => {
 
 
 const handleSeeFavorites = () => {
-    // console.log(favorites)
-    // let idArray = favorites.map(favorite => favorite.id)
-    // console.log(idArray)
-    // seeFavorites(idArray)
     setTimeout(() => {
        navigate("/products", {state: { prevPath: location.pathname }})  //Passing information about route to next page
     }, 1000);

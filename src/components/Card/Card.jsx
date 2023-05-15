@@ -1,18 +1,29 @@
 
-import React, { useContext } from 'react'
-import { FaCartArrowDown } from "react-icons/fa";
+import React, { useContext, useEffect, useState } from 'react'
+import { FaCartArrowDown, FaHeartbeat } from "react-icons/fa";
 import {BsArrowUpRightSquareFill} from "react-icons/bs"
-import guitarPic from "../../assets/guitarproduct.jpg"
-import StarCalculator from '../StarCalculator/StarCalculator'
 import { ProductContext } from '../../context/ProductContext/ProductState'
-import "./Card.scss"
+import StarCalculator from '../StarCalculator/StarCalculator'
 import DateComparer from '../DateComparer/DateComparer';
+import "./Card.scss"
 
 const Card = (props) => {
   let scale = "limited" //invented variable to limit what starcalculator returns
-
-  const{extractOne, addToCart} = useContext(ProductContext)
   const imagePath = "http://localhost:3000/uploaded_imgs/"
+  
+  const{extractOne, addToCart} = useContext(ProductContext)
+  const {favorites} = useContext(ProductContext)
+  const[inMyFavorites, setInMyFavorites] = useState("")
+
+  useEffect(() => {
+    setInMyFavorites(null)
+    if (favorites.length > 0 ) {
+      let coincides = favorites.filter(favorite => favorite.id === props.product.id)
+      if (coincides.length > 0) {
+      setInMyFavorites(<><FaHeartbeat></FaHeartbeat></>)
+    } 
+  }
+  }, [favorites])
 
   return (
     <>
@@ -23,7 +34,11 @@ const Card = (props) => {
           <DateComparer dateString={props.product.createdAt} />
         
         </div>
-        <h4 className="product-header card-title w-100  text-bg-dark p-2 mb-0">{props.product.name}</h4>
+<div className="">
+  
+          <h4 className="d-flex justify-content-center product-header card-title w-100 text-bg-dark p-2 mb-0"><span className="w-100">{props.product.name}</span><i className="flex-shrink-1">{inMyFavorites}</i></h4>
+  
+</div>
         <div className="neon-glow card-body">
           <h5 className="mb-3">{props.product.price}€</h5>
 
