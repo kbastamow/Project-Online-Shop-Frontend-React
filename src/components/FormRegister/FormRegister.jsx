@@ -94,11 +94,6 @@ const FormRegister = () => {
 
 ///THIS DOESN'T WORK
 useEffect(() => {
-    
-
-
-    console.log("change reg msg")
-    console.log(registrationMsg)
 
     if (registrationMsg == "Please check your email to confirm registration!"){
         setAlert(<div className="secondary-emphasized">NEW USER REGISTERED!<br/> Check your email to complete registration!</div>)

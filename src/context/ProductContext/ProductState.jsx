@@ -99,6 +99,24 @@ export const ProductProvider = ({children}) => {
     })
   }
 
+  const seeFavorites = async(idArray) => {
+    try {
+      let request = {"id": idArray}
+      console.log(request)
+      const res = await axios.post(API_URL + "products/findVarious", request)
+      console.log("Returning from backend: ", res.data)
+      dispatch({
+        type: "SEE_FAVORITES",
+        payload: res.data
+      })
+    } catch (error) {
+      console.error(error)
+    } 
+  }
+
+
+
+
   const addToCart = (product) => {
     const trimmed = { id: product.id, name: product.name, price: product.price, image: product.image, quantity: 1 }
     let newProduct = [...state.cart]  //Withoud spread, state.cart updates here too!!!!
@@ -159,6 +177,7 @@ export const ProductProvider = ({children}) => {
         extractOne,
         addFavorite,
         deleteFavorite,
+        seeFavorites,
         addToCart,
         changeQuantity,
         removeFromCart,

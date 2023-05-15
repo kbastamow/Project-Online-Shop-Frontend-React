@@ -4,14 +4,18 @@ import { UserContext } from '../../context/UserContext/UserState'
 import DateFormatter from '../DateFormatter/DateFormatter'
 import { OrderContext } from "../../context/OrderContext/OrderState"
 import { useNavigate } from "react-router-dom";
+import { ProductContext } from "../../context/ProductContext/ProductState"
 
 const Profile = () => {
 
+const navigate = useNavigate();    
 const {logout, logoutMsg} = useContext(UserContext);
 const {user, findUser} = useContext(UserContext)
 const {orders, pastOrders} = useContext(OrderContext)
 const [userDetails, setUserDetails] = useState("")
 const [orderHistory, setOrderHistory] = useState("")
+const [favOptions, setFavOptions] = useState("")
+const {favorites, seeFavorites} = useContext(ProductContext)
 
 
 useEffect(()=> {  
@@ -20,7 +24,7 @@ useEffect(()=> {
     console.log(user)
 }, [])
 
-const navigate = useNavigate();
+
 
   useEffect(() => {
     if (logoutMsg) {
@@ -71,6 +75,35 @@ useEffect(()=> {
     
 }, [orders])
 
+useEffect(() => {
+        if (favorites.length > 0) {
+            setFavOptions(
+                <>
+                    <button type="button" className="text-button" onClick={() => handleSeeFavorites()}>Browse favorites</button>
+                    <button type="button" className="text-button" onClick={() => handleClearFavorites}>Clear all favorites</button>
+                </>
+            )
+        } else {
+            setFavOptions(<p>No saved favorites</p>)
+        }
+    }, [favorites])
+
+
+
+
+
+
+const handleSeeFavorites = () => {
+    console.log(favorites)
+    let idArray = favorites.map(favorite => favorite.id)
+    console.log(idArray)
+    seeFavorites(idArray)
+    setTimeout(() => {
+       navigate("/products") 
+    }, 1000);
+
+}
+
 
 
 
@@ -93,7 +126,7 @@ return (
                 </div>
 
                 <div className="col-11 col-md-5">
-                    <button className="w-100 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#user-orders" aria-expanded="false" aria-controls="collapseExample">
+                    <button className="w-100 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#user-orders" aria-expanded="false" aria-controls="user-orders">
                         <div className="dark-header p-2 text-light">View order history</div>
                     </button>
                     <div className="collapse" id="user-orders">
@@ -118,9 +151,20 @@ return (
                             <button className="w-100 p-0" type="button" data-bs-toggle="modal" data-bs-target="#cartModal">
                                 <div className="dark-header p-2 text-light">View current cart</div>
                             </button>
-                            <button className="w-100 p-0" type="button">
+                            <button className="w-100 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#favorites" aria-expanded="false" aria-controls="collapseExample"  onClick={()=> handleFavoritesBtn()}>
                                 <div className="dark-header p-2 text-light">Browse favorites</div>
                             </button>
+                            <div className="collapse" id="favorites">
+                           <div className="card card-body text-start neon-glow">
+                            
+                            {favOptions}
+                            
+                        </div>
+                         </div>
+
+
+
+
                             <button className="w-100 p-0" type="button">
                                 <div className="dark-header p-2 text-light" onClick={() => logout()}>Logout</div>
                             </button>
@@ -143,21 +187,3 @@ return (
 }
 
 export default Profile
-
-
-
-
-// orders.map(order => (
-//     <>
-//     <tr key={order.createdAt}>
-//         <th>{<DateFormatter dateString={order.createdAt} />}</th>
-//          <th> {order.Products.map(product => 
-//                 <>{product.name} ({product.Order_Product.quantity})<br/>
-//                 </>
-//                 )} </th>
-//         <th> Price </th>
-
-
-//     </tr>
-    
-//     </>))

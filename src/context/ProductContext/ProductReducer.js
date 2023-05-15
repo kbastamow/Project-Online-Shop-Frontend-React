@@ -18,6 +18,7 @@ const products = (state, action) => {
            ...state,
            products: action.payload,
           };
+
        case "CREATE_PRODUCT":
         return {
           ...state,
@@ -39,7 +40,13 @@ const products = (state, action) => {
           return {
             ...state,
             favorites: state.favorites.filter(favorite => favorite.id !== action.payload.id)
-          };  
+          };
+         
+        case "SEE_FAVORITES":
+          return {
+            ...state,
+           products: action.payload,
+          };     
           
         case "ADD_TO_CART": 
         return {

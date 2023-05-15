@@ -71,10 +71,8 @@ return (
   
 
       </div>
-      <div className="modal-footer d-flex justify-content-between">
-        <button type="button" className="outline-dark mb-2 px-5 py-1" onClick={() => logout()}>Logout</button>
+      <div className="modal-footer d-flex justify-content-end">
         <button type="button" className="outline-dark py-1 px-2" data-bs-dismiss="modal">Close</button>
-
       </div>
     </div>
   </div>
