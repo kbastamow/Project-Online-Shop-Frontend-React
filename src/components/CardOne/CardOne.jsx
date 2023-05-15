@@ -10,9 +10,6 @@ const CardOne = () => {
 const {product, addToCart, addFavorite, deleteFavorite, favorites} = useContext(ProductContext)
 const imagePath = "http://localhost:3000/uploaded_imgs/"
 
-console.log(favorites)
-
-
 return (<>
     <div className="topContainer">
       <div className="card flex-row oneCard">

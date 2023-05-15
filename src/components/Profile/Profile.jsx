@@ -15,23 +15,18 @@ const {orders, pastOrders} = useContext(OrderContext)
 const [userDetails, setUserDetails] = useState("")
 const [orderHistory, setOrderHistory] = useState("")
 const [favOptions, setFavOptions] = useState("")
-const {favorites, seeFavorites, clearFavorites} = useContext(ProductContext)
+const {favorites, clearFavorites} = useContext(ProductContext)
 
 
 useEffect(()=> {  
-    // findUser()  //COMMENTED OUT
     pastOrders()
-    console.log(user)
 }, [])
-
-
 
   useEffect(() => {
     if (logoutMsg) {
         setTimeout(() => {
             navigate("/");  
         }, 2000);
-      
     }
   }, [logoutMsg]);
 
@@ -42,9 +37,7 @@ const calculateOrderTotal = (productSet) => {
     productSet.forEach(item => prices.push(item.price * item.Order_Product.quantity))
     return prices.reduce((acc, val) => acc + val).toFixed(2)
 }
-
-
-//PROBLEM HERE!!!! 
+ 
 useEffect(()=>{
     if(user) { 
         setUserDetails(<><p>Name: {user.name} {user.surname}</p>
@@ -54,11 +47,10 @@ useEffect(()=>{
 }, [user])
 
 
-
 useEffect(()=> {  
     if(orders) {
     setOrderHistory(<>
-        {orders.map(order => {
+        {orders.reverse().map(order => {  //Reversed to see the newest first
             return(
             <>
             <tr key={order.createdAt}>
@@ -69,7 +61,6 @@ useEffect(()=> {
                 <td> {calculateOrderTotal(order.Products)}€ </td>
             </tr>
             </>)})}
-        
         </>)
     }
     
@@ -79,8 +70,8 @@ useEffect(() => {
         if (favorites.length > 0) {
             setFavOptions(
                 <>
-                    <button type="button" className="text-button" onClick={() => handleSeeFavorites()}>Browse favorites</button>
-                    <button type="button" className="text-button" onClick={clearFavorites}>Clear all favorites</button>
+                    <button type="button" className="text-button py-1" onClick={() => handleSeeFavorites()}>Favorites</button><hr/>
+                    <button type="button" className="text-button py-1" onClick={clearFavorites}>Clear all favorites</button>
                 </>
             )
         } else {

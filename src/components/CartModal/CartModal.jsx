@@ -45,7 +45,7 @@ const {placeOrder} = useContext(OrderContext)
 
       </tbody>
     </table>
-    <h5>Total: {cart.reduce((acc, value) => (acc + value.price * value.quantity), 0)}€</h5>
+    <h5>Total: {(cart.reduce((acc, value) => (acc + value.price * value.quantity), 0)).toFixed(2)}€</h5>
     <button type="button" className="dark-button-blue click-effect mb-2 px-5 py-1 w-25" onClick={() => placeOrder(cart)}>Place Order</button><br/>
     
 

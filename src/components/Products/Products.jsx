@@ -12,12 +12,9 @@ const Products = () => {
   const location = useLocation() //TELLS US InFORMATION ABOUT THE ROUTE AND PREVIOUS PAGE if we came through navigate!
   
   useEffect(()=> {  //when component appears, do this once
-    console.log("location", location)
+    // console.log("location", location)
     if (location.state && location.state.prevPath === "/profile"){   //NOT NULL & profile-favorites-browse is the origin 
-      console.log("came from profile!")
-      console.log(favorites)
       let idArray = favorites.map(favorite => favorite.id)
-      console.log(idArray)
       seeFavorites(idArray)
     } else {
     getProducts()
@@ -29,7 +26,6 @@ const Products = () => {
 
 useEffect (() => {
   localStorage.setItem("shopfavorites", JSON.stringify(favorites))
-  console.log(favorites, "my favourites are")
 }, [favorites])
 
 
