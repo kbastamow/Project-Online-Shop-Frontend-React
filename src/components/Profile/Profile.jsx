@@ -3,21 +3,33 @@ import "./Profile.scss"
 import { UserContext } from '../../context/UserContext/UserState'
 import DateFormatter from '../DateFormatter/DateFormatter'
 import { OrderContext } from "../../context/OrderContext/OrderState"
-import { UserContext } from '../../context/UserContext/UserState'
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
 
-const {logout} = useContext(UserContext);
+const {logout, logoutMsg} = useContext(UserContext);
 const {user, findUser} = useContext(UserContext)
 const {orders, pastOrders} = useContext(OrderContext)
 const [userDetails, setUserDetails] = useState("")
 const [orderHistory, setOrderHistory] = useState("")
 
+
 useEffect(()=> {  
-    findUser()
+    // findUser()  //COMMENTED OUT
     pastOrders()
     console.log(user)
 }, [])
+
+const navigate = useNavigate();
+
+  useEffect(() => {
+    if (logoutMsg) {
+        setTimeout(() => {
+            navigate("/");  
+        }, 2000);
+      
+    }
+  }, [logoutMsg]);
 
 
 //Complexxx math to calculate total - could be done in backend??
@@ -27,9 +39,10 @@ const calculateOrderTotal = (productSet) => {
     return prices.reduce((acc, val) => acc + val).toFixed(2)
 }
 
-useEffect(()=>{
 
-    if(user.email) {  //login user doesn't include email so checking after change
+//PROBLEM HERE!!!! 
+useEffect(()=>{
+    if(user) { 
         setUserDetails(<><p>Name: {user.name} {user.surname}</p>
         <p>Email: {user.email} </p>
         <p>Registered since: {<DateFormatter dateString={user.createdAt} />}</p></>)

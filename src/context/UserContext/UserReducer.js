@@ -5,7 +5,8 @@ const users = (state, action) => {
             return {
                 ...state,
                 token: action.payload.token,
-                user: {id: action.payload.user.id, name: action.payload.user.name, msg: action.payload.msg} 
+                user: action.payload.user,
+                loginMsg: action.payload.msg
             };
         case "REGISTER":
             return {
@@ -17,7 +18,16 @@ const users = (state, action) => {
             return {
                 ...state,
                 token: null,
-                user: null
+                user: null,
+                logoutMsg: action.payload
+            };
+
+        case "CLEAR_MESSAGES":
+            return {
+                ...state,
+                loginMsg: "",
+                registrationMsg: "", 
+                logoutMsg: ""
             };
 
         case "FIND_USER":

@@ -14,18 +14,19 @@ const Header = () => {
 
   let loggedInUser = JSON.parse(localStorage.getItem("shopuser")) 
   let greetingUser;
+
   console.log(loggedInUser,  "user who is logged in")
   
-  // if (loggedInUser.length === 0 || !(loggedInUser)) {
-  //   greetingUser = ""
-  //  } else {
-  //   greetingUser = loggedInUser.name
-  //  }
+  if (loggedInUser) {
+    greetingUser = loggedInUser.name
+   } else {
+    greetingUser = ""
+   }
 
   let loggedInToken = JSON.parse(localStorage.getItem("shoptoken")) || ""
  
   let navbarLeft = (loggedInToken) ? (
-    <div className="welcome-div">Welcome  <span className="cart-icon ms-3" data-bs-toggle="modal" data-bs-target="#cartModal">
+    <div className="welcome-div">Welcome {loggedInUser.name} <span className="cart-icon ms-3" data-bs-toggle="modal" data-bs-target="#cartModal">
       <FaShoppingCart></FaShoppingCart>
     </span></div>)  :  (<div className="login-div me-2 px-4 py2" onClick={openForm}>Login/register</div>)
 

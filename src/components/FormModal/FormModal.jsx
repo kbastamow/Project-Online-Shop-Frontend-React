@@ -22,16 +22,13 @@ useEffect(()=>{
   console.log("changing state", formModal)
 }, [formModal])
 
-
-
 useEffect(() => {
   seeLogin()
 }, []);
 
 const seeRegistration = () => {
   setFormOnDisplay(<FormRegister/>)
-  setToggleForms(<>Already registered? <span className ="secondary-emphasized form-link" onClick={()=>seeLogin()}>Login here</span></>)
-  
+  setToggleForms(<>Already registered? <span className ="secondary-emphasized form-link" onClick={()=>seeLogin()}>Login here</span></>) 
 }
 
 const seeLogin = () => {

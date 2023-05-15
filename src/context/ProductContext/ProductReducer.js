@@ -29,11 +29,17 @@ const products = (state, action) => {
             product: action.payload,
           };
 
-        case "ADD_FAVORITE":
-        return {
-          ...state,
-          favorites: [action.payload, ...state.favorites]
-        };  
+          case "ADD_FAVORITE":
+            return {
+              ...state,
+              favorites: [action.payload, ...state.favorites]
+            };  
+
+        case "DELETE_FAVORITE":
+          return {
+            ...state,
+            favorites: state.favorites.filter(favorite => favorite.id !== action.payload.id)
+          };  
           
         case "ADD_TO_CART": 
         return {

@@ -83,12 +83,20 @@ export const ProductProvider = ({children}) => {
       })
     }
 
-  const addFavorite = (product) => {
-    console.log(product)
+    const addFavorite = (product) => {
+      console.log(product)
+      dispatch({
+        type: "ADD_FAVORITE",
+        payload: product,
+      });
+    }
+
+
+  const deleteFavorite = (product) => {
     dispatch({
-      type: "ADD_FAVORITE",
+      type: "DELETE_FAVORITE",
       payload: product,
-    });
+    })
   }
 
   const addToCart = (product) => {
@@ -150,6 +158,7 @@ export const ProductProvider = ({children}) => {
         createProduct,
         extractOne,
         addFavorite,
+        deleteFavorite,
         addToCart,
         changeQuantity,
         removeFromCart,

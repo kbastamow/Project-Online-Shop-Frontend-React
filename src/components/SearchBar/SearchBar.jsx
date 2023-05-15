@@ -4,6 +4,7 @@ import { ProductContext } from '../../context/ProductContext/ProductState'
 import {FaSearch} from "react-icons/fa"
 import "./SearchBar.scss"
 
+
 const SearchBar = () => {
   const [search, setSearch] = useState("");
   const [resultMsg, setResultMsg] = useState("")

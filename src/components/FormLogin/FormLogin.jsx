@@ -7,11 +7,15 @@ import { ModalContext } from "../../context/ModalContext/ModalState";
 
 const FormLogin= () => {
 
-  const [alert, setAlert] = useState(null)
-  const {token, login} = useContext(UserContext)
+  const [alert, setAlert] = useState("")
+  const {token, login, loginMsg, clearMessages} = useContext(UserContext)
   const {closeForm} = useContext(ModalContext)
-  
-  const navigate = useNavigate()
+
+  // const navigate = useNavigate()
+
+
+
+
 
   const handleLogin = (event) =>{
     event.preventDefault();
@@ -20,28 +24,42 @@ const FormLogin= () => {
       password: event.target.password.value
     }
     console.log(userData)
-    login(userData);
-  
-    if (!token) {
-      console.log("wrong user")
-      setAlert(<div className="alert alert-danger">Login details not correct</div>)
-      setTimeout(() => {
-        setAlert(null)
-      }, 3000);
-  
-    }  else {
+    setAlert(<div className="alert">
+      <div>Please wait...</div>
+      <div className="spinner-border spinner-border-sm" role="status"/>  
+    </div>)
+    login(userData)
+  }
+
+  useEffect(() => {
+    console.log("login message changing: ", loginMsg)
+
+    if(token && loginMsg) {
+    setAlert(<div className="alert">Logged in!</div>)
     setTimeout(() => {
-      closeForm()
-      navigate("/products")
-    }, 2000);
-    event.target.reset()
-  }
-  }
-  
+      // setAlert(null)
+      closeForm();
+      clearMessages()
+    }, 3000) 
+  } else if (!token && loginMsg.length > 0){  // .length
+    console.log("wrong user")
+    setAlert(<div className="alert">Login details not correct</div>)
+    clearMessages()
+    // setTimeout(() => {
+    //   setAlert(null)
+    // }, 3000);
+  }}, [loginMsg])
+
+
+
+
   return (
     <>
     <p className="text-center">Login to your account</p>
+    <div className="d-flex justify-content-center">
     {alert}
+    </div>
+
 {/* LOGIN MODAL */}
       <form onSubmit={handleLogin}>
         <div className="input-group form-group">

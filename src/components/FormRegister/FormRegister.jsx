@@ -8,7 +8,7 @@ import { ModalContext } from "../../context/ModalContext/ModalState";
 const FormRegister = () => {
     const navigate = useNavigate()
 
-  const [alert, setAlert] = useState(null)
+  const [alert, setAlert] = useState("")
   const {register, registrationMsg} = useContext(UserContext)
   const [nameDisabled, setNameDisabled] = useState(true)
   const [surnameDisabled, setSurnameDisabled] = useState(true)
@@ -25,10 +25,10 @@ const FormRegister = () => {
     passwordRepeat: "",
   });
 
-  useEffect(() => {
-    if(formModal == false || formModal === true)  setAlert(null)
-    console.log("formModal changing", alert)
-  }, [formModal]);
+  // useEffect(() => {
+  //   if(formModal == false || formModal === true)  setAlert(null)
+  //   console.log("formModal changing", alert)
+  // }, [formModal]);
 
   const handleInputChange = (event) => {
       setData({ ...data, [event.target.name]: event.target.value  });
@@ -94,19 +94,24 @@ const FormRegister = () => {
 
 ///THIS DOESN'T WORK
 useEffect(() => {
+    
+
+
     console.log("change reg msg")
     console.log(registrationMsg)
+
     if (registrationMsg == "Please check your email to confirm registration!"){
-        setAlert(<div className="secondary-emphasized">NEW USER REGISTERED!<br/> Check your email to confirm registration!</div>)
+        setAlert(<div className="secondary-emphasized">NEW USER REGISTERED!<br/> Check your email to complete registration!</div>)
         setRegSubmitDisabled(true)
         setTimeout(() => {
-          setAlert(null)
+          setAlert("")
         }, 5000);
+
       } else if (registrationMsg == "email must be unique"){
         console.log(registrationMsg)
         setAlert(<div className="secondary-emphasized mb-4">This email is already registered</div>)
         setTimeout(() => {
-          setAlert(null)
+          setAlert("")
         }, 4000);
       }
     }, [registrationMsg])

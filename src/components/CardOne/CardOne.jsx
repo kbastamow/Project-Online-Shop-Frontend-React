@@ -7,8 +7,11 @@ import DateComparer from '../DateComparer/DateComparer'
 
 const CardOne = () => {
 
-const {product, addToCart, addFavorite, favorites} = useContext(ProductContext)
+const {product, addToCart, addFavorite, deleteFavorite, favorites} = useContext(ProductContext)
 const imagePath = "http://localhost:3000/uploaded_imgs/"
+
+console.log(favorites)
+
 
 return (<>
     <div className="topContainer">
@@ -30,6 +33,7 @@ return (<>
 
             {(favorites.includes(product)) ?
               <>
+              <button type="button" className="outline click-effect my-1 ms-4" onClick={() => deleteFavorite(product)}>Remove from favorites</button>
                 <div className="secondary-emphasized">In your favorites</div>
               </>
               :
