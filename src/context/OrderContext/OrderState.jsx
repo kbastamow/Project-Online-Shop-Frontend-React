@@ -21,15 +21,13 @@ export const OrderProvider = ({ children }) => {
         const newOrder = {"productAndQuantity":[]}    
         const items = cart.map(item => ({"ProductId":item.id, "quantity":item.quantity}))
         items.forEach(item => newOrder.productAndQuantity.push(item));
-        
-        console.log(newOrder)
+      
         const token = JSON.parse(localStorage.getItem("shoptoken"));
         const res = await axios.post(API_URL + "orders/create", newOrder, {
             headers: {
                 "authorization": token
             }
         })
-        console.log("this is res data msg", res.data.msg)
         dispatch ({
             type: "PLACE_ORDER",
             payload: res.data.msg
@@ -41,17 +39,14 @@ export const OrderProvider = ({ children }) => {
 
 
 const pastOrders = async() => {
-    
     try {
     console.log("retrieving orders")
     let token = JSON.parse(localStorage.getItem("shoptoken"));
-    console.log(token)
        const res = await axios.get(API_URL + "orders/getMyOrders", {
         headers: {
             "authorization": token
         }
     }) 
-    console.log(res.data, "success")
     dispatch ({
         type: "PAST_ORDERS",
         payload: res.data

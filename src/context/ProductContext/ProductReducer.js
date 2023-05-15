@@ -46,7 +46,13 @@ const products = (state, action) => {
           return {
             ...state,
            products: action.payload,
-          };     
+          };
+          
+         case "CLEAR_FAVORITES":
+          return {
+            ...state,
+            favorites: []
+          } 
           
         case "ADD_TO_CART": 
         return {

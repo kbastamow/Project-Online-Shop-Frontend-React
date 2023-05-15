@@ -15,7 +15,7 @@ const {orders, pastOrders} = useContext(OrderContext)
 const [userDetails, setUserDetails] = useState("")
 const [orderHistory, setOrderHistory] = useState("")
 const [favOptions, setFavOptions] = useState("")
-const {favorites, seeFavorites} = useContext(ProductContext)
+const {favorites, seeFavorites, clearFavorites} = useContext(ProductContext)
 
 
 useEffect(()=> {  
@@ -80,7 +80,7 @@ useEffect(() => {
             setFavOptions(
                 <>
                     <button type="button" className="text-button" onClick={() => handleSeeFavorites()}>Browse favorites</button>
-                    <button type="button" className="text-button" onClick={() => handleClearFavorites}>Clear all favorites</button>
+                    <button type="button" className="text-button" onClick={clearFavorites}>Clear all favorites</button>
                 </>
             )
         } else {
@@ -89,19 +89,14 @@ useEffect(() => {
     }, [favorites])
 
 
-
-
-
-
 const handleSeeFavorites = () => {
-    console.log(favorites)
-    let idArray = favorites.map(favorite => favorite.id)
-    console.log(idArray)
-    seeFavorites(idArray)
+    // console.log(favorites)
+    // let idArray = favorites.map(favorite => favorite.id)
+    // console.log(idArray)
+    // seeFavorites(idArray)
     setTimeout(() => {
-       navigate("/products") 
+       navigate("/products", {state: { prevPath: location.pathname }})  //Passing information about route to next page
     }, 1000);
-
 }
 
 
@@ -151,7 +146,7 @@ return (
                             <button className="w-100 p-0" type="button" data-bs-toggle="modal" data-bs-target="#cartModal">
                                 <div className="dark-header p-2 text-light">View current cart</div>
                             </button>
-                            <button className="w-100 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#favorites" aria-expanded="false" aria-controls="collapseExample"  onClick={()=> handleFavoritesBtn()}>
+                            <button className="w-100 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#favorites" aria-expanded="false" aria-controls="collapseExample">
                                 <div className="dark-header p-2 text-light">Browse favorites</div>
                             </button>
                             <div className="collapse" id="favorites">

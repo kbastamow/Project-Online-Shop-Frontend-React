@@ -115,6 +115,13 @@ export const ProductProvider = ({children}) => {
   }
 
 
+  const clearFavorites = () => {
+    dispatch({
+      type: "CLEAR_FAVORITES"
+    })
+  }
+
+
 
 
   const addToCart = (product) => {
@@ -178,6 +185,7 @@ export const ProductProvider = ({children}) => {
         addFavorite,
         deleteFavorite,
         seeFavorites,
+        clearFavorites,
         addToCart,
         changeQuantity,
         removeFromCart,

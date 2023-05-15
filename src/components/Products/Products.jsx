@@ -4,14 +4,24 @@ import Card from '../Card/Card'
 import SearchBar from '../SearchBar/SearchBar'
 import CardOne from '../CardOne/CardOne'
 import "./Product.scss"
+import { useLocation } from 'react-router-dom'
 
 const Products = () => {
 
-  const {product, products, getProducts, cart, favorites} = useContext(ProductContext)  //basically initialstate and function to change
+  const {product, products, getProducts, cart, favorites, seeFavorites} = useContext(ProductContext)  //basically initialstate and function to change
+  const location = useLocation() //TELLS US InFORMATION ABOUT THE ROUTE AND PREVIOUS PAGE if we came through navigate!
   
   useEffect(()=> {  //when component appears, do this once
+    console.log("location", location)
+    if (location.state && location.state.prevPath === "/profile"){   //NOT NULL & profile-favorites-browse is the origin 
+      console.log("came from profile!")
+      console.log(favorites)
+      let idArray = favorites.map(favorite => favorite.id)
+      console.log(idArray)
+      seeFavorites(idArray)
+    } else {
     getProducts()
-  }, [])
+}}, [])
 
   useEffect(() => {
     localStorage.setItem("shopcart", JSON.stringify(cart));

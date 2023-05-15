@@ -14,7 +14,6 @@ const Card = (props) => {
   const{extractOne, addToCart} = useContext(ProductContext)
   const imagePath = "http://localhost:3000/uploaded_imgs/"
 
-
   return (
     <>
       <div key={props.product.id} className="card card-list col-5 col-md-2 mx-md-3 my-3">

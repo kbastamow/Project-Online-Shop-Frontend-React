@@ -127,65 +127,124 @@ const Admin = () => {
 
   return (
     <>
-      <div>Admin</div>
-      <div>
+      <div  className="admin-div">Admin</div>
+
+
+
+
+
+
+<div classname="container-fluid">
+  
+  <div className="d-flex flex-wrap justify-content-around p-4">
+  
+                    <div className="">
+                        <button className="w-100 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#create-product" aria-expanded="false" aria-controls="collapseExample">
+                            <div className="dark-header p-2 text-light">Create new product</div>
+                        </button>
+                        <div className="collapse" id="create-product">
+                            <div className="card card-body text-start neon-glow">
+  
+                            <div className="d-flex col-12 col-md-8 justify-content-center mx-auto">
+
+<form id="post-form" encType="multipart/form-data" method="post" className="" onSubmit={handleSubmit}>
+
+  <div className="form-outline mb-4">
+    <label className="form-label" htmlFor="productname">Name</label>
+    <input type="text" className="form-control" name="name" id="productname" required onChange={handleInput} />
+  </div>
+  <div className="form-outline mb-4">
+    <label className="form-label" htmlFor="description">Description</label>
+    <textarea id="description" rows="4" className="form-control" name="description" required onChange={handleInput}></textarea>
+  </div>
+  <div className="form-outline mb-4">
+    <label className="form-label" htmlFor="">Price</label>
+    <input type="number" className="form-control" name="price" required id="price" onChange={handleInput} />
+  </div>
+
+  <fieldset className="text-start">
+    <div className="text-center">Category</div>
+
+    {categoryMap}
+
+  </fieldset>
+  <div className="form-outline mb-4">
+    <label className="form-label" htmlFor="image">Upload an image</label>
+    <input type="file" id="image" name="image" accept="image/jpeg, image/png, image/jpg, image/gif" required onChange={handleInput} />
+  </div>
+{/* FORM FINISH, MODAL BUTTON AND MODAL */}
+  <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#previewModal" onClick={previewProduct}>Preview</button>
+
+  <div className="modal fade" id="previewModal" tabIndex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+    <div className="modal-dialog">
+      <div className="modal-content">
+        <div className="modal-header">
+          <h5 className="modal-title text-center">Review the product:</h5>
+        </div>
+        <div className="modal-body">
+
+          {preview}
+
+        </div>
+        <div className="modal-footer">
+          <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => setPreview(<h5>Complete all fields</h5>)}>Go back</button>
+
+          <button type="submit" className="btn btn-primary" data-bs-dismiss="modal" disabled={btnDisabled}>Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+</div>
+<div>
+{showNew}
+</div>
+  
+                            </div>
+                        </div>
+                    </div>
+  
+                    <div className="">
+                        <button className="w-100 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#create-category" aria-expanded="false" aria-controls="collapseExample">
+                            <div className="dark-header p-2 text-light">Create category </div>
+                        </button>
+                        <div className="collapse" id="create-category">
+                            <div className="card card-body text-start neon-glow">
+  
+                                <p>Text</p>
+  
+                            </div>
+                        </div>
+                    </div>
+  
+                    <div className="">
+                        <button className="w-100 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#update-delete" aria-expanded="false" aria-controls="collapseExample">
+                            <div className="dark-header p-2 text-light">Your profile </div>
+                        </button>
+                        <div className="collapse" id="update-delete">
+                            <div className="card card-body text-start neon-glow">
+  
+                                <p>Text</p>
+  
+                            </div>
+                        </div>
+                    </div>
+  
+  </div>
+</div>
+
+
+
+
+
+
+
+
+      {/* <div>
         <button type="button" className="btn btn-outline-danger">Create new product</button>
         <button type="button" className="btn btn-outline-danger">Update or delete</button>
-      </div>
-      <div className="d-flex col-12 col-md-8 justify-content-center mx-auto">
-
-        <form id="post-form" encType="multipart/form-data" method="post" className="" onSubmit={handleSubmit}>
-
-          <div className="form-outline mb-4">
-            <label className="form-label" htmlFor="productname">Name</label>
-            <input type="text" className="form-control" name="name" id="productname" required onChange={handleInput} />
-          </div>
-          <div className="form-outline mb-4">
-            <label className="form-label" htmlFor="description">Description</label>
-            <textarea id="description" rows="4" className="form-control" name="description" required onChange={handleInput}></textarea>
-          </div>
-          <div className="form-outline mb-4">
-            <label className="form-label" htmlFor="">Price</label>
-            <input type="number" className="form-control" name="price" required id="price" onChange={handleInput} />
-          </div>
-
-          <fieldset className="text-start">
-            <div className="text-center">Category</div>
-
-            {categoryMap}
-
-          </fieldset>
-          <div className="form-outline mb-4">
-            <label className="form-label" htmlFor="image">Upload an image</label>
-            <input type="file" id="image" name="image" accept="image/jpeg, image/png, image/jpg, image/gif" required onChange={handleInput} />
-          </div>
-{/* FORM FINISH, MODAL BUTTON AND MODAL */}
-          <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#previewModal" onClick={previewProduct}>Preview</button>
-
-          <div className="modal fade" id="previewModal" tabIndex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title text-center">Review the product:</h5>
-                </div>
-                <div className="modal-body">
-
-                  {preview}
-
-                </div>
-                <div className="modal-footer">
-                  <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => setPreview(<h5>Complete all fields</h5>)}>Go back</button>
-
-                  <button type="submit" className="btn btn-primary" data-bs-dismiss="modal" disabled={btnDisabled}>Confirm</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div>
-        {showNew}
-      </div>
+      </div> */}
+      
     </>
 
   )
