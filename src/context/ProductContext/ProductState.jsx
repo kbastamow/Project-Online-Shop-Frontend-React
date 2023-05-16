@@ -74,9 +74,7 @@ export const ProductProvider = ({children}) => {
       }
     }
 
-    const extractOne = (data) => {
-      console.log(data);
-      window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+    const extractOne = (data) => {    
       dispatch({
         type: "EXTRACT_ONE",
         payload: data

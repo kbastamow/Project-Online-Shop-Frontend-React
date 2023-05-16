@@ -25,6 +25,7 @@ const Card = (props) => {
   }
   }, [favorites])
 
+
   return (
     <>
       <div key={props.product.id} className="card card-list col-5 col-md-2 mx-md-3 my-3">
@@ -42,7 +43,7 @@ const Card = (props) => {
         <div className="neon-glow card-body">
           <h5 className="mb-3">{props.product.price}€</h5>
 
-          <p className="mt-2 show-details" onClick={() => extractOne(props.product)}>Details<span className="ms-2"><BsArrowUpRightSquareFill /></span></p>
+          <p className="mt-2 show-details" onClick={() => [extractOne(props.product), window.scrollTo({top: 0, left: 0, behavior: 'smooth'})]}>Details<span className="ms-2"><BsArrowUpRightSquareFill /></span></p>
 
           <span className="click-effect cart-icon" onClick={() => addToCart(props.product)}><i><FaCartArrowDown /></i></span>
 

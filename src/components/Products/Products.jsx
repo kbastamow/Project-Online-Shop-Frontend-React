@@ -29,13 +29,18 @@ useEffect (() => {
 }, [favorites])
 
 
+
+
+
+
+
   const productList= products.map((item) => {
     return <>
     <Card product={item}/>
     </>
   })
 
-  const productFocus = product ? <Card product={product}/> : <p>Hello</p> //null is falsy value
+  // const productFocus = product ? <Card product={product}/> : <p>Hello</p> //null is falsy value
   
   return (
     <>

@@ -14,31 +14,15 @@ useEffect(() => {
     if (products.length === 0) getProducts()
 }, [])
 
-useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * products.length);
-    console.log("getting one")
-    extractOne(products[randomIndex])
-}, [products])
 
 
-
-
-    // <div key="" className="card card-list col-5 col-md-2 mx-md-3 my-3">
-    //     <div className="w-75 bg-white mx-auto">
-    //         <img src={testpic}
-    //             className="img-fluid mt-2" />
-
-    //         <DateComparer dateString={props.product.createdAt} />
-
-    //     </div>
-    //     <div className="">
-
-    //         <h4 className="d-flex justify-content-center product-header card-title w-100 text-bg-dark p-2 mb-0"><span className="w-100">Electric guitar</span><i className="flex-shrink-1"></i></h4>
-
-    //     </div>
-    // </div>    
-
-
+// useEffect(() => {
+//     setInterval(()=> {
+//         const randomIndex = Math.floor(Math.random() * products.length);
+//         console.log("getting one")
+//         extractOne(products[randomIndex])
+//     }, 6000)    
+// }, [products])
 
 
 
