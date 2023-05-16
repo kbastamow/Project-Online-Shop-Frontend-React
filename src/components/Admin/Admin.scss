@@ -1,0 +1,12 @@
+@import "../../colors_styles.scss";
+
+.img-thumbnail {
+ max-width: 100px;
+}
+
+.form-field form {
+    background-color: $light;
+    border-radius: 0.5em;
+    box-shadow: 2px 2px 5px lightgrey;
+    padding: 15px;
+}

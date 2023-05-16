@@ -16,6 +16,7 @@ import {OrderProvider} from "./context/OrderContext/OrderState"
 import User from './components/User/User'
 import { ModalProvider } from './context/ModalContext/ModalState'
 import Profile from './components/Profile/Profile'
+import AdminEdit from './components/AdminEdit/AdminEdit'
 
 
 
@@ -38,6 +39,7 @@ function App() {
                 <Route path="/" element={<Homepage />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/admin" element={<Admin />} />
+                <Route path="/admin/edit" element={<AdminEdit />} />
                 <Route path="/products" element={<Products />} />
               </Routes>
               </OrderProvider>
