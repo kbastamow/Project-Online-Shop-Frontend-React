@@ -8,7 +8,7 @@ import { ModalContext } from "../../context/ModalContext/ModalState";
 const FormLogin= () => {
 
   const [alert, setAlert] = useState("")
-  const {token, login, loginMsg, clearMessages} = useContext(UserContext)
+  const {token, login, loginMsg, clearMessages, user} = useContext(UserContext)
   const {closeForm} = useContext(ModalContext)
 
   const handleLogin = (event) =>{
@@ -17,11 +17,17 @@ const FormLogin= () => {
       email: event.target.email.value,
       password: event.target.password.value
     }
-    setAlert(<div className="alert">
-      <div>Please wait...</div>
-      <div className="spinner-border spinner-border-sm" role="status"/>  
-    </div>)
+    setAlert(<><div className="secondary-emphasized">Please wait...</div><div className="spinner-border spinner-border-sm" role="status"/></>) 
+    console.log(userData)
     login(userData)
+    setTimeout(() => {
+      if(user === null){
+        setAlert(<><div className="secondary-emphasized">Something went wrong!</div></>)   
+        setTimeout(() => {
+          setAlert(null)
+        }, 3000) 
+      }
+    }, 5000);
   }
 
   useEffect(() => {
@@ -33,14 +39,16 @@ const FormLogin= () => {
     }, 3000) 
   } else if (!token && loginMsg.length > 0){  
     setAlert(<div className="alert">Login details not correct</div>)
-    clearMessages()
+    setTimeout(() => {
+      setAlert(null)
+    }, 3000) 
   }}, [loginMsg])
 
 
   return (
     <>
     <p className="text-center">Login to your account</p>
-    <div className="d-flex justify-content-center">
+    <div className="d-flex justify-content-center my-2">
     {alert}
     </div>
 

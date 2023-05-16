@@ -7,13 +7,12 @@ import DateComparer from '../DateComparer/DateComparer'
 
 const CardOne = () => {
 
-const {product, addToCart, addFavorite, deleteFavorite, favorites} = useContext(ProductContext)
-const imagePath = "http://localhost:3000/uploaded_imgs/"
+  const { product, addToCart, addFavorite, deleteFavorite, favorites } = useContext(ProductContext)
+  const imagePath = "http://localhost:3000/uploaded_imgs/"
 
-return (<>
+  return (<>
     <div className="topContainer">
-      <div className="card flex-row oneCard">
-
+      <div className="card flex-row oneCard col-11 col-md-6">
         <div className="imgDiv col-7 col-md-4">
           <img className="card-img-left img-fluid" src={imagePath + product.image} />
         </div>
@@ -30,7 +29,7 @@ return (<>
 
             {(favorites.includes(product)) ?
               <>
-              <button type="button" className="outline click-effect my-1 ms-4" onClick={() => deleteFavorite(product)}>Remove from favorites</button>
+                <button type="button" className="outline click-effect my-1 ms-4" onClick={() => deleteFavorite(product)}>Remove from favorites</button>
                 <div className="secondary-emphasized">In your favorites</div>
               </>
               :

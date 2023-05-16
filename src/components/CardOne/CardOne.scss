@@ -4,7 +4,6 @@
 
 
 .oneCard {
-    width: 75%;
     max-height: 88%;
     margin: auto;
     background: linear-gradient(90deg, rgb(255, 255, 255) 15%, $light 40%);
@@ -22,8 +21,7 @@
     img {
         max-height: 100%;
         box-shadow: 2px 2px 5px grey;
-        // box-shadow: inset 0 -10px 10px -10px rgba(0, 0, 0, 0.5);
-
+   
     }
 
     .card-body {
@@ -45,17 +43,13 @@
     .badge {
         right: 5%;
         top: 10%;
-    }
-
-    
-
-
-   
+    }  
 }
 
 .imgDiv {
     height: 85%;
-    margin: auto 10px;;
+    margin: 10px;
+ 
+
        
 }
-

@@ -23,6 +23,7 @@ export const UserProvider = ({ children }) => {
     const [state, dispatch] = useReducer(UserReducer, initialState);
 
     const login = async (loginData) => {
+        console.log(loginData)
         try {
             console.log("LOGIN executing")
             const res = await axios.post(API_URL + "users/login", loginData)

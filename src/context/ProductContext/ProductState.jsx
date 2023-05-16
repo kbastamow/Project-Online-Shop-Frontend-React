@@ -81,6 +81,14 @@ export const ProductProvider = ({children}) => {
       })
     }
 
+    const clearProduct = () => {
+      console.log("clearing product");
+      dispatch ({
+        type: "CLEAR_PRODUCT",
+        payload: ""
+      })
+    }
+
     const addFavorite = (product) => {
       console.log(product)
       dispatch({
@@ -118,8 +126,6 @@ export const ProductProvider = ({children}) => {
       type: "CLEAR_FAVORITES"
     })
   }
-
-
 
 
   const addToCart = (product) => {
@@ -180,6 +186,7 @@ export const ProductProvider = ({children}) => {
         searchByName,
         createProduct,
         extractOne,
+        clearProduct,
         addFavorite,
         deleteFavorite,
         seeFavorites,

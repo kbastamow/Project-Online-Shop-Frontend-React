@@ -30,6 +30,12 @@ const products = (state, action) => {
             product: action.payload,
           };
 
+          case "CLEAR_PRODUCT":
+          return {
+            ...state,
+            product: action.payload
+          };
+
           case "ADD_FAVORITE":
             return {
               ...state,

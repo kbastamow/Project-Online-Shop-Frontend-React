@@ -10,7 +10,7 @@ const SearchBar = () => {
   const [resultMsg, setResultMsg] = useState("")
 
   const {categories, getCategories} = useContext(CategoryContext)
-  const {products, getByCategory, getProducts, searchByName} = useContext(ProductContext)
+  const {products, getByCategory, getProducts, searchByName, clearProduct, product} = useContext(ProductContext)
 
   useEffect(()=> {  //when component appears, do this once
     getCategories()
@@ -19,7 +19,7 @@ const SearchBar = () => {
   const buttonList = categories.map((category, i) => {
     return <>
     <div key={i}>
-    <li><button className="dropdown-item" onClick={() => {return getByCategory(category.id), setResultMsg(`Showing results for ${category.name}`)}}>{category.name}</button></li>
+    <li><button className="dropdown-item" onClick={() => {return clearProduct(), getByCategory(category.id), setResultMsg(`Showing results for ${category.name}`)}}>{category.name}</button></li>
     </div>
     </>
   })
@@ -30,6 +30,7 @@ const SearchBar = () => {
     searchByName(search)
     setResultMsg(`Showing results for "${search}"`)
     setSearch("")
+    clearProduct()  //Clears the existing product focus
   }
  
   return (

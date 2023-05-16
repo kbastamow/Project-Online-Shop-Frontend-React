@@ -31,19 +31,19 @@ const Card = (props) => {
       <div key={props.product.id} className="card card-list col-5 col-md-2 mx-md-3 my-3">
         <div className="image-zoom w-75 bg-white mx-auto">
           <img src={imagePath + props.product.image} className="img-fluid mt-2" />
-          
+
           <DateComparer dateString={props.product.createdAt} />
-        
+
         </div>
-<div className="">
-  
+        <div className="">
+
           <h4 className="d-flex justify-content-center product-header card-title w-100 text-bg-dark p-2 mb-0"><span className="w-100">{props.product.name}</span><i className="flex-shrink-1">{inMyFavorites}</i></h4>
-  
-</div>
+
+        </div>
         <div className="neon-glow card-body">
           <h5 className="mb-3">{props.product.price}€</h5>
 
-          <p className="mt-2 show-details" onClick={() => [extractOne(props.product), window.scrollTo({top: 0, left: 0, behavior: 'smooth'})]}>Details<span className="ms-2"><BsArrowUpRightSquareFill /></span></p>
+          <p className="mt-2 show-details" onClick={() => [extractOne(props.product), window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })]}>Details<span className="ms-2"><BsArrowUpRightSquareFill /></span></p>
 
           <span className="click-effect cart-icon" onClick={() => addToCart(props.product)}><i><FaCartArrowDown /></i></span>
 

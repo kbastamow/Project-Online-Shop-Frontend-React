@@ -11,7 +11,6 @@ const Header = () => {
   const {token} = useContext(UserContext)
   const {openForm} = useContext(ModalContext)
 
-
   let loggedInUser = JSON.parse(localStorage.getItem("shopuser")) 
   let greetingUser;
 
@@ -29,6 +28,16 @@ const Header = () => {
     <div className="welcome-div">Welcome {loggedInUser.name} <span className="cart-icon ms-3" data-bs-toggle="modal" data-bs-target="#cartModal">
       <FaShoppingCart></FaShoppingCart>
     </span></div>)  :  (<div className="login-div me-2 px-4 py2" onClick={openForm}>Login/register</div>)
+
+// console.log(location)
+// if(location.pathname === "/") {
+//   return <>
+//   <div className="main-navbar p-3">
+//    <img src={logosm} alt="logo" />
+//    </div>
+//   </>
+
+// }
 
 
   return (
