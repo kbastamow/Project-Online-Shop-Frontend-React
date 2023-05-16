@@ -34,7 +34,7 @@ function App() {
               <OrderProvider>
               <User></User>
               <Header></Header>
-              <FormModal></FormModal>
+                <FormModal></FormModal>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/profile" element={<Profile />} />
