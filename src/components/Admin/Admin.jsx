@@ -153,15 +153,13 @@ const handleCategorySubmit = (event) => {
 
   return (
     <>
-      <div className="admin-div">Admin</div>
-
-      <div>Admin</div>
+      <div><h5 className="my-4">Administration tools</h5></div>
       <div className="container-fluid">
         <div className="d-flex flex-wrap justify-content-around">
           {/* Button toggles true and false */}
-          <button type="button" className="btn btn-outline-danger" onClick={() => [setShowCreate(true), setShowNew(null), setShowCreateCategory(false)]}>Create new product</button>
-          <button type="button" className="btn btn-outline-danger"><Link to={'/admin/edit'}> Update or delete</Link></button>
-          <button type="button" className="btn btn-outline-danger" onClick={() => [setShowCreateCategory(true), setShowCreate(false)]}>Create new categories</button>
+          <button type="button" className="dark-button-blue py-2 px-3" onClick={() => [setShowCreate(true), setShowNew(null), setShowCreateCategory(false)]}>Create new product</button>
+          <Link to={'/admin/edit'}><button type="button" className="dark-button-blue py-2 px-3"> Update or delete</button></Link>
+          <button type="button" className="dark-button-blue py-2 px-3" onClick={() => [setShowCreateCategory(true), setShowCreate(false)]}>Create new categories</button>
         </div>
       </div>
 

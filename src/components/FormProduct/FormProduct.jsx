@@ -8,12 +8,11 @@ import { Link } from 'react-router-dom'
 const FormProduct = () => {
 
 
-    const { categories, getCategories, createCategory } = useContext(CategoryContext)
-    const { product, getProducts, createProduct, products, extractOne } = useContext(ProductContext)
+    const { categories } = useContext(CategoryContext)
+    const { product,  createProduct } = useContext(ProductContext)
     const [preview, setPreview] = useState(<h5>Complete all fields</h5>)
     const [btnDisabled, setBtnDisabled] = useState(true)
-    const [showNew, setShowNew] = useState("")
-    const [name, setName] = useState("");
+
 
 
    const [formInput, setFormInput] = useState({
@@ -88,9 +87,6 @@ const FormProduct = () => {
         })
       }
     
-
-
-//HEEEEEEEEEEEEEREEEEEEEEEEEEEEEEEEEEEE
 if (!product || (categories.length === 0)) {
   console.log("product:", product)
   return <>Waiting...</>
@@ -160,11 +156,9 @@ const categoryMap = categories.map(category => {
 
   return (
 
-    
-
     <div className="d-flex col-12 col-md-8 justify-content-center mx-auto">
-        <div className="bg bg-warning">
-          <h4>New product</h4>
+        <div className="">
+          <h4>Edit product</h4>
           <form id="post-form" encType="multipart/form-data" method="post" className={""} onSubmit={handleSubmit}>
                 <div className="form-outline mb-4">
                   <label className="form-label" htmlFor="productname">Name</label>
@@ -177,10 +171,6 @@ const categoryMap = categories.map(category => {
                   onChange={(event) => setFormInput({...formInput, name: event.target.value})}
                   value = {formInput.name || ""} 
 
-
-
-                  
-                  
                   />
                 </div>
                 <div className="form-outline mb-4">
@@ -194,7 +184,6 @@ const categoryMap = categories.map(category => {
                 //   onChange={handleInput}
                   onChange={(event) => setFormInput({...formInput, "description": event.target.value})}
                   value = {formInput.description || ""}
-
                   
                   ></textarea>
                 </div>
@@ -243,12 +232,6 @@ const categoryMap = categories.map(category => {
               </form>
         </div>
     
-    
-
-
-
-
-
 </div>
   )
 }

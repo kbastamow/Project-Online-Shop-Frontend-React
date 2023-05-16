@@ -52,7 +52,8 @@ useEffect(() => {
                     <div className="col-6"></div>
                     <div className="col-6 align-self-right">
                         <div className="d-flex flex-column align-items-center col-12 mt-5 mx-auto p-4">
-                            <h1 className="m-4">15 years in tune with all your musical needs </h1>
+                            <h1 className="m-4">15 years in tune with your musical needs </h1>
+                            <p>Find the right tools for the music you make.</p>
                             <Link to="/products"><h5 className="p-4 show-details">See our catalogue <FaLocationArrow></FaLocationArrow></h5></Link>
                         </div>
 
