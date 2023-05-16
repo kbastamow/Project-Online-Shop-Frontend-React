@@ -16,6 +16,10 @@
 
 
 
+
+
+
+
 .icon-span {
   background-color: $secondary;
   border-top-right-radius: 0;
@@ -97,4 +101,11 @@
   border: none;
   font-weight: bold;
   color: $secondary;
+}
+
+.show-details:hover {
+  cursor: pointer;
+  color: $secondary;
+  // font-weight: bolder;
+  text-shadow: 1px 1px 4px grey;
 }

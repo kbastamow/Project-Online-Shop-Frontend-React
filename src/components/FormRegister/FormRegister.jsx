@@ -9,7 +9,7 @@ const FormRegister = () => {
     const navigate = useNavigate()
 
   const [alert, setAlert] = useState("")
-  const {register, registrationMsg} = useContext(UserContext)
+  const {register, registrationMsg, clearMessages} = useContext(UserContext)
   const [nameDisabled, setNameDisabled] = useState(true)
   const [surnameDisabled, setSurnameDisabled] = useState(true)
   const [passwordDisabled, setPasswordDisabled] = useState(true)
@@ -25,15 +25,9 @@ const FormRegister = () => {
     passwordRepeat: "",
   });
 
-  // useEffect(() => {
-  //   if(formModal == false || formModal === true)  setAlert(null)
-  //   console.log("formModal changing", alert)
-  // }, [formModal]);
-
   const handleInputChange = (event) => {
       setData({ ...data, [event.target.name]: event.target.value  });
-      console.log(data)
-
+      
       if(/(\w+?@\w+?\x2E.+)/.test(data.email)) setNameDisabled(false)
 
       if (data.name.length + 1 > 2) setSurnameDisabled(false)
@@ -45,16 +39,14 @@ const FormRegister = () => {
 
     const handleRegister = (event) => {
         console.log("handling register")
+        setAlert(<><div className="secondary-emphasized">Please wait...</div><div className="spinner-border spinner-border-sm" role="status"/></>)
         event.preventDefault();
         if (data.password !== data.passwordRepeat) {
           setAlert(<div className="secondary-emphasized" >Passwords don't match</div>)
-          setTimeout(() => {
-            setAlert(null)
-          }, 3000);
+          clearMessages()
 
         } else {
           console.log("Registering")
-
           //DELETE Whitespaces
           let email = data.email.trim()
           let password = data.password.trim()
@@ -87,27 +79,24 @@ const FormRegister = () => {
           let registerData = { email, name, surname, password }
           console.log( "data before register ", registerData)
           register(registerData)
-          setAlert(<><div className="secondary-emphasized">Please wait...</div><div className="spinner-border spinner-border-sm" role="status"/></>)
           event.target.reset()
         }
       }
 
-///THIS DOESN'T WORK
 useEffect(() => {
 
     if (registrationMsg == "Please check your email to confirm registration!"){
         setAlert(<div className="secondary-emphasized">NEW USER REGISTERED!<br/> Check your email to complete registration!</div>)
         setRegSubmitDisabled(true)
+        clearMessages()
         setTimeout(() => {
-          setAlert("")
-        }, 5000);
+          closeForm()
+        }, 4000);
 
       } else if (registrationMsg == "email must be unique"){
         console.log(registrationMsg)
         setAlert(<div className="secondary-emphasized mb-4">This email is already registered</div>)
-        setTimeout(() => {
-          setAlert("")
-        }, 4000);
+        clearMessages()
       }
     }, [registrationMsg])
 
@@ -117,9 +106,6 @@ useEffect(() => {
     <p className="text-center">Create an account</p>
     <div className="mx-auto mb-3 text-center">
       {alert}
-    {/* <div className="secondary-emphasized">Please wait...</div>
-    <div className="spinner-border spinner-border-sm" role="status"/>
-          */}
           </div>
     <form onSubmit={handleRegister}>
                     <div className="input-group form-group">

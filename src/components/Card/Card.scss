@@ -23,41 +23,8 @@
     transform: scale(1.5);
   }
 
-  .show-details:hover {
-    cursor: pointer;
-    color: $secondary;
-    font-weight: bolder;
-    text-shadow: 1px 1px 4px grey;
-  }
 
 
 
 
-  //ALREADY IN APP.SCSS
-  // button.click-effect {
-  //       position: relative;
-  //       border-radius: 4em;
-  //       padding: 0.5em;
-  // }
-  
-  
-  //   button.click-effect:after {
-  //       content: '';
-  //       position: absolute;
-  //       border-radius: 4em;
-  //       left: 0;
-  //       top:0;
-  //       width: 100%;
-  //       height: 100%;
-  //       opacity: 0;
-  //       transition: all 0.5s;
-  //       box-shadow: 0 0 10px 40px $primary;
-  //     }
-  
-  //     button.click-effect:active:after {
-  //       box-shadow: 0 0 0 0 black;
-  //       opacity: 1;
-  //       transition: 0s;
-  //     }
-  
     

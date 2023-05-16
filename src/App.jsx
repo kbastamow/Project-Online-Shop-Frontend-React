@@ -2,7 +2,7 @@ import './App.scss'
 import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
 
-import Homepage from './components/Pages/Homepage/Homepage'
+import Home from './components/Home/Home'
 // import Productpage from './components/Pages/Productpage/Productpage'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { UserProvider } from './context/UserContext/UserState'
@@ -36,7 +36,7 @@ function App() {
               <Header></Header>
               <FormModal></FormModal>
               <Routes>
-                <Route path="/" element={<Homepage />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/admin/edit" element={<AdminEdit />} />
