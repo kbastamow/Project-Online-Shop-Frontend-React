@@ -153,65 +153,63 @@ const handleCategorySubmit = (event) => {
 
   return (
     <>
-      <div><h5 className="my-4">Administration tools</h5></div>
-      <div className="container-fluid">
-        <div className="d-flex flex-wrap justify-content-around">
-          {/* Button toggles true and false */}
-          <button type="button" className="dark-button-blue py-2 px-3" onClick={() => [setShowCreate(true), setShowNew(null), setShowCreateCategory(false)]}>Create new product</button>
-          <Link to={'/admin/edit'}><button type="button" className="dark-button-blue py-2 px-3"> Update or delete</button></Link>
-          <button type="button" className="dark-button-blue py-2 px-3" onClick={() => [setShowCreateCategory(true), setShowCreate(false)]}>Create new categories</button>
+      <div className="admin-div">
+        <div><h5 className=" my-4">Administration tools</h5></div>
+        <div className="container-fluid">
+          <div className="d-flex flex-wrap justify-content-around">
+            {/* Button toggles true and false */}
+            <button type="button" className="dark-button-blue py-2 px-3" onClick={() => [setShowCreate(true), setShowNew(null), setShowCreateCategory(false)]}>Create new product</button>
+            <Link to={'/admin/edit'}><button type="button" className="dark-button-blue py-2 px-3"> Update or delete</button></Link>
+            <button type="button" className="dark-button-blue py-2 px-3" onClick={() => [setShowCreateCategory(true), setShowCreate(false)]}>Create new categories</button>
+          </div>
         </div>
-      </div>
-
-      <div className="form-field d-flex flex-wrap justify-content-center mx-auto mt-5">
-
-        {/* CREATE FORM SHOW OR NOT */}
-
-        {!showCreate ? <></> :
-          <div>
-            <h4>New product</h4>
-            <form id="post-form" encType="multipart/form-data" method="post" className={""} onSubmit={handleSubmit}>
-              <div className="form-outline mb-4">
-                <label className="form-label" htmlFor="productname">Name</label>
-                <input type="text" className="form-control" name="name" id="productname" required onChange={handleInput} />
-              </div>
-              <div className="form-outline mb-4">
-                <label className="form-label" htmlFor="description">Description</label>
-                <textarea id="description" rows="4" className="form-control" name="description" required onChange={handleInput}></textarea>
-              </div>
-              <div className="form-outline mb-4">
-                <label className="form-label" htmlFor="">Price</label>
-                <input type="number" className="form-control" name="price" required id="price" onChange={handleInput} />
-              </div>
-              <fieldset className="text-start">
-                <div className="text-center">Category</div>
-                {categoryMap}
-              </fieldset>
-              <div className="form-outline mb-4">
-                <label className="form-label" htmlFor="image">Upload an image</label>
-                <input type="file" id="image" name="image" accept="image/jpeg, image/png, image/jpg, image/gif" required onChange={handleInput} />
-              </div>
-
-              {/* FORM FINISH, MODAL BUTTON AND MODAL */}
-              <button type="button" className="dark-button-blue" data-bs-toggle="modal" data-bs-target="#previewModal" onClick={previewProduct}>Preview</button>
-              <div className="modal fade" id="previewModal" tabIndex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                  <div className="modal-content">
-                    <div className="modal-header">
-                      <h5 className="modal-title text-center">Review the product:</h5>
-                    </div>
-                    <div className="modal-body">
-                      {preview}
-                    </div>
-                    <div className="modal-footer">
-                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => setPreview(<h5>Complete all fields</h5>)}>Go back</button>
-                      <button type="submit" className="btn btn-primary" data-bs-dismiss="modal" disabled={btnDisabled}>Confirm</button>
+        <div className="form-field d-flex flex-wrap justify-content-center mx-auto mt-5">
+          {/* CREATE FORM SHOW OR NOT */}
+          {!showCreate ? <></> :
+            <div>
+              <h4>New product</h4>
+              <form id="post-form" encType="multipart/form-data" method="post" className={""} onSubmit={handleSubmit}>
+                <div className="form-outline mb-4">
+                  <label className="form-label" htmlFor="productname">Name</label>
+                  <input type="text" className="form-control" name="name" id="productname" required onChange={handleInput} />
+                </div>
+                <div className="form-outline mb-4">
+                  <label className="form-label" htmlFor="description">Description</label>
+                  <textarea id="description" rows="4" className="form-control" name="description" required onChange={handleInput}></textarea>
+                </div>
+                <div className="form-outline mb-4">
+                  <label className="form-label" htmlFor="">Price</label>
+                  <input type="number" className="form-control" name="price" required id="price" onChange={handleInput} />
+                </div>
+                <fieldset className="text-start">
+                  <div className="text-center">Category</div>
+                  {categoryMap}
+                </fieldset>
+                <div className="form-outline mb-4">
+                  <label className="form-label" htmlFor="image">Upload an image</label>
+                  <input type="file" id="image" name="image" accept="image/jpeg, image/png, image/jpg, image/gif" required onChange={handleInput} />
+                </div>
+                {/* FORM FINISH, MODAL BUTTON AND MODAL */}
+                <button type="button" className="dark-button-blue" data-bs-toggle="modal" data-bs-target="#previewModal" onClick={previewProduct}>Preview</button>
+                <div className="modal fade" id="previewModal" tabIndex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+                  <div className="modal-dialog">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h5 className="modal-title text-center">Review the product:</h5>
+                      </div>
+                      <div className="modal-body">
+                        {preview}
+                      </div>
+                      <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => setPreview(<h5>Complete all fields</h5>)}>Go back</button>
+                        <button type="submit" className="btn btn-primary" data-bs-dismiss="modal" disabled={btnDisabled}>Confirm</button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </form>
-          </div>
+              </form>
+            </div>
+     
         }
 
         {showNew}
@@ -252,7 +250,7 @@ const handleCategorySubmit = (event) => {
           </div>
         }
       </div>
-
+      </div>
     </>
 
   )

@@ -1,0 +1,25 @@
+@import "../../colors_styles.scss";
+
+.footer-div {
+  background-color: $light;
+  width:100%;
+  border-top: 1px solid $secondary;
+
+
+
+i{
+    font-size:1.8em;
+    color: $secondary;
+    margin: 2%;
+}
+
+div {
+  font-size: 12px;
+}
+
+p {
+  color: $secondary;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+}
