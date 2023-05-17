@@ -10,12 +10,11 @@ const Header = () => {
    
   const location = useLocation()
   const {token, user} = useContext(UserContext)
-  const {openForm} = useContext(ModalContext)
-
+  const {openForm, openCart, closeCart} = useContext(ModalContext)
+  
   let loggedInUser = JSON.parse(localStorage.getItem("shopuser")) 
   let greetingUser;
 
-  console.log(loggedInUser,  "user who is logged in")
   
   if (loggedInUser) {
     greetingUser = loggedInUser.name
@@ -26,11 +25,9 @@ const Header = () => {
   let loggedInToken = JSON.parse(localStorage.getItem("shoptoken")) || ""
  
   let navbarLeft = (loggedInToken) ? (
-    <div className="welcome-div">Welcome {loggedInUser.name} <span className="cart-icon ms-3" data-bs-toggle="modal" data-bs-target="#cartModal">
+    <div className="welcome-div">Welcome {loggedInUser.name} <span className="cart-icon ms-3" onClick={openCart}>
       <FaShoppingCart></FaShoppingCart>
     </span></div>)  :  (<div className="login-div me-2 px-4 py2" onClick={openForm}>Login/register</div>)
-
-
 
 
 // console.log(location)

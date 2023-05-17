@@ -1,8 +1,4 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-// import { FaUser, FaKey } from "react-icons/fa";
-// import { UserContext } from "../../context/UserContext/UserState";
-// import { useNavigate } from "react-router-dom";
-// import { Modal } from "bootstrap";
 import FormLogin from "../FormLogin/FormLogin";
 import FormRegister from "../FormRegister/FormRegister";
 import logosm from "../../assets/logosmall2.png"
@@ -17,10 +13,6 @@ const [formOnDisplay, setFormOnDisplay] = useState(null)
 const [toggleForms, setToggleForms] = useState(null)
 const {formModal, closeForm, openForm} = useContext(ModalContext)
 
-
-useEffect(()=>{
-  console.log("changing state", formModal)
-}, [formModal])
 
 useEffect(() => {
   seeLogin()
@@ -37,7 +29,6 @@ const seeLogin = () => {
 }
 
 
-
   return (
     <>
     <Modal 
@@ -47,9 +38,7 @@ const seeLogin = () => {
         // onHide={closeForm}
         dialogClassName
         >
-      {/* <div ref={modalRef} className="form-div modal fade" show="false" id="loginModal" tabIndex="-1" aria-labelledby="loginModalLabel"
-        aria-hidden="false"> */}
-        <div className="modal-dialog modal-dialog-centered">
+           <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
               <img src={logosm} alt="logo" className="modal-title ms-auto" />

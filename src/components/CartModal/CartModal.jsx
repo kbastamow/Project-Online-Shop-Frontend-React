@@ -3,16 +3,17 @@ import { ProductContext } from '../../context/ProductContext/ProductState'
 import {FaPlus, FaMinus, FaTimes, FaTrash} from "react-icons/fa"
 import { OrderContext } from '../../context/OrderContext/OrderState'
 import logosm from "../../assets/logosmall2.png"
-
+import {Modal} from "react-bootstrap"
+import { ModalContext } from '../../context/ModalContext/ModalState'
 
 
 const CartModal = () => {
 
 const {cart, changeQuantity, removeFromCart, clearCart} = useContext(ProductContext)
 const {placeOrder} = useContext(OrderContext)
+const {cartModal, closeCart} = useContext(ModalContext)
 
-
-  const cartContents = <>
+const cartContents = <>
     <table className="table text-start">
       <thead>
         <tr>
@@ -45,39 +46,51 @@ const {placeOrder} = useContext(OrderContext)
 
       </tbody>
     </table>
-    <h5>Total: {(cart.reduce((acc, value) => (acc + value.price * value.quantity), 0)).toFixed(2)}€</h5>
-    <button type="button" className="dark-button-blue click-effect mb-2 px-5 py-1 w-25" onClick={() => placeOrder(cart)}>Place Order</button><br/>
     
+    <div className="d-flex flex-column align-items-center">
+      <h5>Total: {(cart.reduce((acc, value) => (acc + value.price * value.quantity), 0)).toFixed(2)}€</h5>
+      <button type="button" className="dark-button-blue click-effect mb-2 px-5 py-1 w-25" onClick={() => placeOrder(cart)}>Place Order</button><br/>
+      
+    </div>
 
   </>
 
-
-
-
 return (
     <>
+  <Modal 
+        show={cartModal}
+        backdrop="true"
+        keyboard={false}
+        onHide={closeCart}
+        centered
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        >
 
-<div div className="modal fade" id="cartModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden={true}>
-  <div className="modal-dialog modal-dialog-centered modal-xl">
+  
     <div className="modal-content">
-      <div className="modal-header">
+    <Modal.Header>
         <img src={logosm} alt="logo" className="modal-title"></img>
-        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div className="modal-body">
+        <button type="button" className="btn-close" onClick={closeCart} aria-label="Close"></button>
+        </Modal.Header> 
+    <Modal.Body>
 
       {/* Render depending on state: */}
-    {(cart.length === 0) ? <h4>Your cart is empty</h4> : cartContents}
+    {(cart.length === 0) ? <h4 className="text-center">Your cart is empty</h4> : cartContents}
   
 
+    </Modal.Body>
+    <Modal.Footer>
+      {/* <div className="modal-footer d-flex justify-content-end"> */}
+      <div className="d-flex justify-content-end">
+        <button type="button" className="outline-dark py-1 px-2" onClick={closeCart}>Close</button>
       </div>
-      <div className="modal-footer d-flex justify-content-end">
-        <button type="button" className="outline-dark py-1 px-2" data-bs-dismiss="modal">Close</button>
-      </div>
+      {/* </div> */}
+    </Modal.Footer>
     </div>
-  </div>
-</div>
 
+
+</Modal>
     </>
   )
 }

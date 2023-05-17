@@ -6,6 +6,7 @@ import ModalReducer from "./ModalReducer"
 
 const initialState = {
     formModal: false,
+    cartModal: false
 
 }
 
@@ -15,14 +16,11 @@ export const ModalContext = createContext(initialState);
 export const ModalProvider = ({children}) => {
    const [state, dispatch] = useReducer(ModalReducer, initialState)
 
-
     const openForm = () => {
-        console.log("opening")
         dispatch({
             type: "OPEN_FORM",
             payload: true
         })
-    
     }
 
     const closeForm = () => {
@@ -32,11 +30,31 @@ export const ModalProvider = ({children}) => {
         })
     }
 
+    const openCart = () => {
+        dispatch({
+            type: "OPEN_CART",
+            payload: true
+        })
+    }
+
+    const closeCart = () => {
+        dispatch({
+            type: "CLOSE_CART",
+            payload: false
+        })
+    }
+    
+    
+
     return (
         <ModalContext.Provider value={{
             formModal: state.formModal,
+            cartModal: state.cartModal,
             openForm,
-            closeForm
+            closeForm,
+            openCart,
+            closeCart
+
 
         }}>
             {children}

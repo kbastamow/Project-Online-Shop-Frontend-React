@@ -5,6 +5,7 @@ import DateFormatter from '../DateFormatter/DateFormatter'
 import { OrderContext } from "../../context/OrderContext/OrderState"
 import { useNavigate } from "react-router-dom";
 import { ProductContext } from "../../context/ProductContext/ProductState"
+import { ModalContext } from "../../context/ModalContext/ModalState"
 
 const Profile = () => {
 
@@ -16,6 +17,7 @@ const [userDetails, setUserDetails] = useState("")
 const [orderHistory, setOrderHistory] = useState("")
 const [favOptions, setFavOptions] = useState("")
 const {favorites, clearFavorites} = useContext(ProductContext)
+const {openCart} = useContext(ModalContext)
 
 
 useEffect(()=> {  
@@ -95,8 +97,8 @@ return (
             <div className="d-flex flex-wrap justify-content-around p-4">
 
                 <div className="col-11 col-md-3">
-                    <button className="w-100 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#user-profile" aria-expanded="false" aria-controls="collapseExample">
-                        <div className="dark-header p-2 text-light">Your profile </div>
+                    <button className="w-100 p-0 dark-button-blue" type="button" data-bs-toggle="collapse" data-bs-target="#user-profile" aria-expanded="false" aria-controls="user-profile">
+                        <div className="p-2 text-light">Your profile </div>
                     </button>
                     <div className="collapse" id="user-profile">
                         <div className="card card-body text-start neon-glow">
@@ -108,8 +110,8 @@ return (
                 </div>
 
                 <div className="col-11 col-md-5">
-                    <button className="w-100 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#user-orders" aria-expanded="false" aria-controls="user-orders">
-                        <div className="dark-header p-2 text-light">View order history</div>
+                    <button className="w-100 p-0 dark-button-blue" type="button" data-bs-toggle="collapse" data-bs-target="#user-orders" aria-expanded="false" aria-controls="user-orders">
+                        <div className="p-2 text-light">View order history</div>
                     </button>
                     <div className="collapse" id="user-orders">
                         <div className="card card-body text-start neon-glow">
@@ -123,18 +125,20 @@ return (
                                 </thead>
 
                                 <tbody>
+
                                     {orderHistory}
+
                                 </tbody>
                             </table>
                         </div>
                         </div>
                         </div>
-                        <div className="col-11 col-md-3 mb-3">
-                            <button className="w-100 p-0" type="button" data-bs-toggle="modal" data-bs-target="#cartModal">
-                                <div className="dark-header p-2 text-light">View current cart</div>
+                        <div className="col-11 col-md-3 mb-3 d-flex flex-column gap-4">
+                            <button className="w-100 p-0 dark-button-blue" type="button" onClick={openCart}>
+                                <div className="p-2 text-light">View current cart</div>
                             </button>
-                            <button className="w-100 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#favorites" aria-expanded="false" aria-controls="collapseExample">
-                                <div className="dark-header p-2 text-light">Browse favorites</div>
+                            <button className="w-100 p-0 dark-button-blue " type="button" data-bs-toggle="collapse" data-bs-target="#favorites" aria-expanded="false" aria-controls="collapseExample">
+                                <div className="p-2 text-light">Browse favorites</div>
                             </button>
                             <div className="collapse" id="favorites">
                            <div className="card card-body text-start neon-glow">
@@ -145,24 +149,14 @@ return (
                          </div>
 
 
-
-
-                            <button className="w-100 p-0" type="button">
-                                <div className="dark-header p-2 text-light" onClick={() => logout()}>Logout</div>
+                            <button className="w-100 p-0 dark-button-blue" type="button">
+                                <div className="p-2 text-light" onClick={() => logout()}>Logout</div>
                             </button>
-                            {/* <div className="collapse" id="user-cart">
-                                <div className="card card-body">
-                                </div>
-
-                            </div> */}
                         </div>
-
-                    
+             
                 
             </div>
-
         </div>
-
     </div>
 
 )
