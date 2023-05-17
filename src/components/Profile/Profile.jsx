@@ -97,6 +97,7 @@ return (
             <div className="d-flex flex-wrap justify-content-around p-4">
 
                 <div className="col-11 col-md-3">
+                 <div className="photo-container1"></div>
                     <button className="w-100 p-0 dark-button-blue" type="button" data-bs-toggle="collapse" data-bs-target="#user-profile" aria-expanded="false" aria-controls="user-profile">
                         <div className="p-2 text-light">Your profile </div>
                     </button>
@@ -110,6 +111,7 @@ return (
                 </div>
 
                 <div className="col-11 col-md-5">
+                <div className="photo-container2"></div>
                     <button className="w-100 p-0 dark-button-blue" type="button" data-bs-toggle="collapse" data-bs-target="#user-orders" aria-expanded="false" aria-controls="user-orders">
                         <div className="p-2 text-light">View order history</div>
                     </button>
@@ -133,7 +135,8 @@ return (
                         </div>
                         </div>
                         </div>
-                        <div className="col-11 col-md-3 mb-3 d-flex flex-column gap-4">
+                        <div className="col-11 col-md-3 mb-3 d-flex flex-column">
+                        <div className="photo-container3"></div>
                             <button className="w-100 p-0 dark-button-blue" type="button" onClick={openCart}>
                                 <div className="p-2 text-light">View current cart</div>
                             </button>

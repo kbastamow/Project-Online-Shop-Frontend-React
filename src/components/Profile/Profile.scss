@@ -2,14 +2,37 @@
 
 
 .profile-div {
-    background-image: url("../../assets/player2.jpg");
+    // background-image: url("../../assets/player2.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 90vh;
+}
 
-    .card {
-        opacity: 0.7;
-        font-weight: bold;
-    }
+
+
+.photo-container1 {
+    width: 100%;
+    height:100px;
+    background-image: url(../../assets/profile.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+.photo-container2 {
+    height:100px;
+    background-image: url(../../assets/cassette.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.photo-container3 {
+    height:100px;
+    background-image: url(../../assets/items.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
