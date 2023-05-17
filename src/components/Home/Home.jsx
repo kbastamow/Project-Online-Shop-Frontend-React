@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import "./Home.scss"
-import testpic from "../../assets/guitarproduct.jpg"
 import {FaLocationArrow} from "react-icons/fa"
 import { ProductContext } from '../../context/ProductContext/ProductState'
 import DateComparer from '../DateComparer/DateComparer'
@@ -10,20 +9,14 @@ import { Link } from 'react-router-dom'
 const Home = () => {
     const imagePath = "http://localhost:3000/uploaded_imgs/"
     const { products, getProducts} = useContext(ProductContext)
-
     const [random, setRandom] = useState("")
     const [counter, setCounter] = useState(0);
     const [showComponent, setShowComponent] = useState(false);
 
 
-
-
-
-
 useEffect(() => {
     if (products.length === 0) getProducts()
 }, [])
-
 
 
 //RANDOM PRODUCTS TO SHOW - setinterval doesn't work!!
@@ -48,16 +41,22 @@ useEffect(() => {
     return (
         <div className="home-div d-flex justify-content-center">
             <div className="picture-div">
-                <div className="background-layer row">
-                    <div className="col-6"></div>
-                    <div className="col-6 align-self-right">
-                        <div className="d-flex flex-column align-items-center col-12 mt-5 mx-auto p-4">
-                            <h1 className="m-4">15 years in tune with your musical needs </h1>
+              
+                <div className="background-layer row justify-content-end">
+                    {/* <div className="col-5"></div> */}
+                    <div className="mt-5 text-end">
+                        <h1 className="mt-5 pe-5">15 years in tune with your musical needs</h1>
+
+
+                    </div>
+                    <div className="col-7 ">
+                        <div className="d-flex flex-column align-items-center col-12 mt-2 mx-auto ">
+                            {/* <h1 className="m-4">15 years in tune with your musical needs </h1> */}
                             <p>Find the right tools for the music you make.</p>
                             <Link to="/products"><h5 className="p-4 show-details">See our catalogue <FaLocationArrow></FaLocationArrow></h5></Link>
                         </div>
 
-                        <div className="bg d-flex justify-content-center mt-auto">
+                        <div className="bg d-flex justify-content-center">
 
                             <div className="preview-div col-5 ">
                             <div >

@@ -10,14 +10,14 @@
     width: 70%;
     background-image: url("../../assets/player.jpg");
     background-size: contain;
-    height: 80vh;
+    height: 82vh;
     background-repeat: no-repeat;
     z-index: 1;
 }
 
 .background-layer {
-    background: linear-gradient(90deg, rgb(254, 254, 254, 0) 30%, rgb(254, 254, 254, 1) 65%);
-    height: auto;
+    background: linear-gradient(90deg, rgb(254, 254, 254, 0) 30%, rgb(254, 254, 254, 1) 60%, rgb(254, 254, 254, 1) 85%, rgb(254, 254, 254, 0) 99%);
+    height: 82vh;
     width: 100%;
     margin-left: -2%;
     

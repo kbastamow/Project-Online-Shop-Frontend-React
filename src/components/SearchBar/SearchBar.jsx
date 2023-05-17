@@ -55,7 +55,7 @@ const SearchBar = () => {
               <ul className="dropdown-menu">
                 <li><button className="dropdown-item" onClick={() => {orderResults("price"), clearProduct(product)}}>Price</button></li>
                 <li><button type="button" className="dropdown-item" onClick={() => {orderResults("alphabet"), clearProduct(product)}}>A-Z</button></li>
-                <li><button type="button" className="dropdown-item" onClick={() => {orderResults("date"), clearProduct(product)}}>Date</button></li>
+                <li><button type="button" className="dropdown-item" onClick={() => {orderResults("date"), clearProduct(product)}}>Newest first</button></li>
               </ul>
             </div>
             <div key="allProd" className="ms-2 show-details" onClick={() => { return getProducts(), setResultMsg(""), clearProduct(product)}}><span className="nav-link">All products</span></div>
