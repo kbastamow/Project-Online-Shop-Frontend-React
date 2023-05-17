@@ -24,8 +24,6 @@ const FormProduct = () => {
   })
 
   useEffect(() => {
-    console.log("product changed")
-
     if(product) {
     setFormInput((prevFormInput) => {
     return {
@@ -46,8 +44,6 @@ const FormProduct = () => {
             setFormInput({ ...formInput, category: [...formInput.category, target.name] })
     
           } else { //If checkbox is false, remove from array if it was added earlier
-            console.log("false")
-            console.log(target.name)
             let falseRemoved = formInput.category.filter(item => item !== target.name)
             setFormInput({ ...formInput, category: falseRemoved }); // remove an unchecked value from the array
           }
@@ -55,7 +51,6 @@ const FormProduct = () => {
         }
         if (target.type === "file") {
           setFormInput({ ...formInput, image: target.files[0] })
-          console.log(formInput.image)
         }
         if (target.type === "text" || target.type === "number" || target.type === "textarea") {
           setFormInput({ ...formInput, [target.name]: target.value })
@@ -71,10 +66,7 @@ const FormProduct = () => {
         formData.append('price', formInput.price);
         formData.append('image', formInput.image)
         formInput.category.forEach(id => formData.append('CategoryId[]', id))
-    
-        console.log(formData)
-        console.log("WHAT THE F..")
-        console.log("this is event-target ", event.target)
+  
         createProduct(formData)
         event.target.reset()
     
@@ -88,7 +80,6 @@ const FormProduct = () => {
       }
     
 if (!product || (categories.length === 0)) {
-  console.log("product:", product)
   return <></>
 }     
 
@@ -119,7 +110,6 @@ const categoryMap = categories.map(category => {
     
         for (const key in formInput) {
           if (!formInput[key] && formInput[key] !== 0) {
-            console.log(formInput[key])
             hasEmptyValues = true;
             setPreview(<h5>Complete all fields</h5>)
             setBtnDisabled(true)
@@ -150,8 +140,7 @@ const categoryMap = categories.map(category => {
 
 
   if (!product || (categories.length === 0)) {
-    console.log("product:", product)
-    return <>Waiting...</>
+    return <></>
   } 
 
   return (

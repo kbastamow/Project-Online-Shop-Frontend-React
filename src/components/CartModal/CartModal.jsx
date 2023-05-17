@@ -76,7 +76,7 @@ return (
       {orderSuccess.length > 1}
 
       {/* Render depending on state: */}
-    {(cart.length === 0) ? <h4 className="text-center">Your cart is empty</h4> : cartContents}
+    {(cart.length === 0) ? <div className="text-center" ><h4 >Your cart is empty</h4><p className="small">Visit your profile to see your orders</p></div> : cartContents}
   
 
     </Modal.Body>

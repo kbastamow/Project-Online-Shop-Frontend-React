@@ -23,7 +23,6 @@ useEffect(() => {
 useEffect(() => {
     if (counter < 10) {
       const timeoutId = setTimeout(() => {
-        console.log("inside timeout")
         const randomIndex = Math.floor(Math.random() * products.length);
         setRandom(products[randomIndex]);
         setCounter(prevCounter => prevCounter + 1);

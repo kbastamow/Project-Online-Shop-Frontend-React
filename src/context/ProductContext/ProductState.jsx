@@ -21,7 +21,6 @@ export const ProductProvider = ({children}) => {
     const getProducts = async () => {
         try {
             const res = await axios.get(API_URL + "products/getAllWithAssociations");
-            console.log(res.data)
             dispatch({
               type: "GET_PRODUCTS",
               payload: res.data,
@@ -34,7 +33,6 @@ export const ProductProvider = ({children}) => {
     const getByCategory = async(categoryId) => {
       try {
         const res = await axios.get(API_URL + "categories/findById/" + categoryId);
-        console.log(res.data)
         dispatch({
             type: "GET_BY_CATEGORY",
             payload: res.data.Products

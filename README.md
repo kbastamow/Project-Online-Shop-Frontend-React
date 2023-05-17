@@ -147,9 +147,7 @@ Functionality
 * Axios
 * React router
 
-
-Styles:
-
+Styles
 * React icons
 * React bootstrap
 * Bootstrap 5
