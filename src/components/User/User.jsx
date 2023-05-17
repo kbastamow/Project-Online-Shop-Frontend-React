@@ -10,7 +10,7 @@ const {orderSuccess} = useContext(OrderContext);
 const {clearCart} = useContext(ProductContext)
 
 useEffect(()=>{
-    (orderSuccess) ? clearCart() : console.log("NULLLLL")
+    if (orderSuccess) clearCart()
 }, [orderSuccess])
 
   return (

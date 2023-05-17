@@ -2,29 +2,15 @@ import React, { useContext, useEffect, useState } from 'react'
 import { ProductContext } from '../../context/ProductContext/ProductState'
 import { CategoryContext } from '../../context/CategoryContext/CategoryState'
 import { Link } from 'react-router-dom'
-import Modal from 'react-bootstrap/Modal';
-import Button from "react-bootstrap/Button"
 import FormProduct from '../FormProduct/FormProduct';
-
-
-
-
 
 const AdminEdit = () => {
   const { categories, getCategories} = useContext(CategoryContext)
   const { product, products, getProducts, extractOne } = useContext(ProductContext)
-
-  const [editForm, setEditForm] = useState(null)
-  const [showModal, setShowModal] = useState(false);
-  const handleClose = () => setShowModal(false);
-  const handleShow = () => setShowModal(true);
   useEffect(() => {
     if (categories.length === 0) getCategories()
     if (products.length === 0) getProducts()
   }, [])
-
-  console.log(products)
-  console.log(categories)
 
 if (products.length === 0 || (categories.length === 0)) {
   return <></>

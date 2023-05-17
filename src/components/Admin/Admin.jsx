@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 
 const Admin = () => {
   const { categories, getCategories, createCategory } = useContext(CategoryContext)
-  const { product, getProducts, createProduct, products } = useContext(ProductContext)
+  const { product, getProducts, createProduct, products, clearproduct } = useContext(ProductContext)
   const [preview, setPreview] = useState(<h5>Complete all fields</h5>)
   const [btnDisabled, setBtnDisabled] = useState(true)
   const [showNew, setShowNew] = useState("")
@@ -16,7 +16,8 @@ const Admin = () => {
 //Form diplay controls- in buttons
   const [showCreate, setShowCreate] = useState(false)
   const [showCreateCategory, setShowCreateCategory] = useState(false)
-
+  const [categoryMsg, setCategoryMsg] = useState(null)
+  const [categoryForm, setCategoryForm] = useState ({ name: ""})
   const [formInput, setFormInput] = useState({
     name: "",
     description: "",
@@ -24,18 +25,29 @@ const Admin = () => {
     image: {},
     category: []
   })
+  
+  
+  useEffect(() => {
+    if (categories.length === 0) getCategories()
+  }, [])
+  
+  useEffect(() => {
+    if (products.length == 0) getProducts()
+  }, [])
 
-  const [categoryForm, setCategoryForm] = useState ({
-    name: ""
-  })
-  const [categoryMsg, setCategoryMsg] = useState(null)
+  useEffect(() => {
+    if (product) {
+      clearProduct(product)
+    }
+  }, [])
+
 
   const handleInput = (event) => {
     let target = event.target;
     if (target.type === "checkbox") {
       if (target.value && (!formInput.category.includes(target.name))) {  //Add trues if they don't exist yet
         setFormInput({ ...formInput, category: [...formInput.category, target.name] })
-
+        
       } else { //If checkbox is false, remove from array if it was added earlier
         let falseRemoved = formInput.category.filter(item => item !== target.name)
         setFormInput({ ...formInput, category: falseRemoved }); // remove an unchecked value from the array
@@ -50,13 +62,6 @@ const Admin = () => {
     }
   }
 
-  useEffect(() => {
-    if (categories.length === 0) getCategories()
-  }, [])
-
-  useEffect(() => {
-    if (products.length == 0) getProducts()
-  }, [])
 
   const previewProduct = () => {
     // Check for empty values

@@ -21,6 +21,7 @@ export const ProductProvider = ({children}) => {
     const getProducts = async () => {
         try {
             const res = await axios.get(API_URL + "products/getAllWithAssociations");
+            console.log(res.data[0])
             dispatch({
               type: "GET_PRODUCTS",
               payload: res.data,
@@ -53,6 +54,24 @@ export const ProductProvider = ({children}) => {
         } catch (error) {  
           console.error(error)
         }    
+    }
+
+    const orderResults = (criterion) => {
+      if (criterion === "price"){
+        dispatch({
+          type: "ORDER_BY_PRICE",
+        })
+      }
+      if (criterion === "alphabet" ) {
+        dispatch ({
+          type: "ORDER_ALPHABETICALLY"
+        })
+      }  
+      if (criterion === "date" ) {
+        dispatch ({
+          type: "ORDER_BY_DATE"
+        })
+      } 
     }
 
     const createProduct = async(formdata) => {
@@ -184,6 +203,7 @@ export const ProductProvider = ({children}) => {
         getProducts, 
         getByCategory,
         searchByName,
+        orderResults,
         createProduct,
         extractOne,
         clearProduct,
