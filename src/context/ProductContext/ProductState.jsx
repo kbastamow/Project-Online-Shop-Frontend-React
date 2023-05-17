@@ -21,7 +21,7 @@ export const ProductProvider = ({children}) => {
     const getProducts = async () => {
         try {
             const res = await axios.get(API_URL + "products/getAllWithAssociations");
-            console.log(res.data[0])
+            console.log(res.data)
             dispatch({
               type: "GET_PRODUCTS",
               payload: res.data,
@@ -34,7 +34,8 @@ export const ProductProvider = ({children}) => {
     const getByCategory = async(categoryId) => {
       try {
         const res = await axios.get(API_URL + "categories/findById/" + categoryId);
-          dispatch({
+        console.log(res.data)
+        dispatch({
             type: "GET_BY_CATEGORY",
             payload: res.data.Products
           });
@@ -45,7 +46,6 @@ export const ProductProvider = ({children}) => {
 
       const searchByName = async(input) => {
         try {
-          console.log(input)
           const res = await axios.get(API_URL + "products/findByName/" + input)
           dispatch({
             type:"SEARCH_BY_NAME",
@@ -83,7 +83,6 @@ export const ProductProvider = ({children}) => {
             'Content-Type': 'multipart/form-data'
           }
         })
-        console.log(res.data.product)
         dispatch({
           type: "CREATE_PRODUCT",
           payload: res.data.product,
@@ -101,7 +100,6 @@ export const ProductProvider = ({children}) => {
     }
 
     const clearProduct = () => {
-      console.log("clearing product");
       dispatch ({
         type: "CLEAR_PRODUCT",
         payload: ""
@@ -109,7 +107,6 @@ export const ProductProvider = ({children}) => {
     }
 
     const addFavorite = (product) => {
-      console.log(product)
       dispatch({
         type: "ADD_FAVORITE",
         payload: product,
@@ -127,9 +124,7 @@ export const ProductProvider = ({children}) => {
   const seeFavorites = async(idArray) => {
     try {
       let request = {"id": idArray}
-      console.log(request)
       const res = await axios.post(API_URL + "products/findVarious", request)
-      console.log("Returning from backend: ", res.data)
       dispatch({
         type: "SEE_FAVORITES",
         payload: res.data
@@ -153,7 +148,6 @@ export const ProductProvider = ({children}) => {
     let found = false;
     newProduct.forEach(cartItem => {
       if (cartItem.id == trimmed.id) {
-        console.log("found id")
         cartItem.quantity++
         found = true;
       }

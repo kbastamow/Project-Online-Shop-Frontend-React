@@ -12,8 +12,8 @@ const SearchBar = () => {
   const {categories, getCategories} = useContext(CategoryContext)
   const {products, getByCategory, getProducts, searchByName, clearProduct, orderResults} = useContext(ProductContext)
 
-  useEffect(()=> {  //when component appears, do this once
-    getCategories()
+  useEffect(()=> {  
+    if (categories.length < 1) getCategories()
   }, [])
 
   const buttonList = categories.map((category, i) => {
@@ -26,7 +26,6 @@ const SearchBar = () => {
 
   const handleSearch = (event) => {
     event.preventDefault();
-    console.log(search)
     searchByName(search)
     setResultMsg(`Showing results for "${search}"`)
     setSearch("")

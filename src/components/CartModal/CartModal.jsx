@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { ProductContext } from '../../context/ProductContext/ProductState'
 import {FaPlus, FaMinus, FaTimes, FaTrash} from "react-icons/fa"
 import { OrderContext } from '../../context/OrderContext/OrderState'
@@ -9,11 +9,12 @@ import { ModalContext } from '../../context/ModalContext/ModalState'
 
 const CartModal = () => {
 
-const {cart, changeQuantity, removeFromCart, clearCart} = useContext(ProductContext)
-const {placeOrder} = useContext(OrderContext)
-const {cartModal, closeCart} = useContext(ModalContext)
+  const { cart, changeQuantity, removeFromCart, clearCart } = useContext(ProductContext)
+  const { placeOrder, orderSuccess } = useContext(OrderContext)
+  const { cartModal, closeCart } = useContext(ModalContext)
 
-const cartContents = <>
+
+  const cartContents = <>
     <table className="table text-start">
       <thead>
         <tr>
@@ -36,24 +37,22 @@ const cartContents = <>
         }
         )}
 
-<tr key={"empty-row"}>
-              <th scope="row"></th>
-              <td ></td>
-              <td ></td>
-              <td className="d-flex justify-content-end"><button type="button" className="text-button " onClick={() => clearCart()}>Clear cart<i className="ms-1"><FaTrash></FaTrash></i></button></td>
-      
-              </tr>
-
+        <tr key={"empty-row"}>
+          <th scope="row"></th>
+          <td ></td>
+          <td ></td>
+          <td className="d-flex justify-content-end"><button type="button" className="text-button " onClick={() => clearCart()}>Clear cart<i className="ms-1"><FaTrash></FaTrash></i></button></td>
+        </tr>
       </tbody>
     </table>
-    
+
     <div className="d-flex flex-column align-items-center">
       <h5>Total: {(cart.reduce((acc, value) => (acc + value.price * value.quantity), 0)).toFixed(2)}€</h5>
-      <button type="button" className="dark-button-blue click-effect mb-2 px-5 py-1 w-25" onClick={() => placeOrder(cart)}>Place Order</button><br/>
-      
+      <button type="button" className="dark-button-blue click-effect mb-2 px-5 py-1 w-25" onClick={() => placeOrder(cart)}>Place Order</button><br />
     </div>
 
   </>
+
 
 return (
     <>
@@ -67,7 +66,6 @@ return (
         aria-labelledby="contained-modal-title-vcenter"
         >
 
-  
     <div className="modal-content">
     <Modal.Header>
         <img src={logosm} alt="logo" className="modal-title"></img>
@@ -75,13 +73,14 @@ return (
         </Modal.Header> 
     <Modal.Body>
 
+      {orderSuccess.length > 1}
+
       {/* Render depending on state: */}
     {(cart.length === 0) ? <h4 className="text-center">Your cart is empty</h4> : cartContents}
   
 
     </Modal.Body>
     <Modal.Footer>
-      {/* <div className="modal-footer d-flex justify-content-end"> */}
       <div className="d-flex justify-content-end">
         <button type="button" className="outline-dark py-1 px-2" onClick={closeCart}>Close</button>
       </div>

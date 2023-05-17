@@ -11,13 +11,18 @@ const Products = () => {
   const {product, products, getProducts, cart, favorites, seeFavorites, clearProduct} = useContext(ProductContext)  //basically initialstate and function to change
   const location = useLocation() //TELLS US InFORMATION ABOUT THE ROUTE AND PREVIOUS PAGE if we came through navigate!
   
+
+ useEffect(() => {
+  if (products.length < 1) getProducts()
+  }, []) 
+
   useEffect(()=> {  
     if (location.state && location.state.prevPath === "/profile"){   //NOT NULL & profile-favorites-browse is the origin 
       let idArray = favorites.map(favorite => favorite.id)
       seeFavorites(idArray)
-    } else {
-    getProducts()
-}}, [])
+    } 
+}, [])
+
 
   useEffect(() => {
     localStorage.setItem("shopcart", JSON.stringify(cart));
