@@ -10,7 +10,7 @@ const Header = () => {
    
   const location = useLocation()
   const {token, user} = useContext(UserContext)
-  const {openForm, openCart, closeCart} = useContext(ModalContext)
+  const {openForm, openCart} = useContext(ModalContext)
   
   let loggedInUser = JSON.parse(localStorage.getItem("shopuser")) 
   let greetingUser;
@@ -27,7 +27,7 @@ const Header = () => {
   let navbarLeft = (loggedInToken) ? (
     <div className="welcome-div">Welcome {loggedInUser.name} <span className="cart-icon ms-3" onClick={openCart}>
       <FaShoppingCart></FaShoppingCart>
-    </span></div>)  :  (<div className="login-div me-2 px-4 py2" onClick={openForm}>Login/register</div>)
+    </span></div>)  :  (<div className="login-div text-center" onClick={openForm}>Login/register</div>)
 
   return (
     <div className="main-navbar">
@@ -44,7 +44,7 @@ const Header = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse col-8">
+          <div className="collapse navbar-collapse col-8" id="navbarTogglerDemo01">
             <a className="navbar-brand" href="#">
               <img src={logosm} alt="logo" />
             </a>
@@ -79,7 +79,7 @@ const Header = () => {
             
             </ul>
           </div>
-                <div className="col-4">
+                <div className="col-4 container-fluid ">
             {/* d-flex flex-wrap me-4 mb-2 mb-lg-0 */}
 
             {(location.pathname === "/") ? <></> : <>{navbarLeft}</>}

@@ -7,11 +7,13 @@ import FormProduct from '../FormProduct/FormProduct';
 const AdminEdit = () => {
   const { categories, getCategories} = useContext(CategoryContext)
   const { product, products, getProducts, extractOne } = useContext(ProductContext)
+  
+  
+ 
   useEffect(() => {
     if (categories.length === 0) getCategories()
     if (products.length === 0) getProducts()
-  }, [])
-
+  }, []) 
 if (products.length === 0 || (categories.length === 0)) {
   return <></>
 }
@@ -46,7 +48,7 @@ return (
               <td className="" >{product.description}</td>
               <th className=""><img className="img-thumbnail" src={`http://localhost:3000/uploaded_imgs/${product.image}`}alt="productpicture"/></th>
               <td>{product.Categories.map(category => <div key={category.name}>{category.name}</div>) }</td>
-              <td><button onClick={() => extractOne(product)}>Edit</button></td>
+              <td><button type="button" className="outline-dark" onClick={() => extractOne(product)}>Edit</button></td>
               </tr>
               )})}
             </tbody>

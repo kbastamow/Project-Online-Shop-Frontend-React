@@ -13,7 +13,6 @@ const [formOnDisplay, setFormOnDisplay] = useState(null)
 const [toggleForms, setToggleForms] = useState(null)
 const {formModal, closeForm, openForm} = useContext(ModalContext)
 
-
 useEffect(() => {
   seeLogin()
 }, []);

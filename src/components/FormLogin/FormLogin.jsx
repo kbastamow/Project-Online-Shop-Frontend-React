@@ -25,14 +25,14 @@ const FormLogin= () => {
     setAlert(<><div className="secondary-emphasized">Please wait...</div><div className="spinner-border spinner-border-sm" role="status"/></>) 
     console.log(userData)
     login(userData)
-    // setTimeout(() => {
-    //   if(user === null){
-    //     setAlert(<><div className="secondary-emphasized">Something went wrong!</div></>)   
-    //     setTimeout(() => {
-    //       setAlert(null)
-    //     }, 3000) 
-    //   }
-    // }, 5000);
+    setTimeout(() => {
+      if(user === null){
+        setAlert(<><div className="secondary-emphasized">Something went wrong!</div></>)   
+        setTimeout(() => {
+          setAlert(null)
+        }, 3000) 
+      }
+    }, 5000);
   }
 
   useEffect(() => {
@@ -52,8 +52,6 @@ const FormLogin= () => {
       clearMessages()
     }, 3000) 
   }}, [loginMsg])
-
-  console.log("This is login message outside function", loginMsg)
 
 
   return (

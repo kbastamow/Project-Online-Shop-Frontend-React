@@ -89,13 +89,13 @@ const FormProduct = () => {
     
 if (!product || (categories.length === 0)) {
   console.log("product:", product)
-  return <>Waiting...</>
+  return <></>
 }     
 
 const categoryMap = categories.map(category => {
         let productCategories = product.Categories.map(cat => cat.name)
         if (productCategories.includes[category.name]){
-        console.log(true)
+
         }
         return (
           <>
@@ -112,7 +112,7 @@ const categoryMap = categories.map(category => {
         )
       })    
     
-        
+  //THIS IS NOT INN USE WHILE THE FORM CANNOT BE SUBMITTED      
   const previewProduct = () => {
         // Check for empty values
         let hasEmptyValues = false;
