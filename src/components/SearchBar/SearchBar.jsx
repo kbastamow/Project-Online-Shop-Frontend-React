@@ -44,11 +44,12 @@ const SearchBar = () => {
               </a>
               <ul className="dropdown-menu">
                 {buttonList}
-
-                <li key="allProd"><button className="dropdown-item" onClick={() => { return getProducts(), setResultMsg("") }}><span className="secondary-emphasized">All products</span></button></li>
+               
               </ul>
+           
             </li>
-
+              <div key="allProd" className="ms-2" onClick={() => { return getProducts(), setResultMsg("") }}><span className="nav-link">All products</span></div>
+            
           </div>
 
           <form className="ms-auto" role="search" onSubmit={handleSearch}>

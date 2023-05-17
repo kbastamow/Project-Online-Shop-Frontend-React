@@ -29,18 +29,6 @@ const Header = () => {
       <FaShoppingCart></FaShoppingCart>
     </span></div>)  :  (<div className="login-div me-2 px-4 py2" onClick={openForm}>Login/register</div>)
 
-
-// console.log(location)
-// if(location.pathname === "/") {
-//   return <>
-//   <div className="main-navbar p-3">
-//    <img src={logosm} alt="logo" />
-//    </div>
-//   </>
-
-// }
-
-
   return (
     <div className="main-navbar">
       <nav className="main-navbar navbar navbar-expand-lg bg-light p-0">
@@ -56,21 +44,21 @@ const Header = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse col-8" id="navbarTogglerDemo01">
+          <div className="collapse navbar-collapse col-8">
             <a className="navbar-brand" href="#">
               <img src={logosm} alt="logo" />
             </a>
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <Link to="/">
-                  <span className="nav-link active" aria-current="page">
+                  <span className="nav-link" aria-current="page">
                     Home
                   </span>
                 </Link>
               </li>
               <li className="nav-item">
                 <Link to="/products">
-                  <span className="nav-link" href="#">
+                  <span className="nav-link">
                     Products
                   </span>
                 </Link>
