@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import logosm from "../../assets/logosmall2.png"
 import "./Header.scss"
 import { UserContext } from '../../context/UserContext/UserState';
@@ -7,8 +7,9 @@ import { ModalContext } from '../../context/ModalContext/ModalState';
 import { FaShoppingCart } from "react-icons/fa";
 
 const Header = () => {
-
-  const {token} = useContext(UserContext)
+   
+  const location = useLocation()
+  const {token, user} = useContext(UserContext)
   const {openForm} = useContext(ModalContext)
 
   let loggedInUser = JSON.parse(localStorage.getItem("shopuser")) 
@@ -28,6 +29,9 @@ const Header = () => {
     <div className="welcome-div">Welcome {loggedInUser.name} <span className="cart-icon ms-3" data-bs-toggle="modal" data-bs-target="#cartModal">
       <FaShoppingCart></FaShoppingCart>
     </span></div>)  :  (<div className="login-div me-2 px-4 py2" onClick={openForm}>Login/register</div>)
+
+
+
 
 // console.log(location)
 // if(location.pathname === "/") {
@@ -80,17 +84,23 @@ const Header = () => {
                 </Link>
               </li> : <></>}
 
-
+{!user || (user.role === "user") ? <></> : 
               <li className="nav-item">
                 <Link to="/admin">
                 <span className="nav-link">Admin</span>
                 </Link>
               </li>
+           } 
+            
             </ul>
           </div>
                 <div className="col-4">
             {/* d-flex flex-wrap me-4 mb-2 mb-lg-0 */}
-              {navbarLeft}
+
+            {(location.pathname === "/") ? <></> : <>{navbarLeft}</>}
+
+
+              
             </div>
         
         </div>

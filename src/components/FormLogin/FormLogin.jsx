@@ -13,6 +13,11 @@ const FormLogin= () => {
 
   const handleLogin = (event) =>{
     event.preventDefault();
+    
+    if (!event.target.email.value || !event.target.password.value) {
+      return setAlert(<div className="secondary-emphasized">Complete all fields</div>)
+    } 
+
     let userData = {
       email: event.target.email.value,
       password: event.target.password.value
@@ -20,29 +25,35 @@ const FormLogin= () => {
     setAlert(<><div className="secondary-emphasized">Please wait...</div><div className="spinner-border spinner-border-sm" role="status"/></>) 
     console.log(userData)
     login(userData)
-    setTimeout(() => {
-      if(user === null){
-        setAlert(<><div className="secondary-emphasized">Something went wrong!</div></>)   
-        setTimeout(() => {
-          setAlert(null)
-        }, 3000) 
-      }
-    }, 5000);
+    // setTimeout(() => {
+    //   if(user === null){
+    //     setAlert(<><div className="secondary-emphasized">Something went wrong!</div></>)   
+    //     setTimeout(() => {
+    //       setAlert(null)
+    //     }, 3000) 
+    //   }
+    // }, 5000);
   }
 
   useEffect(() => {
+    console.log(!token)
+  
     if(token && loginMsg) {
     setAlert(<div className="alert">Logged in!</div>)
     setTimeout(() => {
       closeForm();
       clearMessages()
     }, 3000) 
-  } else if (!token && loginMsg.length > 0){  
+  } else if ((!token)  && (loginMsg.length > 0)){  
     setAlert(<div className="alert">Login details not correct</div>)
+    console.log(loginMsg, "inside else if")
     setTimeout(() => {
       setAlert(null)
+      clearMessages()
     }, 3000) 
   }}, [loginMsg])
+
+  console.log("This is login message outside function", loginMsg)
 
 
   return (

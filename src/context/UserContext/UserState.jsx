@@ -10,7 +10,7 @@ const user = JSON.parse(localStorage.getItem("shopuser"))
 
 const initialState = {
     user: user ? user : null,
-    token: token ? token : null,
+    token: token ? token : "",
     registrationMsg: "",
     loginMsg: "",
     logoutMsg: ""
@@ -27,6 +27,8 @@ export const UserProvider = ({ children }) => {
         try {
             console.log("LOGIN executing")
             const res = await axios.post(API_URL + "users/login", loginData)
+            console.log("USER DETAILS", res.data)
+            console.log(res.data.user.role)
             dispatch({
                 type: "LOGIN",
                 payload: res.data
@@ -36,10 +38,11 @@ export const UserProvider = ({ children }) => {
             //CHANGED THIS ON MONDAY
             localStorage.setItem("shopuser", JSON.stringify({ id: res.data.user.id, email: res.data.user.email, name: res.data.user.name, surname: res.data.user.surname, createdAt: res.data.user.createdAt}))}            
         } catch (error) {
-            console.error(error.response.data.messages[0])
+            console.error(error)
+            console.error(error.response.data)
             dispatch({
                 type: "LOGIN",
-                payload:error.response.data.messages[0]
+                payload:error.response.data
             })
         }
 }
