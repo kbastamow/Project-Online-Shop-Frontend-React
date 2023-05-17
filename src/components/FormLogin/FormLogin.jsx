@@ -23,7 +23,6 @@ const FormLogin= () => {
       password: event.target.password.value
     }
     setAlert(<><div className="secondary-emphasized">Please wait...</div><div className="spinner-border spinner-border-sm" role="status"/></>) 
-    console.log(userData)
     login(userData)
     setTimeout(() => {
       if(user === null){
@@ -36,17 +35,14 @@ const FormLogin= () => {
   }
 
   useEffect(() => {
-    console.log(!token)
-  
     if(token && loginMsg) {
-    setAlert(<div className="alert">Logged in!</div>)
+    setAlert(<div className="secondary-emphasized">Logged in!</div>)
     setTimeout(() => {
       closeForm();
       clearMessages()
     }, 3000) 
   } else if ((!token)  && (loginMsg.length > 0)){  
-    setAlert(<div className="alert">Login details not correct</div>)
-    console.log(loginMsg, "inside else if")
+    setAlert(<div className="secondary-emphasized">Login details not correct</div>)
     setTimeout(() => {
       setAlert(null)
       clearMessages()

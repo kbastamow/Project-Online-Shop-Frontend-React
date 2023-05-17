@@ -5,7 +5,7 @@ import {FaFacebookSquare, FaTwitterSquare, FaInstagram, FaTiktok,} from "react-i
 const Footer = () => {
   return (
     <>
-      <div className="footer-div container-fluid z-1">
+      <div className="footer-div  bg-light container-fluid z-1">
 
         <div className="d-flex flex-row mx-5 mt-1">
 

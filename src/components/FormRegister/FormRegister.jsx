@@ -14,7 +14,7 @@ const FormRegister = () => {
   const [surnameDisabled, setSurnameDisabled] = useState(true)
   const [passwordDisabled, setPasswordDisabled] = useState(true)
   const [regSubmitDisabled, setRegSubmitDisabled] = useState(true);
-  const [conditionsCheck, setConditionsCheck] = useState(false)
+  const [conditionsCheck, setConditionsCheck] = useState(true)
   const {closeForm, formModal} = useContext(ModalContext)
 
   const [data, setData] = useState({
@@ -38,15 +38,15 @@ const FormRegister = () => {
     }
 
     const handleRegister = (event) => {
-        console.log("handling register")
         setAlert(<><div className="secondary-emphasized">Please wait...</div><div className="spinner-border spinner-border-sm" role="status"/></>)
         event.preventDefault();
         if (data.password !== data.passwordRepeat) {
           setAlert(<div className="secondary-emphasized" >Passwords don't match</div>)
-          clearMessages()
+          setTimeout(() => {
+            setAlert(null)
+          }, 3000) 
 
         } else {
-          console.log("Registering")
           //DELETE Whitespaces
           let email = data.email.trim()
           let password = data.password.trim()
@@ -71,13 +71,11 @@ const FormRegister = () => {
             surname = nameParts.map(part =>
               part.charAt(0).toUpperCase() + part.slice(1)
             ).join(' ');
-            console.log(surname)
           } else {
             surname = surname.charAt(0).toUpperCase() + surname.slice(1);
           }
 
           let registerData = { email, name, surname, password }
-          console.log( "data before register ", registerData)
           register(registerData)
           event.target.reset()
         }
@@ -94,15 +92,14 @@ useEffect(() => {
         }, 4000);
 
       } else if (registrationMsg == "email must be unique"){
-        console.log(registrationMsg)
         setAlert(<div className="secondary-emphasized mb-4">This email is already registered</div>)
         clearMessages()
-      }
+      } 
     }, [registrationMsg])
 
 
   return (
-    <div>{/* REGISTER MODAL */}
+    <div>
     <p className="text-center">Create an account</p>
     <div className="mx-auto mb-3 text-center">
       {alert}

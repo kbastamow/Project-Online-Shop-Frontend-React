@@ -23,12 +23,8 @@ export const UserProvider = ({ children }) => {
     const [state, dispatch] = useReducer(UserReducer, initialState);
 
     const login = async (loginData) => {
-        console.log(loginData)
         try {
-            console.log("LOGIN executing")
             const res = await axios.post(API_URL + "users/login", loginData)
-            console.log("USER DETAILS", res.data)
-            console.log(res.data.user.role)
             dispatch({
                 type: "LOGIN",
                 payload: res.data
@@ -48,10 +44,8 @@ export const UserProvider = ({ children }) => {
 }
 
 const register = async(registerData) => {
-    console.log("axios in progress!")
     try {
         const res = await axios.post(API_URL + "users/createUser", registerData)
-        console.log("user who registered: " + res.data.msg)
         dispatch({
             type: "REGISTER",
             payload:res.data.msg
@@ -89,23 +83,22 @@ const logout = async() => {
         localStorage.removeItem("shopuser")
       } 
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
 }
 
 
 const findUser = async() => {
     try {
-        console.log("finduser executing")
+     
     let userId = JSON.parse(localStorage.getItem("shopuser")).id
     const res = await axios.get(API_URL + "users/userOrderProducts/" + userId)
-    console.log(res.data)
     dispatch ({
         type: "FIND_USER",
         payload: res.data
     })
     } catch (error) {
-        console.log(error)    
+        console.error(error)    
     }
 }
 

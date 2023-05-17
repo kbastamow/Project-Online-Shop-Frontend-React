@@ -11,7 +11,7 @@ const FormModal = () => {
 
 const [formOnDisplay, setFormOnDisplay] = useState(null)
 const [toggleForms, setToggleForms] = useState(null)
-const {formModal, closeForm, openForm} = useContext(ModalContext)
+const {formModal, closeForm} = useContext(ModalContext)
 
 useEffect(() => {
   seeLogin()
@@ -34,12 +34,14 @@ const seeLogin = () => {
         show={formModal}
         backdrop="true"
         keyboard={false}
-        // onHide={closeForm}
+        onHide={closeForm}
+        centered
+        size="sm"
         dialogClassName
         >
-           <div className="modal-dialog modal-dialog-centered">
+           
           <div className="modal-content">
-            <div className="modal-header">
+          <Modal.Header>
               <img src={logosm} alt="logo" className="modal-title ms-auto" />
               <button
                 type="button"
@@ -48,10 +50,9 @@ const seeLogin = () => {
                 onClick={() => closeForm()}
                 aria-label="Close"
               ></button>
-            </div>
+           </Modal.Header> 
 
-            <div className="modal-body">
-
+            <Modal.Body>
 
               {formOnDisplay}
 
@@ -59,15 +60,13 @@ const seeLogin = () => {
 
               {toggleForms}
 
-              </div>
+              
 
             </div>
-            {/* <div className="modal-footer">
-        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" className="btn btn-primary">Save changes</button>
-      </div> */}
+            </Modal.Body>
+        
           </div>
-        </div>
+        
       {/* </div> */}
       </Modal>
     </>
@@ -75,28 +74,3 @@ const seeLogin = () => {
 };
 
 export default FormModal
-
-
-
-  // //CLOSES AND SHOWS MODAL 
-  // const modalRef = useRef(null);
-  // const [modal, setModal] = useState("")
-  // const showModal = () => {
-  //   modal.show();
-  // }
-  // const closeModal = () => {
-  //   modal.hide();
-  //   console.log("hidden")
-  // }
-  // useEffect(() => {
-  //   if (modalRef.current) {
-  //     setModal(new Modal(modalRef.current));
-  //     // If you want to do something else when the modal show is added, add this line
-  //     // modalRef.current.addEventListener('show.bs.modal', myFunction) first, the default, and second, your function (e.g. a message)
-  //   }
-  //   return () => {
-  //     // if (modalRef.current) {
-  //     //   modalRef.current.removeEventListener();
-  //     // }
-  //   };
-  // }, []);
