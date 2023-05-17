@@ -3,7 +3,7 @@
 
 ## 📜 Description
 
-Course project create a **Vite-React frontend** for an online shop, using a database and backend (**MySQL** and **Sequelize**) from a previous project:  [Project Online shop backend](https://github.com/kbastamow/Project-Online-Shop-Backend-MySQL-Sequelize.git)
+Course project to create a **Vite-React frontend** for an online shop, using a database and backend (**MySQL** and **Sequelize**) from a previous project:  [Project Online shop backend](https://github.com/kbastamow/Project-Online-Shop-Backend-MySQL-Sequelize.git)
 
 ![](./src/assets/readme/overview.png)
 
@@ -113,7 +113,7 @@ Administrators can access a page to manipulate the product catalogue.
 
 ### Updating a new product
 
-This page is still in progress as the backend need to be modified to receive images as an update. Currently, the page shows
+This page is still in progress as the backend needs to be modified to receive images as an update. Currently, the page shows
 
 * A list of all the products in a more concise table form. 
 
